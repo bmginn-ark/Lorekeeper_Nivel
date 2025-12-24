@@ -1,12 +1,12 @@
 @extends('prompts.layout')
 
 @section('prompts-title')
-    Prompt Categories
+    프롬프트 카테고리
 @endsection
 
 @section('content')
     {!! breadcrumbs(['Prompts' => 'prompts', 'Prompt Categories' => 'prompts/prompt-categories']) !!}
-    <h1>Prompt Categories</h1>
+    <h1>프롬프트 카테고리</h1>
 
     <div>
         {!! Form::open(['method' => 'GET', 'class' => 'form-inline justify-content-end']) !!}
