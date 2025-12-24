@@ -37,7 +37,7 @@
             <div class="alert alert-warning mb-0">이미 이 아이템을 {{ $stock->purchase_limit }}개까지 구매했습니다.</div>
         @else
             @if ($stock->purchase_limit)
-                <div class="alert alert-warning mb-3">이 아이템은 {{ $userPurchaseCount }}번 구매했습니다.</div>
+                <div class="alert alert-warning mb-3">이 아이템을 {{ $userPurchaseCount }}번 구매했습니다.</div>
             @endif
             {!! Form::open(['url' => 'shops/buy']) !!}
             {!! Form::hidden('shop_id', $shop->id) !!}
