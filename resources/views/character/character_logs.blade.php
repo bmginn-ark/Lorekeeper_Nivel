@@ -1,7 +1,7 @@
 @extends('character.layout', ['isMyo' => $character->is_myo_slot])
 
 @section('profile-title')
-    {{ $character->fullName }}'s Change Log
+    {{ $character->fullName }}의 수정 기록
 @endsection
 
 @section('meta-img')
@@ -28,13 +28,13 @@
         <div class="logs-table-header">
             <div class="row">
                 <div class="col-6 col-md-2">
-                    <div class="logs-table-cell">Edited By</div>
+                    <div class="logs-table-cell">수정한 이</div>
                 </div>
                 <div class="col-6 col-md-8">
-                    <div class="logs-table-cell">Log</div>
+                    <div class="logs-table-cell">기록</div>
                 </div>
                 <div class="col-6 col-md-2">
-                    <div class="logs-table-cell">Date</div>
+                    <div class="logs-table-cell">날짜</div>
                 </div>
             </div>
         </div>

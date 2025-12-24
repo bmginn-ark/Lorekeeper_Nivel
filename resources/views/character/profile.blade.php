@@ -1,7 +1,7 @@
 @extends('character.layout', ['isMyo' => $character->is_myo_slot])
 
 @section('profile-title')
-    {{ $character->fullName }}'s Profile
+    {{ $character->fullName }}의 프로필
 @endsection
 
 @section('meta-img')
@@ -30,7 +30,7 @@
             </a>
         </div>
         @if ($character->image->canViewFull(Auth::check() ? Auth::user() : null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)))
-            <div class="text-right">You are viewing the full-size image. <a href="{{ $character->image->imageUrl }}">View watermarked image</a>?</div>
+            <div class="text-right">원본 이미지를 보고 있습니다. <a href="{{ $character->image->imageUrl }}">워터마크 이미지 보기</a></div>
         @endif
     </div>
 
@@ -38,7 +38,7 @@
     <a class="float-left" href="{{ url('reports/new?url=') . $character->url . '/profile' }}"><i class="fas fa-exclamation-triangle" data-toggle="tooltip" title="Click here to report this character's profile." style="opacity: 50%;"></i></a>
     @if (Auth::check() && ($character->user_id == Auth::user()->id || Auth::user()->hasPower('manage_characters')))
         <div class="text-right mb-2">
-            <a href="{{ $character->url . '/profile/edit' }}" class="btn btn-outline-info btn-sm"><i class="fas fa-cog"></i> Edit Profile</a>
+            <a href="{{ $character->url . '/profile/edit' }}" class="btn btn-outline-info btn-sm"><i class="fas fa-cog"></i> 프로필 수정</a>
         </div>
     @endif
     @if ($character->profile->parsed_text)
@@ -66,7 +66,7 @@
                 @endif
                 @if ($character->is_trading)
                     <li class="list-group-item">
-                        <h5 class="mb-0"><i class="text-success far fa-circle fa-fw mr-2"></i> Open for trades</h5>
+                        <h5 class="mb-0"><i class="text-success far fa-circle fa-fw mr-2"></i> 거래 요청 받는 중</h5>
                     </li>
                 @endif
             </ul>

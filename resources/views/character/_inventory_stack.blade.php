@@ -1,14 +1,14 @@
 @if (!$stack)
-    <div class="text-center">Invalid stack selected.</div>
+    <div class="text-center">잘못된 스택이 선택되었습니다.</div>
 @else
     <div class="text-center">
         <div class="mb-1"><a href="{{ $item->url }}"><img src="{{ $item->imageUrl }}" alt="{{ $item->name }}" /></a></div>
         <div @if (count($item->tags)) class="mb-1" @endif><a href="{{ $item->url }}">{{ $item->name }}</a></div>
     </div>
 
-    <h5>Item Variations</h5>
+    <h5>아이템 변형</h5>
     @if ($user && $user->hasPower('edit_inventories'))
-        <p class="alert alert-warning my-2">Note: Your rank allows you to transfer character-bound items.</p>
+        <p class="alert alert-warning my-2">참고: 당신의 등급에선 제한된 아이템을 전송할 수 있습니다.</p>
     @endif
 
     {!! Form::open(['url' => 'character/' . $character->slug . '/inventory/edit']) !!}
@@ -20,11 +20,11 @@
                         <th class="col-1"><input id="toggle-checks" type="checkbox" onclick="toggleChecks(this)"></th>
                     @endif
                     @if ($item->category->can_name)
-                        <th class="col-2">Name</th>
+                        <th class="col-2">이름</th>
                     @endif
-                    <th class="col">Source</th>
-                    <th class="col">Notes</th>
-                    <th class="col-2">Quantity</th>
+                    <th class="col">출처</th>
+                    <th class="col">주석</th>
+                    <th class="col-2">수량</th>
                     <th class="col-1"><i class="fas fa-lock invisible"></i></th>
                 </tr>
             </thead>
@@ -67,10 +67,10 @@
                         <a class="card-title h5 collapse-title" data-toggle="collapse" href="#nameForm">
                             @if ($owner_id != $user->id)
                                 [ADMIN]
-                            @endif Name Item
+                            @endif 이름 짓기
                         </a>
                         <div id="nameForm" class="collapse">
-                            <p>Enter a name to display for the selected stack(s)! Note that only one of the stacks' names will display on the inventory page and title of this panel, while other stacks' names will appear in the list above.</p>
+                            <p>선택한 스택에 표시할 이름을 입력하세요! 스택 중 하나의 이름만 인벤토리 페이지와 이 패널의 제목에 표시되며, 다른 스택들의 이름은 위 목록에 나타납니다.</p>
                             {!! Form::open() !!}
                             <div class="form-group">
                                 {!! Form::text('stack_name', null, ['class' => 'form-control stock-field', 'data-name' => 'stack_name']) !!}
@@ -87,14 +87,14 @@
                         <a class="card-title h5 collapse-title" data-toggle="collapse" href="#transferForm">
                             @if ($owner_id != $user->id)
                                 [ADMIN]
-                            @endif Transfer Item
+                            @endif 아이템 전송
                         </a>
                         <div id="transferForm" class="collapse">
-                            <p>This will transfer this item back to @if ($owner_id != $user->id)
-                                    this user's
+                            <p>이 아이템을 @if ($owner_id != $user->id)
+                                    이 사용자의
                                 @else
-                                    your
-                                @endif inventory.</p>
+                                    당신의
+                                @endif 인벤토리로 전송합니다.</p>
                             <div class="text-right">
                                 {!! Form::button('Transfer', ['class' => 'btn btn-primary', 'name' => 'action', 'value' => 'take', 'type' => 'submit']) !!}
                             </div>
@@ -105,10 +105,10 @@
                     <a class="card-title h5 collapse-title" data-toggle="collapse" href="#deleteForm">
                         @if ($owner_id != $user->id)
                             [ADMIN]
-                        @endif Delete Item
+                        @endif 아이템 삭제
                     </a>
                     <div id="deleteForm" class="collapse">
-                        <p>This action is not reversible. Are you sure you want to delete this item?</p>
+                        <p>이 작업은 되돌릴 수 없습니다. 이 아이템을 삭제하시겠습니까?</p>
                         <div class="text-right">
                             {!! Form::button('Delete', ['class' => 'btn btn-danger', 'name' => 'action', 'value' => 'delete', 'type' => 'submit']) !!}
                         </div>

@@ -1,7 +1,7 @@
 @extends('character.layout', ['isMyo' => $character->is_myo_slot])
 
 @section('profile-title')
-    {{ $character->fullName }}'s Bank
+    {{ $character->fullName }}의 ㅇ은행
 @endsection
 
 @section('meta-img')
@@ -19,9 +19,9 @@
 
     <h3>
         @if (Auth::check() && Auth::user()->hasPower('edit_inventories'))
-            <a href="#" class="float-right btn btn-outline-info btn-sm" id="grantButton" data-toggle="modal" data-target="#grantModal"><i class="fas fa-cog"></i> Admin</a>
+            <a href="#" class="float-right btn btn-outline-info btn-sm" id="grantButton" data-toggle="modal" data-target="#grantModal"><i class="fas fa-cog"></i> 관리자</a>
         @endif
-        Currencies
+        재화
     </h3>
     @if (count($currencies))
         <div class="card mb-4">
@@ -53,38 +53,38 @@
     @else
         <div class="card mb-4">
             <div class="card-body">
-                No currencies owned.
+                재화가 없습니다.
             </div>
         </div>
     @endif
 
     @if (Auth::check() && Auth::user()->id == $character->user_id)
         <h3>
-            Take/Give Currency
+            재화 주기/가져오기
         </h3>
         {!! Form::open(['url' => 'character/' . $character->slug . '/bank/transfer']) !!}
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    <label>{{ Form::radio('action', 'take', true, ['class' => 'take-button']) }} Take from Character</label>
+                    <label>{{ Form::radio('action', 'take', true, ['class' => 'take-button']) }} 캐릭터에서 가져오기</label>
                 </div>
                 <div class="col-md-6">
-                    <label>{{ Form::radio('action', 'give', false, ['class' => 'give-button']) }} Give to Character</label>
+                    <label>{{ Form::radio('action', 'give', false, ['class' => 'give-button']) }} 캐릭터에게 주기</label>
                 </div>
             </div>
         </div>
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    {!! Form::label('quantity', 'Quantity') !!}
+                    {!! Form::label('quantity', '개수') !!}
                     {!! Form::text('quantity', null, ['class' => 'form-control']) !!}
                 </div>
                 <div class="col-md-6 take">
-                    {!! Form::label('currency_id', 'Currency') !!}
+                    {!! Form::label('currency_id', '재화') !!}
                     {!! Form::select('take_currency_id', $takeCurrencyOptions, null, ['class' => 'form-control', 'placeholder' => 'Select Currency']) !!}
                 </div>
                 <div class="col-md-6 give hide">
-                    {!! Form::label('currency_id', 'Currency') !!}
+                    {!! Form::label('currency_id', '재화') !!}
                     {!! Form::select('give_currency_id', $giveCurrencyOptions, null, ['class' => 'form-control', 'placeholder' => 'Select Currency']) !!}
                 </div>
             </div>
@@ -95,24 +95,24 @@
         {!! Form::close() !!}
     @endif
 
-    <h3>Latest Activity</h3>
+    <h3>최근 활동</h3>
     <div class="mb-4 logs-table">
         <div class="logs-table-header">
             <div class="row">
                 <div class="col-6 col-md-2">
-                    <div class="logs-table-cell">Sender</div>
+                    <div class="logs-table-cell">보낸 사람</div>
                 </div>
                 <div class="col-6 col-md-2">
-                    <div class="logs-table-cell">Recipient</div>
+                    <div class="logs-table-cell">받는 사람</div>
                 </div>
                 <div class="col-6 col-md-2">
-                    <div class="logs-table-cell">Currency</div>
+                    <div class="logs-table-cell">재화</div>
                 </div>
                 <div class="col-6 col-md-4">
-                    <div class="logs-table-cell">Log</div>
+                    <div class="logs-table-cell">기록</div>
                 </div>
                 <div class="col-6 col-md-2">
-                    <div class="logs-table-cell">Date</div>
+                    <div class="logs-table-cell">날짜</div>
                 </div>
             </div>
         </div>
@@ -125,7 +125,7 @@
         </div>
     </div>
     <div class="text-right">
-        <a href="{{ url($character->url . '/currency-logs') }}">View all...</a>
+        <a href="{{ url($character->url . '/currency-logs') }}">전체 보기...</a>
     </div>
 
     @if (Auth::check() && Auth::user()->hasPower('edit_inventories'))
@@ -133,7 +133,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <span class="modal-title h5 mb-0">[ADMIN] Grant/remove currency</span>
+                        <span class="modal-title h5 mb-0">[ADMIN] 재화 지급/회수</span>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body">

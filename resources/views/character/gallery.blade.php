@@ -1,7 +1,7 @@
 @extends('character.layout', ['isMyo' => $character->is_myo_slot])
 
 @section('profile-title')
-    {{ $character->fullName }}'s Gallery
+    {{ $character->fullName }}의 갤러리
 @endsection
 
 @section('meta-img')
@@ -21,7 +21,7 @@
 
     @include('character._header', ['character' => $character])
 
-    <p>These images are user-submitted and should not be confused with the official record of the character's design and history visible <a href="{{ url($character->url . '/images') }}">here</a>.</p>
+    <p>이 이미지는 사용자가 제출한 것이므로 캐릭터의 디자인에 대한 <a href="{{ url($character->url . '/images') }}">공식 기록</a>과 혼동해서는 안 됩니다 .</p>
 
     @if ($character->gallerySubmissions->count())
         {!! $submissions->render() !!}
@@ -34,7 +34,7 @@
 
         {!! $submissions->render() !!}
     @else
-        <p>No submissions found!</p>
+        <p>제출된 항목이 없습니다.</p>
     @endif
 
 @endsection
