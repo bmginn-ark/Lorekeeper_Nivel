@@ -27,7 +27,7 @@ class Shop extends Model {
      * @var array
      */
     public static $createRules = [
-        'name'        => 'required|unique:shops|between:3,100',
+        'name'        => 'required|unique:shops|between:1,100',
         'description' => 'nullable',
         'image'       => 'mimes:png',
     ];
@@ -38,7 +38,7 @@ class Shop extends Model {
      * @var array
      */
     public static $updateRules = [
-        'name'        => 'required|between:3,100',
+        'name'        => 'required|between:1,100',
         'description' => 'nullable',
         'image'       => 'mimes:png',
     ];

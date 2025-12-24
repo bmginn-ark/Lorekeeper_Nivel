@@ -37,7 +37,7 @@ class Subtype extends Model {
      */
     public static $createRules = [
         'species_id'  => 'required',
-        'name'        => 'required|between:3,100',
+        'name'        => 'required|between:1,100',
         'description' => 'nullable',
         'image'       => 'mimes:png',
     ];
@@ -49,7 +49,7 @@ class Subtype extends Model {
      */
     public static $updateRules = [
         'species_id'  => 'required',
-        'name'        => 'required|between:3,100',
+        'name'        => 'required|between:1,100',
         'description' => 'nullable',
         'image'       => 'mimes:png',
     ];

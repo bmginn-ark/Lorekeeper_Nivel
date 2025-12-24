@@ -37,7 +37,7 @@ class SitePage extends Model {
      */
     public static $createRules = [
         'key'   => 'required|unique:site_pages|between:3,25|alpha_dash',
-        'title' => 'required|between:3,100',
+        'title' => 'required|between:1,100',
         'text'  => 'nullable',
     ];
 
@@ -48,7 +48,7 @@ class SitePage extends Model {
      */
     public static $updateRules = [
         'key'   => 'required|between:3,25|alpha_dash',
-        'title' => 'required|between:3,100',
+        'title' => 'required|between:1,100',
         'text'  => 'nullable',
     ];
 

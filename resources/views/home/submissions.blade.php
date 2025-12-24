@@ -17,24 +17,24 @@
 
     <div class="text-right">
         @if (!$isClaims)
-            <a href="{{ url('submissions/new') }}" class="btn btn-success">New Submission</a>
+            <a href="{{ url('submissions/new') }}" class="btn btn-success">새 제출</a>
         @else
-            <a href="{{ url('claims/new') }}" class="btn btn-success">New Claim</a>
+            <a href="{{ url('claims/new') }}" class="btn btn-success">새 수령</a>
         @endif
     </div>
 
     <ul class="nav nav-tabs mb-3">
         <li class="nav-item">
-            <a class="nav-link {{ Request::get('type') == 'draft' ? 'active' : '' }}" href="{{ url($isClaims ? 'claims' : 'submissions') . '?type=draft' }}">Drafts</a>
+            <a class="nav-link {{ Request::get('type') == 'draft' ? 'active' : '' }}" href="{{ url($isClaims ? 'claims' : 'submissions') . '?type=draft' }}">임시저장</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link {{ !Request::get('type') || Request::get('type') == 'pending' ? 'active' : '' }}" href="{{ url($isClaims ? 'claims' : 'submissions') }}">Pending</a>
+            <a class="nav-link {{ !Request::get('type') || Request::get('type') == 'pending' ? 'active' : '' }}" href="{{ url($isClaims ? 'claims' : 'submissions') }}">대기중</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link {{ Request::get('type') == 'approved' ? 'active' : '' }}" href="{{ url($isClaims ? 'claims' : 'submissions') . '?type=approved' }}">Approved</a>
+            <a class="nav-link {{ Request::get('type') == 'approved' ? 'active' : '' }}" href="{{ url($isClaims ? 'claims' : 'submissions') . '?type=approved' }}">승인됨</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link {{ Request::get('type') == 'rejected' ? 'active' : '' }}" href="{{ url($isClaims ? 'claims' : 'submissions') . '?type=rejected' }}">Rejected</a>
+            <a class="nav-link {{ Request::get('type') == 'rejected' ? 'active' : '' }}" href="{{ url($isClaims ? 'claims' : 'submissions') . '?type=rejected' }}">거절됨</a>
         </li>
     </ul>
 
@@ -45,17 +45,17 @@
                 <div class="row">
                     @if (!$isClaims)
                         <div class="col-12 col-md-2 font-weight-bold">
-                            <div class="logs-table-cell">Prompt</div>
+                            <div class="logs-table-cell">프롬프트</div>
                         </div>
                     @endif
                     <div class="col-6 {{ !$isClaims ? 'col-md-3' : 'col-md-4' }} font-weight-bold">
-                        <div class="logs-table-cell">Link</div>
+                        <div class="logs-table-cell">링크</div>
                     </div>
                     <div class="col-6 {{ !$isClaims ? 'col-md-5' : 'col-md-6' }} font-weight-bold">
-                        <div class="logs-table-cell">Last Action</div>
+                        <div class="logs-table-cell">마지막 작업</div>
                     </div>
                     <div class="col-12 col-md-1 font-weight-bold">
-                        <div class="logs-table-cell">Status</div>
+                        <div class="logs-table-cell">상태</div>
                     </div>
                 </div>
             </div>
@@ -82,7 +82,7 @@
                                 </div>
                             </div>
                             <div class="col-6 col-md-1">
-                                <div class="logs-table-cell"><a href="{{ $submission->viewUrl }}" class="btn btn-primary btn-sm py-0 px-1">Details</a></div>
+                                <div class="logs-table-cell"><a href="{{ $submission->viewUrl }}" class="btn btn-primary btn-sm py-0 px-1">자세히</a></div>
                             </div>
                         </div>
                     </div>
@@ -92,7 +92,7 @@
         {!! $submissions->render() !!}
         <div class="text-center mt-4 small text-muted">{{ $submissions->total() }} result{{ $submissions->total() == 1 ? '' : 's' }} found.</div>
     @else
-        <p>No {{ $isClaims ? 'claims' : 'submissions' }} found.</p>
+        <p>{{ $isClaims ? 'claims' : 'submissions' }} 이 없습니다.</p>
     @endif
 
 @endsection

@@ -1,17 +1,17 @@
 @extends('home.layout')
 
 @section('home-title')
-    My Characters
+    내 캐릭터
 @endsection
 
 @section('home-content')
     {!! breadcrumbs(['My Characters' => 'characters']) !!}
 
     <h1>
-        My Characters
+        내 캐릭터
     </h1>
 
-    <p>This is a list of characters you own. Drag and drop to rearrange them.</p>
+    <p>소유한 캐릭터들의 목록입니다. 드래그 앤 드롭으로 순서를 바꿀 수 있습니다.</p>
 
     <div id="sortable" class="row sortable">
         @foreach ($characters as $character)

@@ -52,7 +52,7 @@ class Sales extends Model implements Feedable {
      * @var array
      */
     public static $createRules = [
-        'title' => 'required|between:3,100',
+        'title' => 'required|between:1,100',
         'text'  => 'required',
     ];
 
@@ -62,7 +62,7 @@ class Sales extends Model implements Feedable {
      * @var array
      */
     public static $updateRules = [
-        'title' => 'required|between:3,100',
+        'title' => 'required|between:1,100',
         'text'  => 'required',
     ];
 
