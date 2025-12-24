@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Shops{!! View::hasSection('shops-title') ? ' :: ' . trim(View::getSection('shops-title')) : '' !!}
+    상점{!! View::hasSection('shops-title') ? ' :: ' . trim(View::getSection('shops-title')) : '' !!}
 @endsection
 
 @section('sidebar')
