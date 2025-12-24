@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    World{!! View::hasSection('world-title') ? ' :: ' . trim(View::getSection('world-title')) : '' !!}
+    세계{!! View::hasSection('world-title') ? ' :: ' . trim(View::getSection('world-title')) : '' !!}
 @endsection
 
 @section('sidebar')

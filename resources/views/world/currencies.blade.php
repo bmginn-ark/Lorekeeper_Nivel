@@ -1,12 +1,12 @@
 @extends('world.layout')
 
 @section('world-title')
-    Currencies
+    재화
 @endsection
 
 @section('content')
     {!! breadcrumbs(['World' => 'world', 'Currencies' => 'world/currencies']) !!}
-    <h1>Currencies</h1>
+    <h1>재화</h1>
 
     <div>
         {!! Form::open(['method' => 'GET', 'class' => 'form-inline justify-content-end']) !!}

@@ -37,7 +37,7 @@
                                 @if (isset($item->category) && $item->category)
                                     <div class="col-md">
                                         <p>
-                                            <strong>Category:</strong>
+                                            <strong>카테고리:</strong>
                                             @if (!$item->category->is_visible)
                                                 <i class="fas fa-eye-slash mx-1 text-danger"></i>
                                             @endif
@@ -50,18 +50,18 @@
                                 @if (config('lorekeeper.extensions.item_entry_expansion.extra_fields'))
                                     @if (isset($item->rarity) && $item->rarity)
                                         <div class="col-md">
-                                            <p><strong>Rarity:</strong> {!! $item->rarity !!}</p>
+                                            <p><strong>희귀도:</strong> {!! $item->rarity !!}</p>
                                         </div>
                                     @endif
                                     @if (isset($item->itemArtist) && $item->itemArtist)
                                         <div class="col-md">
-                                            <p><strong>Artist:</strong> {!! $item->itemArtist !!}</p>
+                                            <p><strong>아티스트:</strong> {!! $item->itemArtist !!}</p>
                                         </div>
                                     @endif
                                 @endif
                                 @if (isset($item->data['resell']) && $item->data['resell'] && config('lorekeeper.extensions.item_entry_expansion.resale_function'))
                                     <div class="col-md">
-                                        <p><strong>Resale Value:</strong> {!! App\Models\Currency\Currency::find($item->resell->flip()->pop())->display($item->resell->pop()) !!}</p>
+                                        <p><strong>재판매 가치:</strong> {!! App\Models\Currency\Currency::find($item->resell->flip()->pop())->display($item->resell->pop()) !!}</p>
                                     </div>
                                 @endif
                                 <div class="col-md-5 col-md">
@@ -79,7 +79,7 @@
                             <div class="world-entry-text">
                                 @if (isset($item->reference) && $item->reference && config('lorekeeper.extensions.item_entry_expansion.extra_fields'))
                                     <p>
-                                        <strong>Reference Link:</strong>
+                                        <strong>레퍼런스 링크:</strong>
                                         <a href="{{ $item->reference }}">
                                             {{ $item->reference }}
                                         </a>
@@ -90,22 +90,22 @@
 
                                     @if (isset($item->uses) && $item->uses)
                                         <p>
-                                            <strong>Uses:</strong> {!! $item->uses !!}
+                                            <strong>사용처:</strong> {!! $item->uses !!}
                                         </p>
                                     @endif
                                     @if ((isset($item->source) && $item->source) || $item->shop_stock_count || (isset($item->data['prompts']) && $item->data['prompts']))
-                                        <h5>Availability</h5>
+                                        <h5>획득경로</h5>
                                         <div class="row">
                                             @if (isset($item->data['release']) && $item->data['release'])
                                                 <div class="col">
-                                                    <p><strong>Source:</strong></p>
+                                                    <p><strong>출처:</strong></p>
                                                     <p>{!! $item->data['release'] !!}</p>
                                                 </div>
                                             @endif
                                             @if ($item->shop_stock_count)
                                                 <div class="col">
                                                     <p>
-                                                        <strong>Purchaseable At:</strong>
+                                                        <strong>구매처:</strong>
                                                     </p>
                                                     <div class="row">
                                                         @foreach ($item->shops as $shop)
@@ -120,7 +120,7 @@
                                             @endif
                                             @if (isset($item->data['prompts']) && $item->data['prompts'])
                                                 <div class="col">
-                                                    <p><strong>Drops From:</strong></p>
+                                                    <p><strong>드랍:</strong></p>
                                                     <div class="row">
                                                         @foreach ($item->prompts as $prompt)
                                                             <span class="badge" style="font-size:95%; background-color: #fefcf6; margin:5px;">

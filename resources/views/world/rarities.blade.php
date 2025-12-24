@@ -1,12 +1,12 @@
 @extends('world.layout')
 
 @section('world-title')
-    Rarities
+    희귀도
 @endsection
 
 @section('content')
     {!! breadcrumbs(['World' => 'world', 'Rarities' => 'world/rarities']) !!}
-    <h1>Rarities</h1>
+    <h1>희귀도</h1>
 
     <div>
         {!! Form::open(['method' => 'GET', 'class' => 'form-inline justify-content-end']) !!}

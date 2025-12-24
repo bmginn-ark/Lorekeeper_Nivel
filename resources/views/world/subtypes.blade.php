@@ -1,12 +1,12 @@
 @extends('world.layout')
 
 @section('world-title')
-    Subtypes
+    분류
 @endsection
 
 @section('content')
     {!! breadcrumbs(['World' => 'world', 'Subtypes' => 'world/subtypes']) !!}
-    <h1>Subtypes</h1>
+    <h1>분류</h1>
 
     <div>
         {!! Form::open(['method' => 'GET', 'class' => 'form-inline justify-content-end']) !!}

@@ -1,12 +1,12 @@
 @extends('world.layout')
 
 @section('world-title')
-    Character Categories
+    캐릭터 카테고리
 @endsection
 
 @section('content')
     {!! breadcrumbs(['World' => 'world', 'Character Categories' => 'world/character-categories']) !!}
-    <h1>Character Categories</h1>
+    <h1>캐릭터 카테고리</h1>
 
     <div>
         {!! Form::open(['method' => 'GET', 'class' => 'form-inline justify-content-end']) !!}

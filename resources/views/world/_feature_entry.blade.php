@@ -19,14 +19,14 @@
         </h3>
         @if ($feature->feature_category_id)
             <div>
-                <strong>Category:</strong> {!! $feature->category->displayName !!}
+                <strong>카테고리:</strong> {!! $feature->category->displayName !!}
             </div>
         @endif
         @if ($feature->species_id)
             <div>
-                <strong>Species:</strong> {!! $feature->species->displayName !!}
+                <strong>종:</strong> {!! $feature->species->displayName !!}
                 @if ($feature->subtype_id)
-                    ({!! $feature->subtype->displayName !!} subtype)
+                    ({!! $feature->subtype->displayName !!} 카테고리)
                 @endif
             </div>
         @endif
