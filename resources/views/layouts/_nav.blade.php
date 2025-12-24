@@ -14,112 +14,112 @@
                     @if (Auth::check() && Auth::user()->is_news_unread && config('lorekeeper.extensions.navbar_news_notif'))
                         <a class="nav-link d-flex text-warning" href="{{ url('news') }}"><strong>News</strong><i class="fas fa-bell"></i></a>
                     @else
-                        <a class="nav-link" href="{{ url('news') }}">News</a>
+                        <a class="nav-link" href="{{ url('news') }}">공지</a>
                     @endif
                 </li>
                 <li class="nav-item">
                     @if (Auth::check() && Auth::user()->is_sales_unread && config('lorekeeper.extensions.navbar_news_notif'))
                         <a class="nav-link d-flex text-warning" href="{{ url('sales') }}"><strong>Sales</strong><i class="fas fa-bell"></i></a>
                     @else
-                        <a class="nav-link" href="{{ url('sales') }}">Sales</a>
+                        <a class="nav-link" href="{{ url('sales') }}">분양</a>
                     @endif
                 </li>
                 @if (Auth::check())
                     <li class="nav-item dropdown">
                         <a id="inventoryDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            Home
+                            홈
                         </a>
 
                         <div class="dropdown-menu" aria-labelledby="inventoryDropdown">
                             <a class="dropdown-item" href="{{ url('characters') }}">
-                                My Characters
+                                내 캐릭터
                             </a>
                             <a class="dropdown-item" href="{{ url('characters/myos') }}">
-                                My MYO Slots
+                                내 MYO 슬롯
                             </a>
                             <a class="dropdown-item" href="{{ url('inventory') }}">
-                                Inventory
+                                인벤토리
                             </a>
                             <a class="dropdown-item" href="{{ url('bank') }}">
-                                Bank
+                                은행
                             </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{ url('comments/liked') }}">
-                                Liked Comments
+                                좋아요 한 덧글
                             </a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
                         <a id="queueDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            Activity
+                            활동
                         </a>
                         <div class="dropdown-menu" aria-labelledby="queueDropdown">
                             <a class="dropdown-item" href="{{ url('submissions') }}">
-                                Prompt Submissions
+                                프롬프트 제출
                             </a>
                             <a class="dropdown-item" href="{{ url('claims') }}">
-                                Claims
+                                수령
                             </a>
                             <a class="dropdown-item" href="{{ url('reports') }}">
-                                Reports
+                                신고
                             </a>
                             <a class="dropdown-item" href="{{ url('designs') }}">
-                                Design Approvals
+                                디자인 승인
                             </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{ url('characters/transfers/incoming') }}">
-                                Character Transfers
+                                캐릭터 이전
                             </a>
                             <a class="dropdown-item" href="{{ url('trades/open') }}">
-                                Trades
+                                거래
                             </a>
                         </div>
                     </li>
                 @endif
                 <li class="nav-item dropdown">
                     <a id="browseDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                        Browse
+                        검색
                     </a>
 
                     <div class="dropdown-menu" aria-labelledby="browseDropdown">
                         <a class="dropdown-item" href="{{ url('users') }}">
-                            Users
+                            유저
                         </a>
                         <a class="dropdown-item" href="{{ url('masterlist') }}">
-                            Character Masterlist
+                            캐릭터 마스터리스트
                         </a>
                         <a class="dropdown-item" href="{{ url('myos') }}">
-                            MYO Slot Masterlist
+                            MYO 슬롯 마스터리스트
                         </a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ url('raffles') }}">
-                            Raffles
+                            추첨
                         </a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ url('reports/bug-reports') }}">
-                            Bug Reports
+                            버그 신고
                         </a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
                     <a id="loreDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                        World
+                        세계
                     </a>
 
                     <div class="dropdown-menu" aria-labelledby="loreDropdown">
                         <a class="dropdown-item" href="{{ url('world') }}">
-                            Encyclopedia
+                            백과사전
                         </a>
                         <a class="dropdown-item" href="{{ url('prompts/prompts') }}">
-                            Prompts
+                            프롬프트
                         </a>
                         <a class="dropdown-item" href="{{ url('shops') }}">
-                            Shops
+                            상점
                         </a>
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('gallery') }}">Gallery</a>
+                    <a class="nav-link" href="{{ url('gallery') }}">갤러리</a>
                 </li>
             </ul>
 
@@ -149,18 +149,18 @@
 
                     <li class="nav-item dropdown">
                         <a id="browseDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            Submit
+                            제출
                         </a>
 
                         <div class="dropdown-menu" aria-labelledby="browseDropdown">
                             <a class="dropdown-item" href="{{ url('submissions/new') }}">
-                                Submit Prompt
+                                프롬프트 제출
                             </a>
                             <a class="dropdown-item" href="{{ url('claims/new') }}">
-                                Submit Claim
+                                수령 제출
                             </a>
                             <a class="dropdown-item" href="{{ url('reports/new') }}">
-                                Submit Report
+                                신고 제출
                             </a>
                         </div>
                     </li>
@@ -172,16 +172,16 @@
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ Auth::user()->url }}">
-                                Profile
+                                프로필
                             </a>
                             <a class="dropdown-item" href="{{ url('notifications') }}">
-                                Notifications
+                                알림
                             </a>
                             <a class="dropdown-item" href="{{ url('account/bookmarks') }}">
-                                Bookmarks
+                                북마크
                             </a>
                             <a class="dropdown-item" href="{{ url('account/settings') }}">
-                                Settings
+                                세팅
                             </a>
                             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                 document.getElementById('logout-form').submit();">
