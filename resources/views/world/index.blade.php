@@ -13,7 +13,7 @@
             <div class="card mb-4">
                 <div class="card-body text-center">
                     <img src="{{ asset('images/characters.png') }}" alt="Characters" />
-                    <h5 class="card-title">Characters</h5>
+                    <h5 class="card-title">캐릭터</h5>
                 </div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item"><a href="{{ url('world/species') }}">종</a></li>
