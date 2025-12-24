@@ -9,7 +9,7 @@
         <div class="card mb-4">
             <div class="card-body text-center">
                 <img src="{{ asset('images/account.png') }}" alt="Account" />
-                <h5 class="card-title">Account</h5>
+                <h5 class="card-title">계정</h5>
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"><a href="{{ Auth::user()->url }}">프로필</a></li>
@@ -22,7 +22,7 @@
         <div class="card mb-4">
             <div class="card-body text-center">
                 <img src="{{ asset('images/characters.png') }}" alt="Characters" />
-                <h5 class="card-title">Characters</h5>
+                <h5 class="card-title">캐릭터</h5>
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"><a href="{{ url('characters') }}">내 캐릭터</a></li>
@@ -37,7 +37,7 @@
         <div class="card mb-4">
             <div class="card-body text-center">
                 <img src="{{ asset('images/inventory.png') }}" alt="Inventory" />
-                <h5 class="card-title">Inventory</h5>
+                <h5 class="card-title">인벤토리</h5>
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"><a href="{{ url('inventory') }}">내 인벤토리</a></li>
@@ -49,7 +49,7 @@
         <div class="card">
             <div class="card-body text-center">
                 <img src="{{ asset('images/currency.png') }}" alt="Bank" />
-                <h5 class="card-title">Bank</h5>
+                <h5 class="card-title">은행</h5>
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"><a href="{{ url('bank') }}">은행</a></li>
