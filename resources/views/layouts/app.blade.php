@@ -90,7 +90,7 @@
         <div class="site-header-image" id="header" style="background-image: url('{{ asset('images/header.png') }}');"></div>
         @include('layouts._nav')
         @if (View::hasSection('sidebar'))
-            <div class="site-mobile-header bg-secondary"><a href="#" class="btn btn-sm btn-outline-light" id="mobileMenuButton">Menu <i class="fas fa-caret-right ml-1"></i></a></div>
+            <div class="site-mobile-header bg-secondary"><a href="#" class="btn btn-sm btn-outline-light" id="mobileMenuButton">메뉴 <i class="fas fa-caret-right ml-1"></i></a></div>
         @endif
 
         <main class="container-fluid">
@@ -103,18 +103,18 @@
                     <div>
                         @if (Settings::get('is_maintenance_mode'))
                             <div class="alert alert-secondary">
-                                The site is currently in maintenance mode!
+                                이 사이트는 현재 유지보수 모드입니다!
                                 @if (!Auth::check() || !Auth::user()->hasPower('maintenance_access'))
-                                    You can browse public content, but cannot make any submissions.
+                                    개방된 콘텐츠를 확인할 순 있지만, 제출은 불가능합니다.
                                 @endif
                             </div>
                         @endif
                         @if (Auth::check() && !config('lorekeeper.extensions.navbar_news_notif'))
                             @if (Auth::user()->is_news_unread)
-                                <div class="alert alert-info"><a href="{{ url('news') }}">There is a new news post!</a></div>
+                                <div class="alert alert-info"><a href="{{ url('news') }}">새로운 공지 게시물이 있습니다!</a></div>
                             @endif
                             @if (Auth::user()->is_sales_unread)
-                                <div class="alert alert-info"><a href="{{ url('sales') }}">There is a new sales post!</a></div>
+                                <div class="alert alert-info"><a href="{{ url('sales') }}">새로운 분양 게시물이 있습니다!</a></div>
                             @endif
                         @endif
                         @include('flash::message')
