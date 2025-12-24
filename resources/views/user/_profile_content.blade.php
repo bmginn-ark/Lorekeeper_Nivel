@@ -16,12 +16,12 @@
                 @if ($user->previousUsername && mb_strtolower($user->name) != mb_strtolower($user->previousUsername))
                     <small>{!! add_help('Previously known as ' . $user->previousUsername) !!}</small>
                 @endif
-                <a href="{{ url('reports/new?url=') . $user->url }}"><i class="fas fa-exclamation-triangle fa-xs text-danger" data-toggle="tooltip" title="Click here to report this user." style="opacity: 50%;"></i></a>
+                <a href="{{ url('reports/new?url=') . $user->url }}"><i class="fas fa-exclamation-triangle fa-xs text-danger" data-toggle="tooltip" title="클릭하여 유저를 신고" style="opacity: 50%;"></i></a>
             </div>
 
             @if ($user->settings->is_fto)
                 <div class="col-md-1 text-center">
-                    <span class="btn badge-success float-md-right" data-toggle="tooltip" title="This user has not owned any characters from this world before.">FTO</span>
+                    <span class="btn badge-success float-md-right" data-toggle="tooltip" title="이 유저는 이 사이트에서 캐릭터를 소유한 적 없습니다.">FTO</span>
                 </div>
             @endif
         </div>
@@ -30,7 +30,7 @@
         <div class="row no-gutters">
             <div class="row no-gutters col-sm-5">
                 <div class="col-lg-3 col-md-3 col-4">
-                    <h5>Alias</h5>
+                    <h5>SNS</h5>
                 </div>
                 <div class="col-lg-9 col-md-9 col-8">
                     {!! $user->displayAlias !!}
@@ -48,20 +48,20 @@
             </div>
             <div class="row no-gutters col-sm-7">
                 <div class="col-md-4 col-4">
-                    <h5>Joined</h5>
+                    <h5>가입일</h5>
                 </div>
                 <div class="col-md-8 col-8">{!! format_date($user->created_at, false) !!} ({{ $user->created_at->diffForHumans() }})</div>
             </div>
             <div class="row no-gutters col-sm-5">
                 <div class="col-lg-3 col-md-3 col-4">
-                    <h5>Rank</h5>
+                    <h5>등급</h5>
                 </div>
                 <div class="col-lg-9 col-md-9 col-8">{!! $user->rank->displayName !!} {!! $user->rank->parsed_description ? add_help($user->rank->parsed_description) : '' !!}</div>
             </div>
             @if ($user->birthdayDisplay && isset($user->birthday))
                 <div class="row no-gutters col-sm-7">
                     <div class="col-md-4 col-4">
-                        <h5>Birthday</h5>
+                        <h5>생일</h5>
                     </div>
                     <div class="col-md-8 col-8">{!! $user->birthdayDisplay !!}</div>
                 </div>
@@ -81,18 +81,18 @@
 <div class="card-deck mb-4 profile-assets" style="clear:both;">
     <div class="card profile-currencies profile-assets-card">
         <div class="card-body text-center">
-            <h5 class="card-title">Bank</h5>
+            <h5 class="card-title">은행</h5>
             <div class="profile-assets-content">
                 @foreach ($user->getCurrencies(false) as $currency)
                     <div>{!! $currency->display($currency->quantity) !!}</div>
                 @endforeach
             </div>
-            <div class="text-right"><a href="{{ $user->url . '/bank' }}">View all...</a></div>
+            <div class="text-right"><a href="{{ $user->url . '/bank' }}">전체 보기...</a></div>
         </div>
     </div>
     <div class="card profile-inventory profile-assets-card">
         <div class="card-body text-center">
-            <h5 class="card-title">Inventory</h5>
+            <h5 class="card-title">인벤토리</h5>
             <div class="profile-assets-content">
                 @if (count($items))
                     <div class="row">
@@ -107,16 +107,16 @@
                         @endforeach
                     </div>
                 @else
-                    <div>No items owned.</div>
+                    <div>소유 아이템이 없습니다.</div>
                 @endif
             </div>
-            <div class="text-right"><a href="{{ $user->url . '/inventory' }}">View all...</a></div>
+            <div class="text-right"><a href="{{ $user->url . '/inventory' }}">전체 보기...</a></div>
         </div>
     </div>
 </div>
 
 <h2>
-    <a href="{{ $user->url . '/characters' }}">Characters</a>
+    <a href="{{ $user->url . '/characters' }}">캐릭터</a>
     @if (isset($sublists) && $sublists->count() > 0)
         @foreach ($sublists as $sublist)
             / <a href="{{ $user->url . '/sublist/' . $sublist->key }}">{{ $sublist->name }}</a>
@@ -143,7 +143,7 @@
     </div>
 @endforeach
 
-<div class="text-right"><a href="{{ $user->url . '/characters' }}">View all...</a></div>
+<div class="text-right"><a href="{{ $user->url . '/characters' }}">전체 보기...</a></div>
 <hr class="mb-5" />
 
 <div class="row col-12">
@@ -155,27 +155,27 @@
     <div class="col-md-4">
         <div class="card mb-4">
             <div class="card-header">
-                <h5>Mention This User</h5>
+                <h5>이 유저 언급하기</h5>
             </div>
             <div class="card-body">
-                In the rich text editor:
+                Rich text editor에서:
                 <div class="alert alert-secondary">
                     {{ '@' . $user->name }}
                 </div>
                 @if (!config('lorekeeper.settings.wysiwyg_comments'))
-                    In a comment:
+                    덧글에서:
                     <div class="alert alert-secondary">
                         [{{ $user->name }}]({{ $user->url }})
                     </div>
                 @endif
                 <hr>
-                <div class="my-2"><strong>For Names and Avatars:</strong></div>
-                In the rich text editor:
+                <div class="my-2"><strong>이름과 아바타:</strong></div>
+                Rich text editor에서:
                 <div class="alert alert-secondary">
                     {{ '%' . $user->name }}
                 </div>
                 @if (!config('lorekeeper.settings.wysiwyg_comments'))
-                    In a comment:
+                    덧글에서:
                     <div class="alert alert-secondary">
                         [![{{ $user->name }}'s Avatar]({{ $user->avatarUrl }})]({{ $user->url }}) [{{ $user->name }}]({{ $user->url }})
                     </div>
@@ -183,7 +183,7 @@
             </div>
             @if (Auth::check() && Auth::user()->isStaff)
                 <div class="card-footer">
-                    <h5>[ADMIN]</h5>
+                    <h5>[관리자]</h5>
                     Permalinking to this user, in the rich text editor:
                     <div class="alert alert-secondary">
                         [user={{ $user->id }}]

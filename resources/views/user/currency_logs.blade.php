@@ -1,14 +1,14 @@
 @extends('user.layout')
 
 @section('profile-title')
-    {{ $user->name }}'s Currency Logs
+    {{ $user->name }}의 재화 로그
 @endsection
 
 @section('profile-content')
     {!! breadcrumbs(['Users' => 'users', $user->name => $user->url, 'Bank' => $user->url . '/bank', 'Logs' => $user->url . '/currency-logs']) !!}
 
     <h1>
-        {!! $user->displayName !!}'s Currency Logs
+        {!! $user->displayName !!}의 재화 로그
     </h1>
 
     {!! $logs->render() !!}
@@ -16,19 +16,19 @@
         <div class="logs-table-header">
             <div class="row">
                 <div class="col-6 col-md-2">
-                    <div class="logs-table-cell">Sender</div>
+                    <div class="logs-table-cell">보내는 이</div>
                 </div>
                 <div class="col-6 col-md-2">
-                    <div class="logs-table-cell">Recipient</div>
+                    <div class="logs-table-cell">받는 이</div>
                 </div>
                 <div class="col-6 col-md-2">
-                    <div class="logs-table-cell">Currency</div>
+                    <div class="logs-table-cell">재화</div>
                 </div>
                 <div class="col-6 col-md-4">
-                    <div class="logs-table-cell">Log</div>
+                    <div class="logs-table-cell">로그</div>
                 </div>
                 <div class="col-6 col-md-2">
-                    <div class="logs-table-cell">Date</div>
+                    <div class="logs-table-cell">날짜</div>
                 </div>
             </div>
         </div>

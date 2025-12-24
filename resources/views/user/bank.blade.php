@@ -1,17 +1,17 @@
 @extends('user.layout')
 
 @section('profile-title')
-    {{ $user->name }}'s Bank
+    {{ $user->name }}의 은행
 @endsection
 
 @section('profile-content')
     {!! breadcrumbs(['Users' => 'users', $user->name => $user->url, 'Bank' => $user->url . '/bank']) !!}
 
     <h1>
-        {!! $user->displayName !!}'s Bank
+        {!! $user->displayName !!}의 은행
     </h1>
 
-    <h3>Currencies</h3>
+    <h3>재화</h3>
     <div class="card mb-4">
         <ul class="list-group list-group-flush">
 
@@ -39,24 +39,24 @@
         </ul>
     </div>
 
-    <h3>Latest Activity</h3>
+    <h3>최근 활동</h3>
     <div class="mb-4 logs-table">
         <div class="logs-table-header">
             <div class="row">
                 <div class="col-6 col-md-2">
-                    <div class="logs-table-cell">Sender</div>
+                    <div class="logs-table-cell">보내는 이</div>
                 </div>
                 <div class="col-6 col-md-2">
-                    <div class="logs-table-cell">Recipient</div>
+                    <div class="logs-table-cell">받는 이</div>
                 </div>
                 <div class="col-6 col-md-2">
-                    <div class="logs-table-cell">Currency</div>
+                    <div class="logs-table-cell">재화</div>
                 </div>
                 <div class="col-6 col-md-4">
-                    <div class="logs-table-cell">Log</div>
+                    <div class="logs-table-cell">로그</div>
                 </div>
                 <div class="col-6 col-md-2">
-                    <div class="logs-table-cell">Date</div>
+                    <div class="logs-table-cell">날짜</div>
                 </div>
             </div>
         </div>
@@ -69,6 +69,6 @@
         </div>
     </div>
     <div class="text-right">
-        <a href="{{ url($user->url . '/currency-logs') }}">View all...</a>
+        <a href="{{ url($user->url . '/currency-logs') }}">전체 보기...</a>
     </div>
 @endsection
