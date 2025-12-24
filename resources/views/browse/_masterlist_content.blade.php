@@ -66,7 +66,7 @@
                     {!! Form::select('is_gift_art_allowed', [0 => '아무나', 2 => '먼저 묻기', 1 => '가능', 3 => '가능하거나 먼저 묻기'], Request::get('is_gift_art_allowed'), ['class' => 'form-control', 'style' => 'width: 250px']) !!}
                 </div>
                 <div class="masterlist-search-field">
-                    {!! Form::label('is_gift_writing_allowed', '선물 글 상태: ') !!}
+                    {!! Form::label('is_gift_writing_allowed', '글 선물 상태: ') !!}
                     {!! Form::select('is_gift_writing_allowed', [0 => '아무나', 2 => '먼저 묻기', 1 => '가능', 3 => '가능하거나 먼저 묻기'], Request::get('is_gift_writing_allowed'), ['class' => 'form-control', 'style' => 'width: 250px']) !!}
                 </div>
             @endif
