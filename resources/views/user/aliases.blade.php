@@ -15,7 +15,7 @@
         <div class="logs-table-header">
             <div class="row">
                 <div class="col-4">
-                    <div class="logs-table-cell">SNS</div>
+                    <div class="logs-table-cell">계정</div>
                 </div>
                 <div class="col-3">
                     <div class="logs-table-cell">사이트</div>

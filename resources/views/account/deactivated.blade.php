@@ -1,15 +1,15 @@
 @extends('layouts.app')
 
 @section('title')
-    Deactivated
+    비활성화
 @endsection
 
 @section('content')
     {!! breadcrumbs(['Deactivated' => 'banned']) !!}
 
-    <h1>Deactivated</h1>
+    <h1>비활성화</h1>
 
-    <p>Your account has been deactivated as of {!! format_date(Auth::user()->settings->deactivated_at) !!}. {{ Auth::user()->settings->deactivate_reason ? 'The following reason was given:' : '' }}</p>
+    <p>계정이 {!! format_date(Auth::user()->settings->deactivated_at) !!}에 비활성화되었습니다. {{ Auth::user()->settings->deactivate_reason ? '다음 사유가 주어졌습니다:' : '' }}</p>
 
     @if (Auth::user()->settings->deactivate_reason)
         <div class="alert alert-danger">
@@ -18,12 +18,11 @@
         </div>
     @endif
 
-    <p>As such, you may not continue to to use site features. Items, currencies, characters and any other assets attached to your account cannot be transferred to another user, nor can another user transfer any assets to your account. Any pending
-        submissions have also been removed from the submission queue. </p>
+    <p>사이트 기능을 계속 사용할 수 없습니다. 계정에 연결된 항목, 통화, 문자 및 기타 자산은 다른 사용자에게 이전할 수 없으며, 다른 사용자가 계정으로 자산을 이전할 수도 없습니다. 보류 중인 모든 항목 제출물도 제출 대기열에서 삭제되었습니다.</p>
 
     @if (Auth::user()->is_deactivated)
         <div class="text-right">
-            <a href="#" class="btn btn-outline-danger reactivate-button">Reactivate Account</a>
+            <a href="#" class="btn btn-outline-danger reactivate-button">계정 재활성화</a>
         </div>
     @endif
 @endsection

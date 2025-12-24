@@ -1,8 +1,8 @@
 @if (!Auth::user()->is_deactivated)
     <p>
-        Are you sure you want to deactivate your account? All trades and submissions will be canceled and you will not be able to access the website when logged in.
+        계정을 비활성화하시겠습니까? 모든 거래 및 제출이 취소되며 로그인 시 웹사이트에 액세스할 수 없습니다.
     </p>
-    <div class="text-right"><a href="#" class="btn btn-danger deactivate-confirm-button">Deactivate</a></div>
+    <div class="text-right"><a href="#" class="btn btn-danger deactivate-confirm-button">비활성화</a></div>
 
     <script>
         $('.deactivate-confirm-button').on('click', function(e) {
@@ -11,5 +11,5 @@
         });
     </script>
 @else
-    <p>Your account is already deactivated.</p>
+    <p>귀하의 계정은 이미 비활성화되어 있습니다.</p>
 @endif

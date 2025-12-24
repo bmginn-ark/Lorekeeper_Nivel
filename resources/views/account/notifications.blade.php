@@ -1,17 +1,17 @@
 @extends('account.layout')
 
 @section('account-title')
-    Notifications
+    알림
 @endsection
 
 @section('account-content')
     {!! breadcrumbs(['My Account' => Auth::user()->url, 'Notifications' => 'notifications']) !!}
 
-    <h1>Notifications</h1>
+    <h1>알림</h1>
 
     <div class="text-right mb-3">
         {!! Form::open(['url' => 'notifications/clear', 'id' => 'clearForm']) !!}
-        <a href="#" class="btn btn-primary" id="clearButton">Clear All</a>
+        <a href="#" class="btn btn-primary" id="clearButton">모두 지우기</a>
         {!! Form::close() !!}
     </div>
     {!! $notifications->render() !!}
@@ -34,8 +34,8 @@
                         <table class="table notifications-table">
                             <thead>
                                 <tr>
-                                    <th>Message</th>
-                                    <th>Date</th>
+                                    <th>메시지</th>
+                                    <th>날짜</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -55,7 +55,7 @@
         </div>
     @endforeach
     @if (!count($notifications))
-        <div class="text-center">No notifications.</div>
+        <div class="text-center">알림이 없습니다.</div>
     @endif
 
     {!! $notifications->render() !!}
@@ -64,13 +64,13 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <span class="modal-title h5 mb-0">Clear All Notifications</span>
+                    <span class="modal-title h5 mb-0">모든 알림 지우기</span>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <p>This will clear <strong>all</strong> of your notifications. Are you certain you wish to do so?</p>
+                    <p>이 작업은 <strong>모든</strong> 알림을 지웁니다. 정말로 진행하시겠습니까?</p>
                     <div class="text-right">
-                        <a href="#" id="clearSubmit" class="btn btn-primary">Clear All</a>
+                        <a href="#" id="clearSubmit" class="btn btn-primary">모두 지우기</a>
                     </div>
                 </div>
             </div>
