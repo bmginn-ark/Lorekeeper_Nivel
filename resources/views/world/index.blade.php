@@ -7,7 +7,7 @@
 @section('content')
     {!! breadcrumbs(['Encyclopedia' => 'world']) !!}
 
-    <h1>World</h1>
+    <h1>세계</h1>
     <div class="row">
         <div class="col-md-6">
             <div class="card mb-4">
