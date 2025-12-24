@@ -1,4 +1,4 @@
-<h1>어서오세요 {!! Auth::user()->displayName !!}님!</h1>
+<h1>어서오세요, {!! Auth::user()->displayName !!}님!</h1>
 <div class="card mb-4 timestamp">
     <div class="card-body">
         <i class="far fa-clock"></i> {!! format_date(Carbon\Carbon::now()) !!}
