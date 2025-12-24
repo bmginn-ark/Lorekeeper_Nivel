@@ -75,7 +75,7 @@
                 </div>
             @endif
             <div class="text-right">
-                {!! Form::submit('Purchase', ['class' => 'btn btn-primary']) !!}
+                {!! Form::submit('구매', ['class' => 'btn btn-primary']) !!}
             </div>
             {!! Form::close() !!}
         @endif
