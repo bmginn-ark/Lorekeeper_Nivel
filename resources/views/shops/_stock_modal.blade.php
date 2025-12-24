@@ -42,7 +42,7 @@
             {!! Form::open(['url' => 'shops/buy']) !!}
             {!! Form::hidden('shop_id', $shop->id) !!}
             {!! Form::hidden('stock_id', $stock->id) !!}
-            {!! Form::label('quantity', 'Quantity') !!}
+            {!! Form::label('quantity', '수량') !!}
             {!! Form::selectRange('quantity', 1, $quantityLimit, 1, ['class' => 'form-control mb-3']) !!}
             @if ($stock->use_user_bank && $stock->use_character_bank)
                 <p>사용자 계정 은행이나 캐릭터 은행으로 지불할 수 있습니다. 사용하려는 항목을 선택하십시오.</p>
