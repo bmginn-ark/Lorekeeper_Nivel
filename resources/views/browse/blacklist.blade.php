@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('title')
-    Blacklist
+    블랙리스트
 @endsection
 
 @section('content')
     {!! breadcrumbs(['Users' => 'users', 'Blacklist' => 'blacklist']) !!}
-    <h1>User Blacklist</h1>
+    <h1>유저 블랙리스트</h1>
 
     @if (!$canView)
         {{-- blade-formatter-disable --}}

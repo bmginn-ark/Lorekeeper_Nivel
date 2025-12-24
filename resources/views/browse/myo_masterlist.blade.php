@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    MYO Slot Masterlist
+    MYO 슬롯 마스터리스트
 @endsection
 
 @section('sidebar')
@@ -10,7 +10,7 @@
 
 @section('content')
     {!! breadcrumbs(['MYO Slot Masterlist' => 'myos']) !!}
-    <h1>MYO Slot Masterlist</h1>
+    <h1>MYO 슬롯 마스터리스트</h1>
 
     @include('browse._masterlist_content', ['characters' => $slots])
 @endsection

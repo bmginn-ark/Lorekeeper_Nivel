@@ -1,18 +1,18 @@
 @extends('layouts.app')
 
 @section('title')
-    Users
+    유저
 @endsection
 
 @section('content')
     {!! breadcrumbs(['Users' => 'users']) !!}
     <h1>
-        User Index
+        유저 인덱스
         @if ($blacklistLink)
-            <a href="{{ url('blacklist') }}" class="btn btn-dark float-right ml-2">Blacklist</a>
+            <a href="{{ url('blacklist') }}" class="btn btn-dark float-right ml-2">블랙리스트</a>
         @endif
         @if ($deactivatedLink || (Auth::check() && Auth::user()->isStaff))
-            <a href="{{ url('deactivated-list') }}" class="btn btn-dark float-right">Deactivated Accounts</a>
+            <a href="{{ url('deactivated-list') }}" class="btn btn-dark float-right">비활성화된 계정</a>
         @endif
     </h1>
 
@@ -50,16 +50,16 @@
         <div class="logs-table-header">
             <div class="row">
                 <div class="col-12 col-md-4">
-                    <div class="logs-table-cell">Username</div>
+                    <div class="logs-table-cell">닉네임</div>
                 </div>
                 <div class="col-4 col-md-3">
-                    <div class="logs-table-cell">Primary Alias</div>
+                    <div class="logs-table-cell">대표 SNS</div>
                 </div>
                 <div class="col-4 col-md-2">
-                    <div class="logs-table-cell">Rank</div>
+                    <div class="logs-table-cell">등급</div>
                 </div>
                 <div class="col-4 col-md-3">
-                    <div class="logs-table-cell">Joined</div>
+                    <div class="logs-table-cell">가입일</div>
                 </div>
             </div>
         </div>
