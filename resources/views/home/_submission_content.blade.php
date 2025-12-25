@@ -12,14 +12,14 @@
     <div class="card-body">
         <div class="row mb-2 no-gutters">
             <div class="col-md-2">
-                <h5 class="mb-0">User</h5>
+                <h5 class="mb-0">유저</h5>
             </div>
             <div class="col-md-10">{!! $submission->user->displayName !!}</div>
         </div>
         @if ($submission->prompt_id)
             <div class="row mb-2 no-gutters">
                 <div class="col-md-2">
-                    <h5 class="mb-0">Prompt</h5>
+                    <h5 class="mb-0">프롬프트</h5>
                 </div>
                 <div class="col-md-10">{!! $submission->prompt->displayName !!}</div>
             </div>
@@ -32,7 +32,7 @@
         </div>
         <div class="row mb-2 no-gutters">
             <div class="col-md-2">
-                <h5 class="mb-0">Submitted</h5>
+                <h5 class="mb-0">제출일</h5>
             </div>
             <div class="col-md-10">
                 {!! format_date($submission->created_at) !!} ({{ $submission->created_at->diffForHumans() }})
@@ -41,7 +41,7 @@
         @if ($submission->status != 'Pending' && $submission->status != 'Draft')
             <div class="row mb-2 no-gutters">
                 <div class="col-md-2">
-                    <h5 class="mb-0">Processed</h5>
+                    <h5 class="mb-0">진행일</h5>
                 </div>
                 <div class="col-md-10">
                     {!! format_date($submission->updated_at) !!} ({{ $submission->updated_at->diffForHumans() }}) by {!! $submission->staff->displayName !!}
@@ -52,13 +52,13 @@
 </div>
 
 <div class="card mb-3">
-    <div class="card-header h2">Comments</div>
+    <div class="card-header h2">코멘트</div>
     <div class="card-body">
         {!! nl2br(htmlentities($submission->comments)) !!}
     </div>
 
     @if (Auth::check() && $submission->staff_comments && ($submission->user_id == Auth::user()->id || Auth::user()->hasPower('manage_submissions')))
-        <div class="card-header h2">Staff Comments</div>
+        <div class="card-header h2">스태프 코멘트</div>
         <div class="card-body">
             @if (isset($submission->parsed_staff_comments))
                 {!! $submission->parsed_staff_comments !!}
@@ -71,13 +71,13 @@
 
 @if (array_filter(parseAssetData(isset($submission->data['rewards']) ? $submission->data['rewards'] : $submission->data)))
     <div class="card mb-3">
-        <div class="card-header h2">Rewards</div>
+        <div class="card-header h2">보상</div>
         <div class="card-body">
             <table class="table table-sm">
                 <thead class="thead-light">
                     <tr>
-                        <th width="70%">Reward</th>
-                        <th width="30%">Amount</th>
+                        <th width="70%">보상</th>
+                        <th width="30%">수량</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -96,12 +96,12 @@
 @endif
 
 <div class="card mb-3">
-    <div class="card-header h2">Characters</div>
+    <div class="card-header h2">캐릭터</div>
     <div class="card-body">
         @if (count(
                 $submission->characters()->whereRelation('character', 'deleted_at', null)->get()) != count($submission->characters()->get()))
             <div class="alert alert-warning">
-                Some characters have been deleted since this submission was created.
+                이 제출물이 생성된 이후 일부 캐릭터가 삭제되었습니다.
             </div>
         @endif
         @foreach ($submission->characters()->with('character', 'character.image')->whereRelation('character', 'deleted_at', null)->get() as $character)
@@ -118,8 +118,8 @@
                                     <table class="table table-sm mb-0">
                                         <thead class="thead-light">
                                             <tr>
-                                                <th width="70%">Reward</th>
-                                                <th width="30%">Amount</th>
+                                                <th width="70%">보상</th>
+                                                <th width="30%">수량</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -153,7 +153,7 @@
                                     </table>
                                 @else
                                     <p>
-                                        No rewards set.
+                                        보상이 없습니다.
                                     </p>
                                 @endif
                             </div>
@@ -167,16 +167,16 @@
 
 @if (isset($inventory['user_items']) && array_filter($inventory['user_items']))
     <div class="card mb-3">
-        <div class="card-header h2">Add-Ons</div>
+        <div class="card-header h2">추가</div>
         <div class="card-body">
-            <p>These items have been removed from the {{ $submission->prompt_id ? 'submitter' : 'claimant' }}'s inventory and will be refunded if the request is rejected or consumed if it is approved.</p>
+            <p>이 항목들은 {{$submission->prompt_id ? '보내는 이' : '받는 이' }}의 인벤토리에서 제거되었으며, 요청이 거부되거나 승인될 경우 환불됩니다.</p>
             <table class="table table-sm">
                 <thead class="thead-light">
                     <tr class="d-flex">
-                        <th class="col-2">Item</th>
-                        <th class="col-4">Source</th>
-                        <th class="col-4">Notes</th>
-                        <th class="col-2">Quantity</th>
+                        <th class="col-2">아이템</th>
+                        <th class="col-4">출처</th>
+                        <th class="col-4">주석</th>
+                        <th class="col-2">수량</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -199,13 +199,13 @@
 
 @if (isset($inventory['currencies']) && array_filter($inventory['currencies']))
     <div class="card mb-3">
-        <div class="card-header h2">{!! $submission->user->displayName !!}'s Bank</div>
+        <div class="card-header h2">{!! $submission->user->displayName !!}의 은행</div>
         <div class="card-body">
             <table class="table table-sm mb-3">
                 <thead class="thead-light">
                     <tr>
-                        <th width="70%">Currency</th>
-                        <th width="30%">Quantity</th>
+                        <th width="70%">재화</th>
+                        <th width="30%">수량</th>
                     </tr>
                 </thead>
                 <tbody>

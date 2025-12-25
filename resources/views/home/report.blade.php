@@ -1,7 +1,7 @@
 @extends('home.layout')
 
 @section('home-title')
-    Report (#{{ $report->id }})
+    신고 (#{{ $report->id }})
 @endsection
 
 @section('home-content')
@@ -10,6 +10,6 @@
     @if (Auth::user()->id == $report->user->id || Auth::user()->hasPower('manage_reports') || ($report->is_br == 1 && ($report->status == 'Closed' || $report->error_type != 'exploit')))
         @include('home._report_content', ['report' => $report])
     @else
-        <div class="alert alert-danger">Reports are private. Please contact support if you believe this is a mistake.</div>
+        <div class="alert alert-danger">신고는 비공개입니다. 이 문제가 발생한 경우 지원팀에 문의해주세요.</div>
     @endif
 @endsection

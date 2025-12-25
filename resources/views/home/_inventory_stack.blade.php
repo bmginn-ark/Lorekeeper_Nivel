@@ -1,6 +1,6 @@
 @if (!$stack)
     <div class="text-center">
-        Invalid stack selected.</div>
+        잘못된 스택이 선택되었습니다.</div>
 @else
     <div class="text-center">
         @if ($item->has_image)
@@ -18,9 +18,9 @@
         @endif
     </div>
 
-    <h5>Item Variations</h5>
+    <h5>항목 변형</h5>
     @if ($user && $user->hasPower('edit_inventories'))
-        <p class="alert alert-warning my-2">Note: Your rank allows you to transfer account-bound items to another user.</p>
+        <p class="alert alert-warning my-2">참고: 귀하의 등급을 통해 계정 제한 항목을 다른 사용자에게 전송할 수 있습니다.</p>
     @endif
 
     {!! Form::open(['url' => 'inventory/edit']) !!}
@@ -30,18 +30,18 @@
                 <tr class="d-flex">
                     @if ($user && !$readOnly && ($stack->first()->user_id == $user->id || $user->hasPower('edit_inventories')))
                         <th class="col-1"><input id="toggle-checks" type="checkbox" onclick="toggleChecks(this)"></th>
-                        <th class="col-4">Source</th>
+                        <th class="col-4">출처</th>
                     @else
-                        <th class="col-5">Source</th>
+                        <th class="col-5">출처</th>
                     @endif
-                    <th class="col-3">Notes</th>
-                    <th class="col-3">Quantity</th>
+                    <th class="col-3">설명</th>
+                    <th class="col-3">수량</th>
                     <th class="col-1"><i class="fas fa-lock invisible"></i></th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($stack as $itemRow)
-                    <tr id="itemRow{{ $itemRow->id }}" class="d-flex {{ $itemRow->isTransferrable ? '' : 'accountbound' }}">
+                    <tr id="itemRow{{ $itemRow->id }}" class="d-flex {{ $itemRow->isTransferrable ? '' : '귀속' }}">
                         @if ($user && !$readOnly && ($stack->first()->user_id == $user->id || $user->hasPower('edit_inventories')))
                             <td class="col-1">{!! Form::checkbox('ids[]', $itemRow->id, false, ['class' => 'item-check', 'onclick' => 'updateQuantities(this)']) !!}</td>
                             <td class="col-4">{!! array_key_exists('data', $itemRow->data) ? ($itemRow->data['data'] ? $itemRow->data['data'] : 'N/A') : 'N/A' !!}</td>
@@ -91,10 +91,10 @@
                         <a class="card-title h5 collapse-title" data-toggle="collapse" href="#characterTransferForm">
                             @if ($stack->first()->user_id != $user->id)
                                 [ADMIN]
-                            @endif Transfer Item to Character
+                            @endif 캐릭터에게 아이템 전송
                         </a>
                         <div id="characterTransferForm" class="collapse">
-                            <p>This will transfer this stack or stacks to this character's inventory.</p>
+                            <p>이렇게 하면 이 스택이 캐릭터의 인벤토리로 전송됩니다.</p>
                             <div class="form-group">
                                 {!! Form::select('character_id', $characterOptions, null, ['class' => 'form-control mr-2 default character-select', 'placeholder' => 'Select Character']) !!}
                             </div>
@@ -109,12 +109,12 @@
                         <a class="card-title h5 collapse-title" data-toggle="collapse" href="#resellForm">
                             @if ($stack->first()->user_id != $user->id)
                                 [ADMIN]
-                            @endif Sell Item
+                            @endif 아이템 판매
                         </a>
                         <div id="resellForm" class="collapse">
-                            <p>This item can be sold for <strong>{!! App\Models\Currency\Currency::find($item->resell->flip()->pop())->display($item->resell->pop()) !!}</strong>. This action is not reversible. Are you sure you want to sell this item?</p>
+                            <p>이 아이템은 <strong>{!! App\Models\Currency\Currency::find($item->resell->flip()->pop())->display($item->resell->pop()) !!}</strong>으로 팔 수 있습니다. 이 작업은 되돌릴 수 없습니다. 이 아이템을 팔겠습니까?</p>
                             <div class="text-right">
-                                {!! Form::button('Sell', ['class' => 'btn btn-danger', 'name' => 'action', 'value' => 'resell', 'type' => 'submit']) !!}
+                                {!! Form::button('판매', ['class' => 'btn btn-danger', 'name' => 'action', 'value' => 'resell', 'type' => 'submit']) !!}
                             </div>
                         </div>
                     </li>
@@ -123,15 +123,15 @@
                     <a class="card-title h5 collapse-title" data-toggle="collapse" href="#transferForm">
                         @if ($stack->first()->user_id != $user->id)
                             [ADMIN]
-                        @endif Transfer Item
+                        @endif 아이템 전송
                     </a>
                     <div id="transferForm" class="collapse">
                         <div class="form-group">
-                            {!! Form::label('user_id', 'Recipient') !!} {!! add_help('You can only transfer items to verified users.') !!}
+                            {!! Form::label('user_id', '받는 이') !!} {!! add_help('인증된 사용자에게만 아이템을 전송할 수 있습니다.') !!}
                             {!! Form::select('user_id', $userOptions, null, ['class' => 'form-control']) !!}
                         </div>
                         <div class="text-right">
-                            {!! Form::button('Transfer', ['class' => 'btn btn-primary', 'name' => 'action', 'value' => 'transfer', 'type' => 'submit']) !!}
+                            {!! Form::button('전송', ['class' => 'btn btn-primary', 'name' => 'action', 'value' => 'transfer', 'type' => 'submit']) !!}
                         </div>
                     </div>
                 </li>
@@ -139,12 +139,12 @@
                     <a class="card-title h5 collapse-title" data-toggle="collapse" href="#deleteForm">
                         @if ($stack->first()->user_id != $user->id)
                             [ADMIN]
-                        @endif Delete Item
+                        @endif 아이템 삭제
                     </a>
                     <div id="deleteForm" class="collapse">
-                        <p>This action is not reversible. Are you sure you want to delete this item?</p>
+                        <p>이 작업은 되돌릴 수 없습니다. 이 아이템을 삭제하시겠습니까?</p>
                         <div class="text-right">
-                            {!! Form::button('Delete', ['class' => 'btn btn-danger', 'name' => 'action', 'value' => 'delete', 'type' => 'submit']) !!}
+                            {!! Form::button('삭제', ['class' => 'btn btn-danger', 'name' => 'action', 'value' => 'delete', 'type' => 'submit']) !!}
                         </div>
                     </div>
                 </li>

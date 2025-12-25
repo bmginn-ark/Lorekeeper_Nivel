@@ -1,17 +1,17 @@
 @extends('home.layout')
 
 @section('home-title')
-    Bank
+    은행
 @endsection
 
 @section('home-content')
     {!! breadcrumbs(['Bank' => 'bank']) !!}
 
     <h1>
-        Bank
+        은행
     </h1>
 
-    <h3>Currencies</h3>
+    <h3>재화</h3>
     <div class="card mb-2">
         <ul class="list-group list-group-flush">
 
@@ -39,30 +39,30 @@
         </ul>
     </div>
     <div class="text-right mb-4">
-        <a href="{{ url(Auth::user()->url . '/currency-logs') }}">View logs...</a>
+        <a href="{{ url(Auth::user()->url . '/currency-logs') }}">기록 보기...</a>
     </div>
 
-    <h3>Transfer Currency</h3>
-    <p>If you are transferring currency as part of a trade for on-site resources (items, currency, characters), using the <a href="{{ url('trades/open') }}">trade system</a> is recommended instead to protect yourself from being scammed.</p>
+    <h3>재화 전송</h3>
+    <p>자원(아이템, 재화, 캐릭터) 거래의 일환으로 재화를 송금하는 경우 사기를 당하지 않도록 <a href="{{ url('trades/open') }}">거래 시스템</a>를 사용하는 것이 좋습니다.</p>
     {!! Form::open(['url' => 'bank/transfer']) !!}
     <div class="form-group">
-        {!! Form::label('user_id', 'Recipient') !!}
+        {!! Form::label('user_id', '받는 이') !!}
         {!! Form::select('user_id', $userOptions, null, ['class' => 'form-control']) !!}
     </div>
     <div class="form-group">
         <div class="row">
             <div class="col-md-6">
-                {!! Form::label('quantity', 'Quantity') !!}
+                {!! Form::label('quantity', '수량') !!}
                 {!! Form::text('quantity', null, ['class' => 'form-control']) !!}
             </div>
             <div class="col-md-6">
-                {!! Form::label('currency_id', 'Currency') !!}
-                {!! Form::select('currency_id', $currencyOptions, null, ['class' => 'form-control', 'placeholder' => 'Select Currency']) !!}
+                {!! Form::label('currency_id', '재화') !!}
+                {!! Form::select('currency_id', $currencyOptions, null, ['class' => 'form-control', 'placeholder' => '재화 선택']) !!}
             </div>
         </div>
     </div>
     <div class="text-right">
-        {!! Form::submit('Transfer', ['class' => 'btn btn-primary']) !!}
+        {!! Form::submit('전송', ['class' => 'btn btn-primary']) !!}
     </div>
     {!! Form::close() !!}
 @endsection

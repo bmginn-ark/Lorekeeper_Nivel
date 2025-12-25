@@ -1,25 +1,25 @@
 @extends('home.layout')
 
 @section('home-title')
-    Full Inventory
+    전체 인벤토리
 @endsection
 
 @section('home-content')
     {!! breadcrumbs(['Inventory' => 'inventory', 'Full Inventory' => 'inventory-full']) !!}
 
     <h1>
-        Full Inventory
+        전체 인벤토리
     </h1>
 
-    <p>This is your FULL inventory. Click on an item name to view more details on the item, click on the word 'stack' to see the actions you can perform on it.</p>
+    <p>이것은 당신의 전체 인벤토리입니다. 항목 이름을 클릭하여 해당 항목에 대한 자세한 정보를 확인하고, 'stack'이라는 단어를 클릭하여 해당 항목에서 수행할 수 있는 작업을 확인할 수 있습니다.</p>
 
     @foreach ($items as $categoryId => $categoryItems)
         <div class="card mb-2">
             <h5 class="card-header">
-                {!! isset($categories[$categoryId]) ? '<a href="' . $categories[$categoryId]->searchUrl . '">' . $categories[$categoryId]->name . '</a>' : 'Miscellaneous' !!}
-                <a class="small inventory-collapse-toggle collapse-toggle" href="#categoryId_{!! isset($categories[$categoryId]) ? $categories[$categoryId]->id : 'miscellaneous' !!}" data-toggle="collapse">Show</a>
+                {!! isset($categories[$categoryId]) ? '<a href="' . $categories[$categoryId]->searchUrl . '">' . $categories[$categoryId]->name . '</a>' : '기타' !!}
+                <a class="small inventory-collapse-toggle collapse-toggle" href="#categoryId_{!! isset($categories[$categoryId]) ? $categories[$categoryId]->id : '기타' !!}" data-toggle="collapse">보기</a>
             </h5>
-            <div class="card-body p-2 collapse show row" id="categoryId_{!! isset($categories[$categoryId]) ? $categories[$categoryId]->id : 'miscellaneous' !!}">
+            <div class="card-body p-2 collapse show row" id="categoryId_{!! isset($categories[$categoryId]) ? $categories[$categoryId]->id : '기타' !!}">
                 @foreach ($categoryItems as $itemtype)
                     <div class="col-lg-3 col-sm-4 col-12">
                         @if ($itemtype->first()->has_image)
@@ -30,13 +30,13 @@
                             @foreach ($itemtype as $item)
                                 <li>
                                     @if (isset($item->pivot->user_id))
-                                        <a class="invuser" data-id="{{ $item->pivot->id }}" data-name="{{ $user->name }}'s {{ $item->name }}" href="#">
-                                            Stack
-                                        </a>
-                                        of x{{ $item->pivot->count }} in
                                         <a href="/inventory">
-                                            your inventory.
+                                            인벤토리의 
                                         </a>
+                                        <a class="invuser" data-id="{{ $item->pivot->id }}" data-name="{{ $user->name }}의 {{ $item->name }}" href="#">
+                                            스택
+                                        </a>
+                                        x{{ $item->pivot->count }}개
                                     @else
                                         @foreach ($characters as $char)
                                             @if ($char->id == $item->pivot->character_id)
@@ -56,13 +56,13 @@
                                         $stackName = $itemNames[$item->pivot->id];
                                         $stackNameClean = htmlentities($stackName);
                                         ?>
-                                        <a class="invchar" data-id="{{ $item->pivot->id }}" data-name="{!! $canName && $stackName ? htmlentities($stackNameClean) . ' [' : null !!}{{ $charaname }}'s {{ $item->name }}{!! $canName && $stackName ? ']' : null !!}" href="#">
-                                            Stack
-                                        </a>
-                                        of x{{ $item->pivot->count }} in {!! $charavisi !!}
                                         <a href="{{ $charalink }}">
                                             {{ $charaname }}
-                                        </a>'s inventory.
+                                        </a>의 인벤토리의
+                                        <a class="invchar" data-id="{{ $item->pivot->id }}" data-name="{!! $canName && $stackName ? htmlentities($stackNameClean) . ' [' : null !!}{{ $charaname }}'s {{ $item->name }}{!! $canName && $stackName ? ']' : null !!}" href="#">
+                                            스택
+                                        </a>
+                                        x{{ $item->pivot->count }}개
                                         @if ($canName && $stackName)
                                             <span class="text-info m-0" style="font-size:95%; margin:5px;" data-toggle="tooltip" data-placement="top" title='Named stack:<br />"{{ $stackName }}"'>
                                                 &nbsp;<i class="fas fa-tag"></i>

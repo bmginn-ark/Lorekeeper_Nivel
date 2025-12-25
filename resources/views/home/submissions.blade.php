@@ -92,7 +92,7 @@
         {!! $submissions->render() !!}
         <div class="text-center mt-4 small text-muted">{{ $submissions->total() }} result{{ $submissions->total() == 1 ? '' : 's' }} found.</div>
     @else
-        <p>{{ $isClaims ? 'claims' : 'submissions' }} 이 없습니다.</p>
+        <p>{{ $isClaims ? '수령' : '제출' }} 이 없습니다.</p>
     @endif
 
 @endsection
