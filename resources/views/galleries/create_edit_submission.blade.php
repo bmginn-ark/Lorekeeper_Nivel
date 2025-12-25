@@ -34,7 +34,7 @@
     @else
         {!! Form::open(['url' => $submission->id ? 'gallery/edit/' . $submission->id : 'gallery/submit', 'id' => 'gallerySubmissionForm', 'files' => true]) !!}
 
-        <h2>Main Content</h2>
+        <h2>메인 콘텐츠</h2>
         <p>Upload an image and/or text as the content of your submission. You <strong>can</strong> upload both in the event that you have an image with accompanying text or vice versa.</p>
 
         <div class="form-group">
