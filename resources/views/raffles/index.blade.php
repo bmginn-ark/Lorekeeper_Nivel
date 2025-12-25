@@ -1,16 +1,16 @@
 @extends('layouts.app')
 
 @section('title')
-    Raffles
+    추첨
 @endsection
 
 @section('content')
     {!! breadcrumbs(['Raffles' => 'raffles']) !!}
-    <h1>Raffles</h1>
-    <p>Click on the name of a raffle to view the tickets, and in the case of completed raffles, the winners. Raffles in a group with a title will be rolled consecutively starting from the top, and will not draw duplicate winners.</p>
+    <h1>추첨</h1>
+    <p>추첨 이름을 클릭하여 티켓을 확인할 수 있으며, 완료된 추첨의 경우 당첨자가 됩니다. 제목이 있는 그룹의 추첨은 상단부터 연속적으로 진행되며 중복 당첨자는 추첨하지 않습니다.</p>
     <ul class="nav nav-tabs mb-3">
-        <li class="nav-item"><a href="{{ url()->current() }}" class="nav-link {{ Request::get('view') ? '' : 'active' }}">Current Raffles</a></li>
-        <li class="nav-item"><a href="{{ url()->current() }}?view=completed" class="nav-link {{ Request::get('view') == 'completed' ? 'active' : '' }}">Completed Raffles</a></li>
+        <li class="nav-item"><a href="{{ url()->current() }}" class="nav-link {{ Request::get('view') ? '' : 'active' }}">진행중인 추첨</a></li>
+        <li class="nav-item"><a href="{{ url()->current() }}?view=completed" class="nav-link {{ Request::get('view') == 'completed' ? 'active' : '' }}">완료된 추첨</a></li>
     </ul>
 
     @if (count($raffles))
@@ -34,7 +34,7 @@
     <?php $prevGroup = $raffle->group_id; ?>
     @endforeach
 @else
-    <p>No raffles found.</p>
+    <p>추첨이 없습니다.</p>
     @endif
 @endsection
 @section('scripts')

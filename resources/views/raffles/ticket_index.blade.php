@@ -1,30 +1,30 @@
 @extends('layouts.app')
 
 @section('title')
-    Raffle - {{ $raffle->name }}
+    추첨 - {{ $raffle->name }}
 @endsection
 
 @section('content')
     <x-admin-edit title="Raffle" :object="$raffle" />
     {!! breadcrumbs(['Raffles' => 'raffles', 'Raffle: ' . $raffle->name => 'raffles/view/' . $raffle->id]) !!}
-    <h1>Raffle: {{ $raffle->name }}</h1>
+    <h1>추첨: {{ $raffle->name }}</h1>
     @if ($raffle->is_active == 1)
         <div class="alert alert-success text-center">
-            This raffle is currently open.
-            ・ Number of winners to be drawn: {{ $raffle->winner_count }}
+            이 추첨은 현재 열려 있습니다.
+            ・ 추첨될 당첨자 수: {{ $raffle->winner_count }}
             @if ($raffle->ticket_cap)
-                ・ This raffle has a cap of {{ $raffle->ticket_cap }} tickets per individual.
+                ・ 이 추첨은 개인당 {{ $raffle->ticket_cap }} 티켓의 제한이 있습니다.
             @endif
         </div>
     @elseif($raffle->is_active == 2)
-        <div class="alert alert-danger">This raffle is closed. Rolled: {!! format_date($raffle->rolled_at) !!}</div>
+        <div class="alert alert-danger">이 추첨은 종료되었습니다. 추첨일: {!! format_date($raffle->rolled_at) !!}</div>
         <div class="card mb-3">
             <div class="card-header h3">Winner(s)</div>
             <div class="table-responsive">
                 <table class="table table-sm mb-0">
                     <thead>
                         <th class="col-xs-1 text-center" style="width: 100px;">#</th>
-                        <th>User</th>
+                        <th>유저</th>
                     </thead>
                     <tbody>
                         @foreach ($raffle->tickets()->winners()->get() as $winner)
@@ -39,12 +39,12 @@
         </div>
     @endif
 
-    <h3>Tickets</h3>
+    <h3>티켓</h3>
 
     @if (Auth::check() && count($tickets))
         <?php $chance = number_format((float) (($userCount / $count) * 100), 1, '.', ''); //Change 1 to 0 if you want no decimal place. ?>
-        <p class="text-center mb-0">You {{ $raffle->is_active == 2 ? 'had' : 'have' }} <strong>{{ $userCount }}</strong> out of <strong>{{ $count }} tickets</strong> in this raffle.</p>
-        <p class="text-center"> That's a <strong>{{ $chance }}%</strong> chance! </p>
+        <p class="text-center mb-0">당신은 전체 <strong>{{ $count }}</strong> 개 중 <strong>{{ $userCount }}</strong> 개의 티켓을 가지고 있습니다.</p>
+        <p class="text-center"> <strong>{{ $chance }}%</strong>의 확률입니다! </p>
     @endif
 
     <div class="text-right">{!! $tickets->render() !!}</div>
@@ -56,7 +56,7 @@
                     <div class="logs-table-cell">#</div>
                 </div>
                 <div class="col-10 col-md-11 font-weight-bold">
-                    <div class="logs-table-cell">User</div>
+                    <div class="logs-table-cell">유저</div>
                 </div>
             </div>
         </div>

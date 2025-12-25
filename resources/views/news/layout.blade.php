@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Site News{!! View::hasSection('news-title') ? ' :: ' . trim(View::getSection('news-title')) : '' !!}
+    사이트 공지{!! View::hasSection('news-title') ? ' :: ' . trim(View::getSection('news-title')) : '' !!}
 @endsection
 
 @section('sidebar')
