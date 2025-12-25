@@ -12,7 +12,7 @@
     @endif
 
     <h1>
-        {{ $isClaims ? 'Claims' : 'Prompt Submissions' }}
+        {{ $isClaims ? '수령' : '프롬프트 제출' }}
     </h1>
 
     <div class="text-right">

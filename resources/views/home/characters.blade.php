@@ -27,7 +27,7 @@
     </div>
     {!! Form::open(['url' => 'characters/sort', 'class' => 'text-right']) !!}
     {!! Form::hidden('sort', null, ['id' => 'sortableOrder']) !!}
-    {!! Form::submit('Save Order', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit('순서 저장', ['class' => 'btn btn-primary']) !!}
     {!! Form::close() !!}
 @endsection
 @section('scripts')
