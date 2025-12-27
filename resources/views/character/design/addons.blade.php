@@ -23,7 +23,7 @@
         @endif
 
         <div class="text-right">
-            {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+            {!! Form::submit('저장', ['class' => 'btn btn-primary']) !!}
         </div>
         {!! Form::close() !!}
     @else

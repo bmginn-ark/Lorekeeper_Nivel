@@ -49,7 +49,7 @@
         </div>
 
         <div class="form-group">
-            {!! Form::label('Traits') !!}
+            {!! Form::label('특성') !!}
             <div><a href="#" class="btn btn-primary mb-2" id="add-feature">특성 추가</a></div>
             <div id="featureList">
                 {{-- Add in the compulsory traits for MYO slots --}}
@@ -81,7 +81,7 @@
             </div>
         </div>
         <div class="text-right">
-            {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+            {!! Form::submit('저장', ['class' => 'btn btn-primary']) !!}
         </div>
         {!! Form::close() !!}
     @else
