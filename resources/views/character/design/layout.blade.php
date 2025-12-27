@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Design Approvals{!! View::hasSection('design-title') ? ' :: ' . trim(View::getSection('design-title')) : '' !!}
+    디자인 승인{!! View::hasSection('design-title') ? ' :: ' . trim(View::getSection('design-title')) : '' !!}
 @endsection
 
 @section('sidebar')

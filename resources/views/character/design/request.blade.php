@@ -1,7 +1,7 @@
 @extends('character.design.layout')
 
 @section('design-title')
-    Request (#{{ $request->id }})
+    요청 (#{{ $request->id }})
 @endsection
 
 @section('design-content')
@@ -11,58 +11,58 @@
 
     @if ($request->status == 'Draft')
         <p>
-            This request has not been submitted to the approval queue yet.
+            이 요청은 아직 승인 대기열에 제출되지 않았습니다.
             @if ($request->user_id == Auth::user()->id)
-                Staff members are able to view this page when provided with a direct link. Click on any of the tabs to edit the section.
+                스태프 멤버는 직접 링크가 제공되면 이 페이지를 볼 수 있습니다. 탭을 클릭하여 섹션을 편집하세요.
             @else
-                As a staff member with the ability to edit the masterlist, you can view the details of the request by clicking the tabs.
+                마스터리스트를 편집할 수 있는 스태프 멤버로서, 탭을 클릭하여 요청의 세부 정보를 볼 수 있습니다.
             @endif
         </p>
         @if ($request->user_id == Auth::user()->id)
             @if ($request->isComplete)
                 <div class="text-right">
-                    <button class="btn btn-outline-danger delete-button">Delete Request</button>
-                    <a href="#" class="btn btn-outline-primary submit-button">Submit Request</a>
+                    <button class="btn btn-outline-danger delete-button">요청 삭제</button>
+                    <a href="#" class="btn btn-outline-primary submit-button">요청 제출</a>
                 </div>
             @else
-                <p class="text-danger">Not all sections have been completed yet. Please visit the necessary tab(s) and click Save to update them, even if no modifications to the information are needed.</p>
+                <p class="text-danger">모든 섹션이 아직 완료되지 않았습니다. 정보 수정이 필요하지 않더라도 필요한 탭을 방문하여 저장을 클릭하여 업데이트하세요.</p>
                 <div class="text-right">
-                    <button class="btn btn-outline-danger delete-button">Delete Request</button>
-                    <button class="btn btn-outline-primary" disabled>Submit Request</button>
+                    <button class="btn btn-outline-danger delete-button">요청 삭제</button>
+                    <button class="btn btn-outline-primary" disabled>요청 제출</button>
                 </div>
             @endif
         @endif
     @elseif($request->status == 'Pending')
         <p>
-            This request is in the approval queue.
+            이 요청은 승인 대기열에 있습니다.
             @if (!Auth::user()->hasPower('manage_characters'))
-                Please wait for it to be processed.
+                처리될 때까지 기다려 주세요.
             @else
-                As a staff member with the ability to edit the masterlist, you can view the details of the request, but can only edit certain parts of it.
+                마스터리스트를 편집할 수 있는 스태프 멤버로서, 요청의 세부 정보를 볼 수 있지만 일부만 편집할 수 있습니다.
             @endif
         </p>
         @if (Auth::user()->hasPower('manage_characters'))
             <div class="card mb-3">
                 <div class="card-body">
-                    <a href="#" class="btn btn-outline-secondary process-button btn-sm float-right" data-action="cancel">Cancel</a>
-                    <strong class="text-secondary">Cancelling</strong> the request returns it to its draft status, allowing the user to make further edits.
+                    <a href="#" class="btn btn-outline-secondary process-button btn-sm float-right" data-action="cancel">취소</a>
+                    <strong class="text-secondary">취소</strong> 요청하면 초안 상태로 반환되어 사용자가 추가 편집을 할 수 있습니다.
                 </div>
             </div>
             <div class="card mb-3">
                 <div class="card-body">
-                    <a href="#" class="btn btn-outline-success process-button btn-sm float-right" data-action="approve">Approve</a>
-                    <strong class="text-success">Approving</strong> the request creates the update.
+                    <a href="#" class="btn btn-outline-success process-button btn-sm float-right" data-action="approve">승인</a>
+                    <strong class="text-success">승인</strong> 요청이 업데이트를 생성합니다.
                 </div>
             </div>
             <div class="card">
                 <div class="card-body">
-                    <a href="#" class="btn btn-outline-danger process-button btn-sm float-right" data-action="reject">Reject</a>
-                    <strong class="text-danger">Rejecting</strong> the update returns any attached items and the user may not edit it any more.
+                    <a href="#" class="btn btn-outline-danger process-button btn-sm float-right" data-action="reject">거절</a>
+                    <strong class="text-danger">거절</strong> 요청하면 첨부된 모든 항목이 반환되고 사용자는 더 이상 편집할 수 없습니다.
                 </div>
             </div>
         @endif
     @elseif($request->status == 'Approved')
-        <p>This request has been approved. The data is preserved as a record of this submission.</p>
+        <p>이 요청은 승인되었습니다. 데이터는 이 제출의 기록으로 보존됩니다.</p>
     @endif
 
 @endsection
