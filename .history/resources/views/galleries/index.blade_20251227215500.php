@@ -1,0 +1,87 @@
+@extends('galleries.layout')
+
+@section('gallery-title')
+    홈
+@endsection
+
+@section('gallery-content')
+    {!! breadcrumbs(['Gallery' => 'gallery']) !!}
+    <h1>
+        @if (config('lorekeeper.extensions.show_all_recent_submissions.enable') && config('lorekeeper.extensions.show_all_recent_submissions.links.indexbutton'))
+            <div class="float-right">
+                <a class="btn btn-primary" href="gallery/all">
+                    모든 최근 제출물
+                </a>
+            </div>
+        @endif
+        갤러리
+    </h1>
+
+    @if ($galleries->count())
+        {!! $galleries->render() !!}
+
+        @foreach ($galleries as $gallery)
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h4>
+                        {!! $gallery->displayName !!}
+                        @if (Auth::check() && $gallery->canSubmit($submissionsOpen, Auth::user()))
+                            <a href="{{ url('gallery/submit/' . $gallery->id) }}" class="btn btn-primary float-right"><i class="fas fa-plus"></i></a>
+                        @endif
+                    </h4>
+                    @if ($gallery->children_count || (isset($gallery->start_at) || isset($gallery->end_at)))
+                        <p>
+                            @if (isset($gallery->start_at) || isset($gallery->end_at))
+                                @if ($gallery->start_at)
+                                    <strong>열림: </strong>{!! pretty_date($gallery->start_at) !!}
+                                @endif
+                                {{ $gallery->start_at && $gallery->end_at ? ' ・ ' : '' }}
+                                @if ($gallery->end_at)
+                                    <strong>닫힘: </strong>{!! pretty_date($gallery->end_at) !!}
+                                @endif
+                            @endif
+                            {{ $gallery->children_count && (isset($gallery->start_at) || isset($gallery->end_at)) ? ' ・ ' : '' }}
+                            @if ($gallery->children_count)
+                                하위 갤러리:
+                                @foreach ($gallery->children()->visible()->get() as $child)
+                                    {!! $child->displayName !!}{{ !$loop->last ? ', ' : '' }}
+                                @endforeach
+                            @endif
+                        </p>
+                    @endif
+                </div>
+                <div class="card-body">
+                    @if ($gallery->submissions_count)
+                        <div class="row">
+                            @foreach ($gallery->submissions->take(4) as $submission)
+                                <div class="col-md-3 text-center align-self-center">
+                                    @include('galleries._thumb', ['submission' => $submission, 'gallery' => true])
+                                </div>
+                            @endforeach
+                        </div>
+                        @if ($gallery->submissions_count > 4)
+                            <div class="text-right"><a href="{{ url('gallery/' . $gallery->id) }}">더 보기...</a></div>
+                        @endif
+                    @elseif(
+                        $gallery->children_count &&
+                            $gallery->through('children')->has('submissions')->where('is_visible', 1)->where('status', 'Accepted')->count())
+                        <div class="row">
+                            @foreach ($gallery->through('children')->has('submissions')->where('is_visible', 1)->where('status', 'Accepted')->orderBy('created_at', 'DESC')->get()->take(4) as $submission)
+                                <div class="col-md-3 text-center align-self-center">
+                                    @include('galleries._thumb', ['submission' => $submission, 'gallery' => false])
+                                </div>
+                            @endforeach
+                        </div>
+                    @else
+                        <p>이 갤러리는 제출물이 없습니다!</p>
+                    @endif
+                </div>
+            </div>
+        @endforeach
+
+        {!! $galleries->render() !!}
+    @else
+        <p>갤러리가 없습니다!</p>
+    @endif
+
+@endsection
