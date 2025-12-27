@@ -5,5 +5,5 @@
         @endforeach
     </ul>
 @else
-    Invalid submission selected.
+    잘못된 제출이 선택되었습니다.
 @endif

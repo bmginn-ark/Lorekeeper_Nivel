@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Gallery{!! View::hasSection('gallery-title') ? ' :: ' . trim(View::getSection('gallery-title')) : '' !!}
+    갤러리{!! View::hasSection('gallery-title') ? ' :: ' . trim(View::getSection('gallery-title')) : '' !!}
 @endsection
 
 @section('sidebar')

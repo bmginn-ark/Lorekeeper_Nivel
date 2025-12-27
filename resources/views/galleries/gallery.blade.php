@@ -17,17 +17,17 @@
     @if (isset($gallery->start_at) || isset($gallery->end_at))
         <p>
             @if ($gallery->start_at)
-                <strong>Open{{ $gallery->start_at->isFuture() ? 's' : 'ed' }}: </strong>{!! pretty_date($gallery->start_at) !!}
+                <strong>열림: </strong>{!! pretty_date($gallery->start_at) !!}
             @endif
             {{ $gallery->start_at && $gallery->end_at ? ' ・ ' : '' }}
             @if ($gallery->end_at)
-                <strong>Close{{ $gallery->end_at->isFuture() ? 's' : 'd' }}: </strong>{!! pretty_date($gallery->end_at) !!}
+                <strong>닫힘: </strong>{!! pretty_date($gallery->end_at) !!}
             @endif
         </p>
     @endif
     <p>{!! $gallery->description !!}</p>
     @if (!$gallery->submissions_count && $gallery->children->count() && $childSubmissions->count())
-        <p>This gallery has no submissions; instead, displayed is a selection of the most recent submissions from its sub-galleries. Please navigate to one of the sub-galleries to view more.</p>
+        <p>이 갤러리에는 제출물이 없습니다. 대신 하위 갤러리에서 가장 최근의 제출물 중 일부가 표시됩니다. 더 많은 내용을 보려면 하위 갤러리 중 하나로 이동하세요.</p>
     @endif
 
     <div>
@@ -76,7 +76,7 @@
             @endforeach
         </div>
     @else
-        <p>No submissions found!</p>
+        <p>제출물이 없습니다!</p>
     @endif
 
 @endsection

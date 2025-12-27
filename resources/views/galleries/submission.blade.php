@@ -29,7 +29,7 @@
                 @if ($submission->user->id == Auth::user()->id || Auth::user()->hasPower('manage_submissions'))
                     <a class="btn btn-outline-primary" href="/gallery/queue/{{ $submission->id }}" data-toggle="tooltip" title="View Log Details"><i class="fas fa-clipboard-list"></i></a>
                     @if ($submission->status != 'Rejected')
-                        <a class="btn btn-outline-primary" href="/gallery/edit/{{ $submission->id }}"><i class="fas fa-edit"></i> Edit</a>
+                        <a class="btn btn-outline-primary" href="/gallery/edit/{{ $submission->id }}"><i class="fas fa-edit"></i> 수정</a>
                     @endif
                 @endif
                 {!! Form::close() !!}
@@ -43,8 +43,8 @@
                 By {!! $submission->credits !!}
             </div>
             <div class="col-md text-right">
-                {{ $submission->favorites_count }} Favorite{{ $submission->favorites_count != 1 ? 's' : '' }} ・ {{ $submission->comments->where('type', 'User-User')->count() }}
-                Comment{{ $submission->comments->where('type', 'User-User')->count() != 1 ? 's' : '' }}
+                {{ $submission->favorites_count }} 좋아요 ・ {{ $submission->comments->where('type', 'User-User')->count() }}
+                덧글
             </div>
         </diV>
     </div>
