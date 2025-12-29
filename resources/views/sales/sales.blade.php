@@ -13,7 +13,7 @@
         @comments(['model' => $sales, 'perPage' => 5])
     @else
         <div class="alert alert-warning text-center">
-            <p>Comments for this sale aren't open yet! They will open {!! pretty_date($sales->comments_open_at) !!}.</p>
+            <p>이 분양에 대한 덧글창이 아직 열리지 않았습니다! 덧글은 {!! pretty_date($sales->comments_open_at) !!}에 열립니다.</p>
         </div>
     @endif
 @endsection

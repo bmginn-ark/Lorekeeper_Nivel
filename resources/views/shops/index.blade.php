@@ -1,14 +1,14 @@
 @extends('shops.layout')
 
 @section('shops-title')
-    Shop Index
+    상점 목록
 @endsection
 
 @section('shops-content')
     {!! breadcrumbs(['Shops' => 'shops']) !!}
 
     <h1>
-        Shops
+        상점
     </h1>
 
     <div class="row shops-row">

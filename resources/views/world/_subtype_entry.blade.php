@@ -12,7 +12,7 @@
             @if (!$subtype->is_visible)
                 <i class="fas fa-eye-slash mr-1"></i>
             @endif
-            {!! $subtype->displayName !!} ({!! $subtype->species->displayName !!} Subtype)
+            {!! $subtype->displayName !!} ({!! $subtype->species->displayName !!} 분류)
             <a href="{{ $subtype->searchUrl }}" class="world-entry-search text-muted">
                 <i class="fas fa-search"></i>
             </a>

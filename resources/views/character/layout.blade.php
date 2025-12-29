@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Character{!! View::hasSection('profile-title') ? ' :: ' . trim(View::getSection('profile-title')) : '' !!}
+    캐릭터{!! View::hasSection('profile-title') ? ' :: ' . trim(View::getSection('profile-title')) : '' !!}
 @endsection
 
 @section('sidebar')

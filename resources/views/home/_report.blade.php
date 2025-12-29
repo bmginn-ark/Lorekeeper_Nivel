@@ -21,9 +21,9 @@
     <div class="col-6 col-md-2 text-right">
         <div class="logs-table-cell">
             @if ($report->status == 'Closed' || ($report->status == 'Assigned' && $report->is_br && $report->error_type != 'exploit') || (Auth::check() && Auth::user()->id == $report->user_id))
-                <a href="{{ $report->viewUrl }}" class="btn btn-primary btn-sm">Details</a>
+                <a href="{{ $report->viewUrl }}" class="btn btn-primary btn-sm">자세히</a>
             @else
-                <a class="btn btn-dark btn-sm text-light">Report not closed</a>
+                <a class="btn btn-dark btn-sm text-light">신고 미폐쇄</a>
             @endif
         </div>
     </div>

@@ -1,16 +1,15 @@
 @extends('account.layout')
 
 @section('account-title')
-    Bookmarks
+    북마크
 @endsection
 
 @section('account-content')
     {!! breadcrumbs(['My Account' => Auth::user()->url, 'Character Bookmarks' => 'bookmarks']) !!}
 
-    <h1>Character Bookmarks</h1>
+    <h1>캐릭터 북마크</h1>
 
-    <p>Bookmarks allow you to keep track of characters that other users own without notifying them in any way. You can add new bookmarks by visiting the character's page and clicking the Bookmark button. You cannot bookmark your own characters, but
-        characters you have bookmarked that are transferred to you will preserve the bookmarks until you delete them. Bookmarks on characters you own will not give you notifications.</p>
+    <p>북마크를 사용하면 다른 사용자가 소유한 캐릭터를 알림 없이 추적할 수 있습니다. 캐릭터 페이지에 방문하여 북마크 버튼을 클릭하여 새 북마크를 추가할 수 있습니다. 자신의 캐릭터는 북마크할 수 없으며, 북마크한 캐릭터가 당신에게 이전되면 해당 북마크는 삭제할 때까지 유지됩니다. 소유한 캐릭터에 대한 북마크는 알림을 주지 않습니다.</p>
 
     {!! Form::open(['method' => 'GET']) !!}
     <div class="form-inline justify-content-end mb-3">
@@ -55,9 +54,9 @@
             <thead>
                 <tr>
                     <th class="thumbnail-hide bookmark-thumbnail"></th>
-                    <th class="bookmark-info">Info</th>
-                    <th class="bookmark-comment">Comment</th>
-                    <th class="bookmark-notifications">Notify When...</th>
+                    <th class="bookmark-info">정보</th>
+                    <th class="bookmark-comment">코멘트</th>
+                    <th class="bookmark-notifications">알림 설정...</th>
                     <th class="bookmark-actions"></th>
                 </tr>
             </thead>
@@ -97,8 +96,8 @@
 
                         </td>
                         <td class="text-right">
-                            <a href="#" class="btn btn-outline-primary btn-sm edit-bookmark-button" data-id="{{ Auth::user()->bookmarks()->where('character_id', $bookmark->character_id)->first()->id }}">Edit</a>
-                            <a href="#" class="btn btn-outline-danger btn-sm delete-bookmark-button" data-id="{{ Auth::user()->bookmarks()->where('character_id', $bookmark->character_id)->first()->id }}">Delete</a>
+                            <a href="#" class="btn btn-outline-primary btn-sm edit-bookmark-button" data-id="{{ Auth::user()->bookmarks()->where('character_id', $bookmark->character_id)->first()->id }}">수정</a>
+                            <a href="#" class="btn btn-outline-danger btn-sm delete-bookmark-button" data-id="{{ Auth::user()->bookmarks()->where('character_id', $bookmark->character_id)->first()->id }}">삭제</a>
                         </td>
                     </tr>
                 @endforeach

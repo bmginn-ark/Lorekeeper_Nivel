@@ -7,7 +7,7 @@
     } ?>
     <div class="mt-1 mx-auto" style="max-width:{{ max(200, $width) }}px; overflow: hidden; text-overflow: ellipsis;">
         @if (isset($submission->content_warning))
-            <p><span class="text-danger"><strong>Content Warning:</strong></span> {!! nl2br(htmlentities($submission->content_warning)) !!}</p>
+            <p><span class="text-danger"><strong>콘텐츠 워닝:</strong></span> {!! nl2br(htmlentities($submission->content_warning)) !!}</p>
         @endif
         <a href="{{ $submission->url }}" class="h5 mb-0">
             @if (!$submission->isVisible)
@@ -19,9 +19,9 @@
         @if (Auth::check() && ($submission->user->id != Auth::user()->id && $submission->collaborators->where('user_id', Auth::user()->id)->first() == null) && $submission->isVisible)
             {!! Form::open(['url' => '/gallery/favorite/' . $submission->id]) !!}
             @if (isset($gallery) && !$gallery)
-                In {!! $submission->gallery->displayName !!} ・
+                {!! $submission->gallery->displayName !!} ・
             @endif
-            By {!! $submission->credits !!}
+            {!! $submission->credits !!}
             @if (isset($gallery) && !$gallery)
                 <br />
             @else

@@ -24,12 +24,12 @@ return [
 
     // Species Trait Index - Mercury
     'species_trait_index' => [
-        'enable'       => 0,
-        'trait_modals' => 0, // Enables modals when you click on a trait for more info instead of linking to the traits page - Moif
+        'enable'       => 1,
+        'trait_modals' => 1, // Enables modals when you click on a trait for more info instead of linking to the traits page - Moif
     ],
 
     // Character Status Badges - Juni
-    'character_status_badges' => 0,
+    'character_status_badges' => 1,
 
     // Character TH Profile Link - Juni
     'character_TH_profile_link' => 0,
@@ -39,20 +39,20 @@ return [
 
     // Item Entry Expansion - Mercury
     'item_entry_expansion' => [
-        'extra_fields'    => 0,
-        'resale_function' => 0,
+        'extra_fields'    => 1,
+        'resale_function' => 1,
         'loot_tables'     => [
             // Adds the ability to use either rarity criteria for items or item categories with rarity criteria in loot tables. Note that disabling this does not apply retroactively.
-            'enable'              => 0,
+            'enable'              => 1,
             'alternate_filtering' => 0, // By default this uses more broadly compatible methods to filter by rarity. If you are on Dreamhost/know your DB software can handle searching in JSON, it's recommended to set this to 1 instead.
         ],
     ],
 
     // Group Traits By Category - Uri
-    'traits_by_category' => 0,
+    'traits_by_category' => 1,
 
     // Scroll To Top - Uri
-    'scroll_to_top' => 0, // 1 - On, 0 - off
+    'scroll_to_top' => 1, // 1 - On, 0 - off
 
     // Character Reward Expansion - Uri
     'character_reward_expansion' => [
@@ -62,7 +62,7 @@ return [
 
     // MYO Image Hide/Remove - Mercury
     // Adds an option when approving MYO submissions to hide or delete the MYO placeholder image
-    'remove_myo_image' => 0,
+    'remove_myo_image' => 1,
 
     // Auto-populate New Image Traits - Mercury
     // Automatically adds the traits present on a character's active image to the list when uploading a new image for an extant character.
@@ -75,12 +75,12 @@ return [
     ],
 
     // Organised Traits Dropdown - Draginraptor
-    'organised_traits_dropdown' => 0,
+    'organised_traits_dropdown' => 1,
 
     // Previous & Next buttons on Character pages - Speedy
     // Adds buttons linking to the previous character as well as the next character on all character pages.
     'previous_and_next_characters' => [
-        'display' => 0,
+        'display' => 1,
         'reverse' => 0, // By default, 0 has the lower number on the 'Next' side and the higher number on the 'Previous' side, reflecting the default masterlist order. Setting this to 1 reverses this.
     ],
 
@@ -98,7 +98,7 @@ return [
     ],
 
     // collapsible admin sidebar - Newt
-    'collapsible_admin_sidebar' => 0,
+    'collapsible_admin_sidebar' => 1,
 
     // use gravatar for user avatars - Newt
     'use_gravatar' => 0,

@@ -1,12 +1,12 @@
 @extends('news.layout')
 
 @section('title')
-    Site News
+    사이트 공지
 @endsection
 
 @section('news-content')
     {!! breadcrumbs(['Site News' => 'news']) !!}
-    <h1>Site News</h1>
+    <h1>사이트 공지</h1>
     @if (count($newses))
         {!! $newses->render() !!}
         @foreach ($newses as $news)
@@ -14,6 +14,6 @@
         @endforeach
         {!! $newses->render() !!}
     @else
-        <div>No news posts yet.</div>
+        <div>아직 공지사항이 없습니다.</div>
     @endif
 @endsection

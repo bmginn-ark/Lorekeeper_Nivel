@@ -2,10 +2,10 @@
     @if ($trade->sender_id == Auth::user()->id)
         @if (!$trade->is_sender_trade_confirmed)
             <p>
-                This will confirm your agreement to this trade. @if (!$trade->is_recipient_trade_confirmed)
-                    After your trade partner has also confirmed the trade, you will not be able to further edit the contents of this trade.
+                거래를 승인합니다. @if (!$trade->is_recipient_trade_confirmed)
+                상대방이 거래를 확인한 후에는 이 거래의 내용을 더 이상 편집할 수 없습니다.
                 @else
-                    You will not be able to further edit the contents of this trade.
+                    이 거래의 내용을 더 이상 편집할 수 없습니다.
                 @endif
             </p>
             {!! Form::open(['url' => 'trades/' . $trade->id . '/confirm-trade']) !!}
@@ -15,29 +15,29 @@
             {!! Form::close() !!}
         @else
             <p>
-                You have already confirmed your agreement to this trade. @if (!$trade->is_recipient_trade_confirmed)
-                    Please wait for {!! $trade->recipient->displayName !!} to confirm the trade.
+                이미 이 거래를 승인했습니다. @if (!$trade->is_recipient_trade_confirmed)
+                    거래를 확인하려면 {!! $trade->recipient->displayName !!}를 기다려 주세요.
                 @endif
             </p>
         @endif
     @else
         @if (!$trade->is_recipient_trade_confirmed)
             <p>
-                This will confirm your agreement to this trade. @if (!$trade->is_recipient_trade_confirmed)
-                    After your trade partner has also confirmed the trade, you will not be able to further edit the contents of this trade.
+                거래를 승인합니다. @if (!$trade->is_recipient_trade_confirmed)
+                    상대방이 거래를 확인한 후에는 이 거래의 내용을 더 이상 편집할 수 없습니다.
                 @else
-                    You will not be able to further edit the contents of this trade.
+                    이 거래의 내용을 더 이상 편집할 수 없습니다.
                 @endif
             </p>
             {!! Form::open(['url' => 'trades/' . $trade->id . '/confirm-trade']) !!}
             <div class="text-right">
-                {!! Form::submit('Confirm', ['class' => 'btn btn-primary']) !!}
+                {!! Form::submit('승인', ['class' => 'btn btn-primary']) !!}
             </div>
             {!! Form::close() !!}
         @else
             <p>
-                You have already confirmed your agreement to this trade. @if (!$trade->is_sender_trade_confirmed)
-                    Please wait for {!! $trade->sender->displayName !!} to confirm the trade.
+                이미 이 거래를 승인했습니다. @if (!$trade->is_sender_trade_confirmed)
+                    거래를 확인하려면 {!! $trade->sender->displayName !!}를 기다려 주세요.
                 @endif
             </p>
         @endif

@@ -1,17 +1,17 @@
 @extends('home.layout')
 
 @section('home-title')
-    My Characters
+    내 캐릭터
 @endsection
 
 @section('home-content')
     {!! breadcrumbs(['My Characters' => 'characters']) !!}
 
     <h1>
-        My Characters
+        내 캐릭터
     </h1>
 
-    <p>This is a list of characters you own. Drag and drop to rearrange them.</p>
+    <p>소유한 캐릭터들의 목록입니다. 드래그 앤 드롭으로 순서를 바꿀 수 있습니다.</p>
 
     <div id="sortable" class="row sortable">
         @foreach ($characters as $character)
@@ -27,7 +27,7 @@
     </div>
     {!! Form::open(['url' => 'characters/sort', 'class' => 'text-right']) !!}
     {!! Form::hidden('sort', null, ['id' => 'sortableOrder']) !!}
-    {!! Form::submit('Save Order', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit('순서 저장', ['class' => 'btn btn-primary']) !!}
     {!! Form::close() !!}
 @endsection
 @section('scripts')

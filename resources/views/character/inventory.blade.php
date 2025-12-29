@@ -1,7 +1,7 @@
 @extends('character.layout', ['isMyo' => $character->is_myo_slot])
 
 @section('profile-title')
-    {{ $character->fullName }}'s Inventory
+    {{ $character->fullName }}의 인벤토리
 @endsection
 
 @section('profile-content')
@@ -19,9 +19,9 @@
 
     <h3>
         @if (Auth::check() && Auth::user()->hasPower('edit_inventories'))
-            <a href="#" class="float-right btn btn-outline-info btn-sm" id="grantButton" data-toggle="modal" data-target="#grantModal"><i class="fas fa-cog"></i> Admin</a>
+            <a href="#" class="float-right btn btn-outline-info btn-sm" id="grantButton" data-toggle="modal" data-target="#grantModal"><i class="fas fa-cog"></i> 관리자</a>
         @endif
-        Items
+        아이템
     </h3>
 
     <div class="text-right mb-3">
@@ -37,7 +37,7 @@
                 <h5 class="card-header inventory-header">
                     {!! isset($categories[$categoryId]) ? '<a href="' . $categories[$categoryId]->searchUrl . '">' . $categories[$categoryId]->name . '</a>' : 'Miscellaneous' !!}
                     <a class="small inventory-collapse-toggle collapse-toggle" href="#categoryId_{!! isset($categories[$categoryId]) ? $categories[$categoryId]->id : 'miscellaneous' !!}" data-toggle="collapse">
-                        Show
+                        보기
                     </a>
                 </h5>
                 <div class="card-body inventory-body collapse show" id="categoryId_{!! isset($categories[$categoryId]) ? $categories[$categoryId]->id : 'miscellaneous' !!}">
@@ -76,7 +76,7 @@
                 <h5 class="card-header">
                     {!! isset($categories[$categoryId]) ? '<a href="' . $categories[$categoryId]->searchUrl . '">' . $categories[$categoryId]->name . '</a>' : 'Miscellaneous' !!}
                     <a class="small inventory-collapse-toggle collapse-toggle" href="#categoryId_{!! isset($categories[$categoryId]) ? $categories[$categoryId]->id : 'miscellaneous' !!}" data-toggle="collapse">
-                        Show
+                        보기
                     </a>
                 </h5>
                 <div class="card-body p-2 collapse show row" id="categoryId_{!! isset($categories[$categoryId]) ? $categories[$categoryId]->id : 'miscellaneous' !!}">
@@ -91,7 +91,7 @@
                                     <div data-id="{{ $item->pivot->id }}" data-name="{!! $item->category->can_name && $item->pivot->stack_name ? htmlentities($item->pivot->stack_name) . ' [' : null !!}{{ $character->name ? $character->name : $character->slug }}'s {{ $item->name }}{!! $item->category->can_name && $item->pivot->stack_name ? ']' : null !!}">
                                         <li>
                                             <a class="inventory-stack" href="#">
-                                                Stack of x{{ $item->pivot->count }}.
+                                                x{{ $item->pivot->count }}개.
                                                 @if ($item->category->can_name && $item->pivot->stack_name)
                                                     <span class="text-info m-0" style="font-size:95%; margin:5px;" data-toggle="tooltip" data-placement="top" title='Named stack:<br />"{{ $item->pivot->stack_name }}"'>
                                                         &nbsp;<i class="fas fa-tag"></i>
@@ -109,24 +109,24 @@
         @endforeach
     </div>
 
-    <h3>Latest Activity</h3>
+    <h3>최근 활동</h3>
     <div class="mb-4 logs-table">
         <div class="logs-table-header">
             <div class="row">
                 <div class="col-6 col-md-2">
-                    <div class="logs-table-cell">Sender</div>
+                    <div class="logs-table-cell">보내는 이</div>
                 </div>
                 <div class="col-6 col-md-2">
-                    <div class="logs-table-cell">Recipient</div>
+                    <div class="logs-table-cell">받는 이</div>
                 </div>
                 <div class="col-6 col-md-2">
-                    <div class="logs-table-cell">Character</div>
+                    <div class="logs-table-cell">캐릭터</div>
                 </div>
                 <div class="col-6 col-md-4">
-                    <div class="logs-table-cell">Log</div>
+                    <div class="logs-table-cell">기록</div>
                 </div>
                 <div class="col-6 col-md-2">
-                    <div class="logs-table-cell">Date</div>
+                    <div class="logs-table-cell">날짜</div>
                 </div>
             </div>
         </div>
@@ -139,7 +139,7 @@
         </div>
     </div>
     <div class="text-right">
-        <a href="{{ url($character->url . '/item-logs') }}">View all...</a>
+        <a href="{{ url($character->url . '/item-logs') }}">전체 보기...</a>
     </div>
 
     @if (Auth::check() && Auth::user()->hasPower('edit_inventories'))
@@ -147,15 +147,15 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <span class="modal-title h5 mb-0">[ADMIN] Grant Items</span>
+                        <span class="modal-title h5 mb-0">[ADMIN] 아이템 지급</span>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body">
-                        <p>Note that granting items does not check against any category hold limits for characters.</p>
+                        <p>아이템을 지급할 때는 캐릭터의 카테고리 보유 한도를 확인하지 않습니다.</p>
                         <div class="form-group">
                             {!! Form::open(['url' => 'admin/character/' . $character->slug . '/grant-items']) !!}
 
-                            {!! Form::label('Item(s)') !!} {!! add_help('Must have at least 1 item and Quantity must be at least 1.') !!}
+                            {!! Form::label('Item(s)') !!} {!! add_help('최소 1개의 아이템과 최소 1개의 수량이 필요합니다.') !!}
                             <div id="itemList">
                                 <div class="d-flex mb-2">
                                     {!! Form::select('item_ids[]', $itemOptions, null, ['class' => 'form-control mr-2 default item-select', 'placeholder' => 'Select Item']) !!}
@@ -170,10 +170,10 @@
                                 <a href="#" class="remove-item btn btn-danger mb-2">×</a>
                             </div>
 
-                            <h5>Additional Data</h5>
+                            <h5>추가 데이터</h5>
 
                             <div class="form-group">
-                                {!! Form::label('data', 'Reason (Optional)') !!} {!! add_help('A reason for the grant. This will be noted in the logs and in the inventory description.') !!}
+                                {!! Form::label('data', '사유 (선택)') !!} {!! add_help('지급 사유입니다. 이 사유는 로그와 인벤토리 설명에 기록됩니다.') !!}
                                 {!! Form::text('data', null, ['class' => 'form-control', 'maxlength' => 400]) !!}
                             </div>
 

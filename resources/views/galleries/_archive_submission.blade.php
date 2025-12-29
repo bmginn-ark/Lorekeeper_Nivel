@@ -1,15 +1,14 @@
 @if ($submission)
     {!! Form::open(['url' => 'gallery/archive/' . $submission->id]) !!}
 
-    <p>You are about to {{ $submission->is_visible ? 'archive' : 'unarchive' }} the submission <strong>{{ $submission->title }}</strong>. This is reversible; you will be able to {{ $submission->is_visible ? 'unarchive' : 'archive' }} the
-        submission at any time. Archiving a submission hides it from view by other users, but not staff.</p>
-    <p>Are you sure you want to {{ $submission->is_visible ? 'archive' : 'unarchive' }} <strong>{{ $submission->title }}</strong>?</p>
+    <p>이 submission <strong>{{ $submission->title }}</strong>을(를) {{ $submission->is_visible ? '보관' : '보관 해제' }}하려고 합니다. 이 작업은 되돌릴 수 있으며, 언제든지 {{ $submission->is_visible ? '보관 해제' : '보관' }}할 수 있습니다. 제출물을 보관하면 다른 사용자에게는 보이지 않지만, 스태프에게는 보입니다.</p>
+    <p>{{ $submission->is_visible ? '보관' : '보관 해제' }} 하시겠습니까? <strong>{{ $submission->title }}</strong>?</p>
 
     <div class="text-right">
-        {!! Form::submit(($submission->is_visible ? 'Archive' : 'Unarchive') . ' Submission', ['class' => 'btn btn-warning']) !!}
+        {!! Form::submit(($submission->is_visible ? '보관' : '보관 해제') . ' Submission', ['class' => 'btn btn-warning']) !!}
     </div>
 
     {!! Form::close() !!}
 @else
-    Invalid submission selected.
+    잘못된 접근입니다.
 @endif

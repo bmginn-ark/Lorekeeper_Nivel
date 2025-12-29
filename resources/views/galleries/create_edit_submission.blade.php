@@ -1,7 +1,7 @@
 @extends('galleries.layout')
 
 @section('gallery-title')
-    {{ $submission->id ? 'Edit' : 'Create' }} Submission
+    제출물 {{ $submission->id ? '수정' : '생성' }}
 @endsection
 
 @section('gallery-content')
@@ -18,7 +18,7 @@
                 @if ($submission->status == 'Accepted')
                     <a href="#" class="btn btn-warning archive-submission-button">{{ $submission->isVisible ? 'Archive' : 'Unarchive' }}</a>
                 @endif
-                <a href="/gallery/view/{{ $submission->id }}" class="btn btn-outline-primary">View Submission</a>
+                <a href="/gallery/view/{{ $submission->id }}" class="btn btn-outline-primary">제출 보기</a>
             </div>
         @endif
     </h1>
@@ -26,16 +26,16 @@
     @if (!$submission->id && ($closed || !$gallery->canSubmit(Settings::get('gallery_submissions_open'), Auth::user())))
         <div class="alert alert-danger">
             @if ($closed)
-                Gallery submissions are currently closed.
+                갤러리 제출이 현재 마감되었습니다.
             @else
-                You can't submit to this gallery.
+                이 갤러리에 제출할 수 없습니다.
             @endif
         </div>
     @else
         {!! Form::open(['url' => $submission->id ? 'gallery/edit/' . $submission->id : 'gallery/submit', 'id' => 'gallerySubmissionForm', 'files' => true]) !!}
 
-        <h2>Main Content</h2>
-        <p>Upload an image and/or text as the content of your submission. You <strong>can</strong> upload both in the event that you have an image with accompanying text or vice versa.</p>
+        <h2>메인 콘텐츠</h2>
+        <p>제출 내용으로 이미지 및/또는 텍스트를 업로드합니다. 텍스트가 첨부된 이미지가 있거나 없는 경우 모두 업로드할 수 있습니다</p>
 
         <div class="form-group">
             {!! Form::label('Image') !!}
@@ -56,7 +56,7 @@
                     {!! Form::label('image', 'Choose file...', ['class' => 'custom-file-label']) !!}
                     {!! Form::file('image', ['class' => 'custom-file-input', 'id' => 'mainImage']) !!}
                 </div>
-                <small>Images may be PNG, GIF, JPG, or WebP and up to 3MB in size.</small>
+                <small>이미지는 PNG, GIF, JPG 또는 WebP일 수 있으며 최대 3MB 크기일 수 있습니다.</small>
             </div>
         </div>
 
@@ -67,19 +67,19 @@
 
         <div class="row">
             <div class="col-md">
-                <h3>Basic Information</h3>
+                <h3>기본 정보</h3>
                 <div class="form-group">
-                    {!! Form::label('Title') !!} {!! add_help('You <strong>do not</strong> need to indicate that a piece is a trade, gift, for a prompt etc. as this will be automatically added based on your input elsewhere in this form.') !!}
+                    {!! Form::label('제목') !!} {!! add_help('You <strong>do not</strong> need to indicate that a piece is a trade, gift, for a prompt etc. as this will be automatically added based on your input elsewhere in this form.') !!}
                     {!! Form::text('title', $submission->title ?? old('title'), ['class' => 'form-control']) !!}
                 </div>
 
                 <div class="form-group">
-                    {!! Form::label('Description (Optional)') !!}
+                    {!! Form::label('설명 (옵션)') !!}
                     {!! Form::textarea('description', $submission->description ?? old('description'), ['class' => 'form-control wysiwyg']) !!}
                 </div>
 
                 <div class="form-group">
-                    {!! Form::label('Content Warning (Optional)') !!} {!! add_help(
+                    {!! Form::label('콘텐츠 워닝 (옵션)') !!} {!! add_help(
                         'Provide a succinct content warning for the piece if necessary. If a content warning is provided, the thumbnail will be replaced with a generic image and the warning displayed under it. The piece will be displayed in full on its page, however.',
                     ) !!}
                     {!! Form::text('content_warning', $submission->content_warning ?? old('content_warning'), ['class' => 'form-control']) !!}
@@ -93,7 +93,7 @@
                         {!! Form::select('prompt_id', $prompts, $submission->prompt_id ?? old('prompt_id'), ['class' => 'form-control selectize', 'id' => 'prompt', 'placeholder' => 'Select a Prompt']) !!}
                     </div>
                 @else
-                    {!! $submission->prompt_id ? '<p><strong>Prompt:</strong> ' . $submission->prompt->displayName . '</p>' : '' !!}
+                    {!! $submission->prompt_id ? '<p><strong>프롬프트:</strong> ' . $submission->prompt->displayName . '</p>' : '' !!}
                 @endif
 
                 @if ($submission->id && Auth::user()->hasPower('manage_submissions'))
@@ -109,11 +109,11 @@
                     {!! Form::hidden('gallery_id', $gallery->id) !!}
                 @endif
 
-                <h3>Characters</h3>
+                <h3>캐릭터</h3>
                 <p>
-                    Add the characters included in this piece.
+                    이 글에 포함된 문자를 추가합니다.
                     @if (Settings::get('gallery_submissions_reward_currency'))
-                        This helps the staff processing your submission award {!! $currency->displayName !!} for it, so be sure to add every character.
+                        {!!! $currency->displayName!!}보상을 처리하는 스태프들에게 도움이 되므로, 모든 캐릭터를 추가해야 합니다.
                     @endif
                 </p>
                 <div id="characters" class="mb-3">
@@ -129,29 +129,28 @@
                     @endif
                 </div>
                 <div class="text-right mb-3">
-                    <a href="#" class="btn btn-outline-info" id="addCharacter">Add Character</a>
+                    <a href="#" class="btn btn-outline-info" id="addCharacter">캐릭터 추가</a>
                 </div>
             </div>
             @if (!$submission->id || $submission->status == 'Pending')
                 <div class="col-md-4">
                     <div class="card mb-4">
                         <div class="card-header">
-                            <h5>Collaborators</h5>
+                            <h5>협력</h5>
                         </div>
                         <div class="card-body">
-                            <p>If this piece is a collaboration, add collaborators and their roles here, including yourself. <strong>Otherwise, leave this blank</strong>. You <strong>will not</strong> be able to edit this once the submission has been
-                                accepted, but will while it is still pending.</p>
+                            <p>이 작품이 협업이라면, 여기에 협력자들과 그들의 역할을 추가하세요. 본인을 포함해주세요. 그렇지 않다면, 이 부분을 비워 두세요. 제출이 완료된 후에는 이 글을 편집할 수 없습니다.</p>
                             @if (!$submission->id || $submission->status == 'Pending')
                                 <div class="text-right mb-3">
-                                    <a href="#" class="btn btn-outline-info" id="add-collaborator">Add Collaborator</a>
+                                    <a href="#" class="btn btn-outline-info" id="add-collaborator">협력자 추가</a>
                                 </div>
                                 <div id="collaboratorList">
                                     @if ($submission->id)
                                         @foreach ($submission->collaborators as $collaborator)
                                             <div class="mb-2">
-                                                <div class="d-flex">{!! $collaborator->has_approved ? '<div class="btn btn-success mb-2 mr-2" data-toggle="tooltip" title="Has Approved"><i class="fas fa-check"></i></div>' : '' !!}{!! Form::select('collaborator_id[]', $users, $collaborator->user_id, ['class' => 'form-control mr-2 collaborator-select original', 'placeholder' => 'Select User']) !!}</div>
+                                                <div class="d-flex">{!! $collaborator->has_approved ? '<div class="btn btn-success mb-2 mr-2" data-toggle="tooltip" title="Has Approved"><i class="fas fa-check"></i></div>' : '' !!}{!! Form::select('collaborator_id[]', $users, $collaborator->user_id, ['class' => 'form-control mr-2 collaborator-select original', 'placeholder' => '유저 선택']) !!}</div>
                                                 <div class="d-flex">
-                                                    {!! Form::text('collaborator_data[]', $collaborator->data, ['class' => 'form-control mr-2', 'placeholder' => 'Role (Sketch, Lines, etc.)']) !!}
+                                                    {!! Form::text('collaborator_data[]', $collaborator->data, ['class' => 'form-control mr-2', 'placeholder' => '역할 (스케치, 선, 기타.)']) !!}
                                                     <a href="#" class="remove-collaborator btn btn-danger mb-2">×</a>
                                                 </div>
                                             </div>
@@ -160,9 +159,9 @@
                                     @if (old('collaborator_id'))
                                         @foreach (old('collaborator_id') as $key => $collaborator)
                                             <div class="mb-2">
-                                                <div class="d-flex">{!! Form::select('collaborator_id[]', $users, $collaborator, ['class' => 'form-control mr-2 collaborator-select original', 'placeholder' => 'Select User']) !!}</div>
+                                                <div class="d-flex">{!! Form::select('collaborator_id[]', $users, $collaborator, ['class' => 'form-control mr-2 collaborator-select original', 'placeholder' => '유저 선택']) !!}</div>
                                                 <div class="d-flex">
-                                                    {!! Form::text('collaborator_data[]', old('collaborator_data')[$key], ['class' => 'form-control mr-2', 'placeholder' => 'Role (Sketch, Lines, etc.)']) !!}
+                                                    {!! Form::text('collaborator_data[]', old('collaborator_data')[$key], ['class' => 'form-control mr-2', 'placeholder' => '역할 (스케치, 선, 기타.)']) !!}
                                                     <a href="#" class="remove-collaborator btn btn-danger mb-2">×</a>
                                                 </div>
                                             </div>
@@ -182,22 +181,21 @@
                     </div>
                     <div class="card mb-4">
                         <div class="card-header">
-                            <h5>Other Participants</h5>
+                            <h5>다른 참여자</h5>
                         </div>
                         <div class="card-body">
-                            <p>If this piece is gift, part of a trade, or was commissioned, specify the related user(s) here and select their role. <strong>Otherwise, leave this blank</strong>. You <strong>will not</strong> be able to edit this once the
-                                submission has been accepted, but will while it is still pending.</p>
+                            <p>이 그림이 선물이나 거래의 일환이거나, 커미션이라면 관련되어있는 유저를 선택하고 역할을 부여하세요. <strong>그렇지 않다면 이 부분을 비워주세요</strong>. 제출이 완료된 후에는 이 글을 편집할 수 없습니다.</p>
                             @if (!$submission->id || $submission->status == 'Pending')
                                 <div class="text-right mb-3">
-                                    <a href="#" class="btn btn-outline-info" id="add-participant">Add Participant</a>
+                                    <a href="#" class="btn btn-outline-info" id="add-participant">참여자 추가</a>
                                 </div>
                                 <div id="participantList">
                                     @if ($submission->id)
                                         @foreach ($submission->participants as $participant)
                                             <div class="mb-2">
-                                                <div class="d-flex">{!! Form::select('participant_id[]', $users, $participant->user_id, ['class' => 'form-control mr-2 participant-select original', 'placeholder' => 'Select User']) !!}</div>
+                                                <div class="d-flex">{!! Form::select('participant_id[]', $users, $participant->user_id, ['class' => 'form-control mr-2 participant-select original', 'placeholder' => '유저 선택']) !!}</div>
                                                 <div class="d-flex">
-                                                    {!! Form::select('participant_type[]', ['Gift' => 'Gift For', 'Trade' => 'Traded For', 'Comm' => 'Commissioned', 'Comm (Currency)' => 'Commissioned (' . $currency->name . ')'], $participant->type, [
+                                                    {!! Form::select('participant_type[]', ['Gift' => '선물', 'Trade' => '거래', 'Comm' => '커미션', 'Comm (Currency)' => '커미션 (' . $currency->name . ')'], $participant->type, [
                                                         'class' => 'form-control mr-2',
                                                         'placeholder' => 'Select Role',
                                                     ]) !!}
@@ -209,9 +207,9 @@
                                     @if (old('participant_id'))
                                         @foreach (old('participant_id') as $key => $participant)
                                             <div class="mb-2">
-                                                <div class="d-flex">{!! Form::select('participant_id[]', $users, $participant, ['class' => 'form-control mr-2 participant-select original', 'placeholder' => 'Select User']) !!}</div>
+                                                <div class="d-flex">{!! Form::select('participant_id[]', $users, $participant, ['class' => 'form-control mr-2 participant-select original', 'placeholder' => '유저 선택']) !!}</div>
                                                 <div class="d-flex">
-                                                    {!! Form::select('participant_type[]', ['Gift' => 'Gift For', 'Trade' => 'Traded For', 'Comm' => 'Commissioned', 'Comm (Currency)' => 'Commissioned (' . $currency->name . ')'], old('participant_type')[$key], [
+                                                    {!! Form::select('participant_type[]', ['Gift' => '선물', 'Trade' => '거래', 'Comm' => '커미션', 'Comm (Currency)' => '커미션 (' . $currency->name . ')'], old('participant_type')[$key], [
                                                         'class' => 'form-control mr-2',
                                                         'placeholder' => 'Select Role',
                                                     ]) !!}
@@ -235,12 +233,10 @@
                     @if (Settings::get('gallery_submissions_reward_currency') && $gallery->currency_enabled && !$submission->id)
                         <div class="card mb-4">
                             <div class="card-header">
-                                <h5>{!! $currency->name !!} Awards</h5>
+                                <h5>{!! $currency->name !!} 보상</h5>
                             </div>
                             <div class="card-body">
-                                <p>Please select options as appropriate for this piece. This will help the staff processing your submission award {!! $currency->displayName !!} for it. You <strong>will not</strong> be able to edit this after creating the
-                                    submission.</p>
-
+                                <p>이 작품에 적절한 옵션을 선택해주세요. 이는 제출을 처리하는 직원들이 이 작품에 대해 {!! $currency->displayName !!}를 지급하는 데 도움이 됩니다. 제출 후에는 이 항목을 수정할 수 없습니다.</p>
                                 @foreach (config('lorekeeper.group_currency_form') as $key => $field)
                                     <div class="form-group">
                                         @if ($field['type'] == 'checkbox')
@@ -280,24 +276,24 @@
         @endif
 
         <div class="text-right">
-            <a href="#" class="btn btn-primary" id="submitButton">Submit</a>
+            <a href="#" class="btn btn-primary" id="submitButton">제출</a>
         </div>
         {!! Form::close() !!}
 
         @include('galleries._character_select')
         <div class="collaborator-row hide mb-2">
-            {!! Form::select('collaborator_id[]', $users, null, ['class' => 'form-control mr-2 collaborator-select', 'placeholder' => 'Select User']) !!}
+            {!! Form::select('collaborator_id[]', $users, null, ['class' => 'form-control mr-2 collaborator-select', 'placeholder' => '유저 선택']) !!}
             <div class="d-flex">
-                {!! Form::text('collaborator_data[]', null, ['class' => 'form-control mr-2', 'placeholder' => 'Role (Sketch, Lines, etc.)']) !!}
+                {!! Form::text('collaborator_data[]', null, ['class' => 'form-control mr-2', 'placeholder' => '역할 (스케치, 라인 등)']) !!}
                 <a href="#" class="remove-collaborator btn btn-danger mb-2">×</a>
             </div>
         </div>
         <div class="participant-row hide mb-2">
-            {!! Form::select('participant_id[]', $users, null, ['class' => 'form-control mr-2 participant-select', 'placeholder' => 'Select User']) !!}
+            {!! Form::select('participant_id[]', $users, null, ['class' => 'form-control mr-2 participant-select', 'placeholder' => '유저 선택']) !!}
             <div class="d-flex">
-                {!! Form::select('participant_type[]', ['Gift' => 'Gift For', 'Trade' => 'Traded For', 'Comm' => 'Commissioned', 'Comm (Currency)' => 'Commissioned (' . $currency->name . ')'], null, [
+                {!! Form::select('participant_type[]', ['Gift' => '선물', 'Trade' => '거래', 'Comm' => '커미션', 'Comm (Currency)' => '커미션 (' . $currency->name . ')'], null, [
                     'class' => 'form-control mr-2',
-                    'placeholder' => 'Select Role',
+                    'placeholder' => '역할 선택',
                 ]) !!}
                 <a href="#" class="remove-participant btn btn-danger mb-2">×</a>
             </div>
@@ -307,21 +303,20 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <span class="modal-title h5 mb-0">Confirm Submission</span>
+                        <span class="modal-title h5 mb-0">제출 승인</span>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body">
                         <p>
                             @if (!$submission->id)
-                                This will submit the form and put it into the approval queue. You will not be able to edit certain parts after the submission has been made, so please review the contents before submitting. Click the Confirm button to
-                                complete the submission.
+                                이렇게 하면 양식을 제출하고 승인 대기열에 넣을 수 있습니다. 제출이 완료된 후에는 특정 부분을 편집할 수 없으므로 제출하기 전에 내용을 검토해 주세요. 제출을 완료하려면 확인 버튼을 클릭하세요.
                             @else
-                                This will update the
-                                submission.{{ $submission->status == 'Pending' ? ' If you have added or removed any collaborators, they will not be informed (so as not to send additional notifications to previously notified collaborators), so please make sure to do so if necessary as all collaborators must approve a submission for it to be submitted for admin approval.' : '' }}
+                                제출을 업데이트합니다.
+                                {{ $submission->status == 'Pending' ? ' If you have added or removed any collaborators, they will not be informed (so as not to send additional notifications to previously notified collaborators), so please make sure to do so if necessary as all collaborators must approve a submission for it to be submitted for admin approval.' : '' }}
                             @endif
                         </p>
                         <div class="text-right">
-                            <a href="#" id="formSubmit" class="btn btn-primary">Confirm</a>
+                            <a href="#" id="formSubmit" class="btn btn-primary">승인</a>
                         </div>
                     </div>
                 </div>

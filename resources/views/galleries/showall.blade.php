@@ -1,19 +1,19 @@
 @extends('galleries.layout')
 
 @section('gallery-title')
-    All Recent Submissions
+    모든 최근 제출물
 @endsection
 
 @section('gallery-content')
     {!! breadcrumbs(['Gallery' => 'gallery', 'All Recent Submissions' => 'gallery/all']) !!}
 
     <h1>
-        All Recent Submissions
+        모든 최근 제출물
     </h1>
 
-    <p>This page displays all recent submissions, regardless of gallery.</p>
+    <p>이 페이지는 갤러리에 관계없이 최근 제출물을 표시합니다.</p>
     @if (!$submissions->count())
-        <p>There are no submissions.</p>
+        <p>제출물이 없습니다.</p>
     @endif
 
     <div>
@@ -56,7 +56,7 @@
 
         {!! $submissions->render() !!}
     @else
-        <p>No submissions found!</p>
+        <p>제출물이 없습니다!</p>
     @endif
 
 @endsection

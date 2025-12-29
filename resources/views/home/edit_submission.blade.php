@@ -2,9 +2,9 @@
 
 @section('home-title')
     @if ($isClaim)
-        Claim Draft
+        수령 초안
     @else
-        Submission Draft
+        제출 초안
     @endif
 @endsection
 
@@ -17,15 +17,15 @@
 
     <h1>
         @if ($isClaim)
-            Claim Draft
+            수령 초안
         @else
-            Submission Draft
+            제출 초안
         @endif
     </h1>
 
     @if ($closed)
         <div class="alert alert-danger">
-            The {{ $isClaim ? 'claim' : 'submission' }} queue is currently closed. You cannot edit {{ $isClaim ? 'claim' : 'submission' }} drafts at this time.
+            {{ $isClaim ? '수령' : '제출' }} 대기열은 현제 닫혀있습니다. {{ $isClaim ? '수령' : '제출' }} 초안을 이 시점에서 편집할 수 없습니다.
         </div>
     @else
         @include('home._submission_form', ['submission' => $submission])
@@ -40,44 +40,44 @@
                     </div>
                     <div class="modal-body">
                         <p>
-                            This will submit the form and put it into the {{ $isClaim ? 'claims' : 'prompt' }} approval queue.
-                            You will not be able to edit the contents after the {{ $isClaim ? 'claim' : 'submission' }} has been made.
-                            If you aren't certain that you are ready, consider saving as a draft instead.
-                            Click the Confirm button to complete the {{ $isClaim ? 'claim' : 'submission' }}.
+                            {{ $isClaim ? '수령' : '제출' }} 폼을 제출하고 승인 대기열에 추가합니다.
+                            {{ $isClaim ? '수령' : '제출' }}이 작성된 후에는 내용을 편집할 수 없습니다.
+                            준비가 되었는지 확실하지 않다면 초안으로 저장하는 것을 고려하세요.
+                            확인 버튼을 클릭하여 {{ $isClaim ? '수령' : '제출' }}을 완료합니다.
                         </p>
                         <div class="text-right">
-                            <a href="#" id="confirmSubmit" class="btn btn-primary">Confirm</a>
+                            <a href="#" id="confirmSubmit" class="btn btn-primary">확인</a>
                         </div>
                     </div>
                 </div>
 
                 <div class="modal-content hide" id="draftContent">
                     <div class="modal-header">
-                        <span class="modal-title h5 mb-0">Save Draft</span>
+                        <span class="modal-title h5 mb-0">초안 저장</span>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body">
                         <p>
-                            This will edit the existing {{ $submission->prompt_id ? 'submission' : 'claim' }} draft.
-                            Items and other attachments will be held, similar to in design update drafts.
+                            존재하는 {{ $submission->prompt_id ? '제출' : '수령' }} 초안을 수정합니다.
+                            디자인 업데이트 초안과 유사하게 항목 및 기타 첨부 파일이 보관됩니다.
                         </p>
                         <div class="text-right">
-                            <a href="#" id="draftSubmit" class="btn btn-success">Save Draft</a>
+                            <a href="#" id="draftSubmit" class="btn btn-success">초안 저장</a>
                         </div>
                     </div>
                 </div>
 
                 <div class="modal-content hide" id="cancelContent">
                     <div class="modal-header">
-                        <span class="modal-title h5 mb-0">Delete Draft</span>
+                        <span class="modal-title h5 mb-0">초안 삭제</span>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body">
                         <p>
-                            This will cancel the {{ $submission->prompt_id ? 'submission' : 'claim' }} draft and return any attachments to your inventories.
+                            이 작업은 {{ $submission->prompt_id ? '제출' : '수령' }} 초안을 취소하고 모든 첨부 파일을 인벤토리로 반환합니다.
                         </p>
                         <div class="text-right">
-                            <a href="#" id="cancelSubmit" class="btn btn-danger">Delete Draft</a>
+                            <a href="#" id="cancelSubmit" class="btn btn-danger">초안 삭제</a>
                         </div>
                     </div>
                 </div>

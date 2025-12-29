@@ -9,8 +9,8 @@
                 ({{ $currency->abbreviation }})
             @endif
         </h3>
-        <div><strong>Displays as:</strong> {!! $currency->display(0) !!}</div>
-        <div><strong>Held by:</strong> <?php echo ucfirst(implode(' and ', ($currency->is_user_owned ? ['users'] : []) + ($currency->is_character_owned ? ['characters'] : []))); ?></div>
+        <div><strong>표시:</strong> {!! $currency->display(0) !!}</div>
+        <div><strong>소유 가능:</strong> <?php echo ucfirst(implode(' 와 ', ($currency->is_user_owned ? ['유저'] : []) + ($currency->is_character_owned ? ['캐릭터'] : []))); ?></div>
         <div class="world-entry-text parsed-text">
             {!! $currency->parsed_description !!}
         </div>

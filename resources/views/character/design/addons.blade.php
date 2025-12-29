@@ -1,7 +1,7 @@
 @extends('character.design.layout')
 
 @section('design-title')
-    Request (#{{ $request->id }}) :: Add-ons
+    요청 (#{{ $request->id }}) :: 추가
 @endsection
 
 @section('design-content')
@@ -9,11 +9,11 @@
 
     @include('character.design._header', ['request' => $request])
 
-    <h2>Add-ons</h2>
+    <h2>추가</h2>
 
     @if ($request->status == 'Draft' && $request->user_id == Auth::user()->id && $request->character)
-        <p>Select items and/or currency to add onto your request. These items will be removed from your inventory{{ $request->character->is_myo_slot ? '' : ' and/or character' }} but refunded if removed from the request, the request is rejected, or the
-            request is deleted. If you don't intend to attach any items/currency, click the Save button once to mark this section complete regardless.</p>
+        <p>요청에 추가할 항목 및/또는 재화를 선택하세요. 이 항목들은 귀하의 인벤토리에서 제거될 것입니다. 그러나 요청이 거부되거나 삭제되면 환불됩니다. 
+            항목/재화화를 첨부할 의도가 없는 경우 저장 버튼을 한 번 클릭하여 이 섹션을 완료한 것으로 표시하세요.</p>
         {!! Form::open(['url' => 'designs/' . $request->id . '/addons']) !!}
         @include('widgets._inventory_select', ['user' => Auth::user(), 'inventory' => $inventory, 'categories' => $categories, 'selected' => $request->inventory])
         @include('widgets._bank_select', ['owner' => Auth::user(), 'selected' => $request->userBank])
@@ -23,22 +23,22 @@
         @endif
 
         <div class="text-right">
-            {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+            {!! Form::submit('저장', ['class' => 'btn btn-primary']) !!}
         </div>
         {!! Form::close() !!}
     @else
-        <p>Items and/or currency listed have been removed from their holders and will be refunded if the request is rejected.</p>
+        <p>나열된 항목 및/또는 재화화는 보유자에서 제거되며 요청이 거부되면 환불됩니다.</p>
         @if ($inventory && count($inventory))
-            <h3>{!! $request->user->displayName !!}'s Inventory</h3>
+            <h3>{!! $request->user->displayName !!}의 인벤토리</h3>
             <div class="card mb-3">
                 <div class="card-body">
                     <table class="table table-sm">
                         <thead class="thead-light">
                             <tr class="d-flex">
-                                <th class="col-2">Item</th>
-                                <th class="col-4">Source</th>
-                                <th class="col-4">Notes</th>
-                                <th class="col-2">Quantity</th>
+                                <th class="col-2">아이템</th>
+                                <th class="col-4">출처</th>
+                                <th class="col-4">정보</th>
+                                <th class="col-2">수량</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -59,12 +59,12 @@
             </div>
         @endif
         @if (count($request->userBank))
-            <h3>{!! $request->user->displayName !!}'s Bank</h3>
+            <h3>{!! $request->user->displayName !!}의 은행</h3>
             <table class="table table-sm mb-3">
                 <thead>
                     <tr>
-                        <th width="70%">Currency</th>
-                        <th width="30%">Quantity</th>
+                        <th width="70%">재화</th>
+                        <th width="30%">수량</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -78,12 +78,12 @@
             </table>
         @endif
         @if ($request->character && count($request->characterBank))
-            <h3>{!! $request->character->displayName !!}'s Bank</h3>
+            <h3>{!! $request->character->displayName !!}의 은행</h3>
             <table class="table table-sm mb-3">
                 <thead>
                     <tr>
-                        <th width="70%">Currency</th>
-                        <th width="30%">Quantity</th>
+                        <th width="70%">재화</th>
+                        <th width="30%">수량</th>
                     </tr>
                 </thead>
                 <tbody>

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Site Sales{!! View::hasSection('sales-title') ? ' :: ' . trim(View::getSection('sales-title')) : '' !!}
+    사이트 분양{!! View::hasSection('sales-title') ? ' :: ' . trim(View::getSection('sales-title')) : '' !!}
 @endsection
 
 @section('sidebar')

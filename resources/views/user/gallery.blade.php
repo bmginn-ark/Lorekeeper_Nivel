@@ -1,14 +1,14 @@
 @extends('user.layout')
 
 @section('profile-title')
-    {{ $user->name }}'s Gallery
+    {{ $user->name }}의 갤러리
 @endsection
 
 @section('profile-content')
     {!! breadcrumbs(['Users' => 'users', $user->name => $user->url, 'Gallery' => $user->url . '/gallery']) !!}
 
     <h1>
-        Gallery
+        갤러리
     </h1>
 
     @if ($user->gallerySubmissions->count())
@@ -22,7 +22,7 @@
 
         {!! $submissions->render() !!}
     @else
-        <p>No submissions found!</p>
+        <p>제출된 항목이 없습니다!</p>
     @endif
 
 @endsection

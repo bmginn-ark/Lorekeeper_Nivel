@@ -3,7 +3,7 @@
         <x-admin-edit title="Sale" :object="$sales" />
         <h2 class="card-title mb-0">{!! $sales->displayName !!}</h2>
         <small>
-            Posted {!! $sales->post_at ? pretty_date($sales->post_at) : pretty_date($sales->created_at) !!} :: Last edited {!! pretty_date($sales->updated_at) !!} by {!! $sales->user->displayName !!}
+            개시됨 {!! $sales->post_at ? pretty_date($sales->post_at) : pretty_date($sales->created_at) !!} :: 마지막 수정 {!! pretty_date($sales->updated_at) !!} 작성자 {!! $sales->user->displayName !!}
         </small>
     </div>
 
@@ -17,7 +17,7 @@
             <div class="col-lg mb-2">
                 <div class="card h-100">
                     <div class="alert alert-warning my-auto mx-2">
-                        <i class="fas fa-exclamation-triangle"></i> This character has been deleted.
+                        <i class="fas fa-exclamation-triangle"></i> 이 캐릭터는 삭제되었습니다.
                     </div>
                 </div>
             </div>

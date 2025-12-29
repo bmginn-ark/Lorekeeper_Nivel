@@ -1,7 +1,7 @@
 @extends('character.layout', ['isMyo' => $character->is_myo_slot])
 
 @section('profile-title')
-    {{ $character->fullName }}'s Item Logs
+    {{ $character->fullName }}의 아이템 기록
 @endsection
 
 @section('profile-content')
@@ -18,26 +18,26 @@
 
     @include('character._header', ['character' => $character])
 
-    <h3>Item Logs</h3>
+    <h3>아이템 기록</h3>
 
     {!! $logs->render() !!}
     <div class="mb-4 logs-table">
         <div class="logs-table-header">
             <div class="row">
                 <div class="col-6 col-md-2">
-                    <div class="logs-table-cell">Sender</div>
+                    <div class="logs-table-cell">보내는 이</div>
                 </div>
                 <div class="col-6 col-md-2">
-                    <div class="logs-table-cell">Recipient</div>
+                    <div class="logs-table-cell">받는 이</div>
                 </div>
                 <div class="col-6 col-md-2">
-                    <div class="logs-table-cell">Item</div>
+                    <div class="logs-table-cell">아이템</div>
                 </div>
                 <div class="col-6 col-md-4">
-                    <div class="logs-table-cell">Log</div>
+                    <div class="logs-table-cell">기록</div>
                 </div>
                 <div class="col-6 col-md-2">
-                    <div class="logs-table-cell">Date</div>
+                    <div class="logs-table-cell">날짜</div>
                 </div>
             </div>
         </div>

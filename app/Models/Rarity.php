@@ -24,7 +24,7 @@ class Rarity extends Model {
      * @var array
      */
     public static $createRules = [
-        'name'        => 'required|unique:rarities|between:3,100',
+        'name'        => 'required|unique:rarities|between:1,100',
         'color'       => 'nullable|regex:/^#?[0-9a-fA-F]{6}$/i',
         'description' => 'nullable',
         'image'       => 'mimes:png',
@@ -36,7 +36,7 @@ class Rarity extends Model {
      * @var array
      */
     public static $updateRules = [
-        'name'        => 'required|between:3,100',
+        'name'        => 'required|between:1,100',
         'color'       => 'nullable|regex:/^#?[0-9a-fA-F]{6}$/i',
         'description' => 'nullable',
         'image'       => 'mimes:png',

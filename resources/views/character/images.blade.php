@@ -1,7 +1,7 @@
 @extends('character.layout', ['isMyo' => $character->is_myo_slot])
 
 @section('profile-title')
-    {{ $character->fullName }}'s Images
+    {{ $character->fullName }}의 이미지
 @endsection
 
 @section('meta-img')
@@ -30,7 +30,7 @@
                             </a>
                         </div>
                         @if ($image->canViewFull(Auth::check() ? Auth::user() : null) && file_exists(public_path($image->imageDirectory . '/' . $image->fullsizeFileName)))
-                            <div class="text-right">You are viewing the full-size image. <a href="{{ $image->imageUrl }}">View watermarked image</a>?</div>
+                            <div class="text-right">원본 이미지를 보고 있습니다. <a href="{{ $image->imageUrl }}">워터마크 이미지 보기</a></div>
                         @endif
                     </div>
                     @include('character._image_info', ['image' => $image])
@@ -40,9 +40,9 @@
     </div>
     <?php $canManage = Auth::check() && Auth::user()->hasPower('manage_characters'); ?>
     <h3>
-        Images
+        이미지
         @if ($canManage)
-            <a href="{{ url('admin/character/' . $character->slug . '/image') }}" class="float-right btn btn-outline-info btn-sm"><i class="fas fa-plus"></i> Add Image</a>
+            <a href="{{ url('admin/character/' . $character->slug . '/image') }}" class="float-right btn btn-outline-info btn-sm"><i class="fas fa-plus"></i> 이미지 추가</a>
         @endif
     </h3>
 

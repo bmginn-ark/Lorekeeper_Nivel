@@ -13,11 +13,11 @@
                     </a>
                 </div>
                 <div class="small">
-                    {!! $character->image->species_id ? $character->image->species->displayName : 'No Species' !!} ・ {!! $character->image->rarity_id ? $character->image->rarity->displayName : 'No Rarity' !!}
+                    {!! $character->image->species_id ? $character->image->species->displayName : '종 없음' !!} ・ {!! $character->image->rarity_id ? $character->image->rarity->displayName : '희귀도 없음' !!}
                 </div>
             </div>
         @endforeach
     </div>
 @else
-    <p>No {{ $myo ? 'MYO slots' : 'characters' }} found.</p>
+    <p>{{ $myo ? 'MYO 슬롯이' : '캐릭터가' }} 없습니다.</p>
 @endif

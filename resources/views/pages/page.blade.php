@@ -9,8 +9,8 @@
     {!! breadcrumbs([$page->title => $page->url]) !!}
     <h1>{{ $page->title }}</h1>
     <div class="mb-4">
-        <div><strong>Created:</strong> {!! format_date($page->created_at) !!}</div>
-        <div><strong>Last updated:</strong> {!! format_date($page->updated_at) !!}</div>
+        <div><strong>작성일:</strong> {!! format_date($page->created_at) !!}</div>
+        <div><strong>수정일:</strong> {!! format_date($page->updated_at) !!}</div>
     </div>
 
     <div class="site-page-content parsed-text">

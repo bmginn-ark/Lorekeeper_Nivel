@@ -1,12 +1,12 @@
 @extends('world.layout')
 
 @section('world-title')
-    Trait Categories
+    특성 카테고리
 @endsection
 
 @section('content')
     {!! breadcrumbs(['World' => 'world', 'Trait Categories' => 'world/trait-categories']) !!}
-    <h1>Trait Categories</h1>
+    <h1>특성 카테고리</h1>
 
     <div>
         {!! Form::open(['method' => 'GET', 'class' => 'form-inline justify-content-end']) !!}

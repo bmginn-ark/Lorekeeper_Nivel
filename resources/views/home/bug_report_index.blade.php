@@ -1,21 +1,21 @@
 @extends('layouts.app')
 
 @section('title')
-    Bug Reports
+    버그 신고
 @endsection
 
 @section('content')
     {!! breadcrumbs(['Reports' => 'reports']) !!}
     <h1>
-        Bug Reports
+        버그 신고
     </h1>
 
-    <p>Please check the current 'fix in progress' reports to ensure your bug is not already being worked on! If the title is not descriptive enough, or does not match your bug, feel free to create a new one.</p>
-    <div class="alert alert-warning">Please note that certain bug reports cannot be viewed until they are closed to prevent abuse.</div>
+    <p>현재 진행 중인 '수정 중' 보고서를 확인하여 버그가 아직 수정되지 않았는지 확인해 주세요! 제목이 충분히 설명되지 않았거나 버그와 일치하지 않는 경우 언제든지 새 버그를 만드세요.</p>
+    <div class="alert alert-warning">특정 버그 보고서는 남용을 방지하기 위해 종료될 때까지 볼 수 없습니다.</div>
 
     @if (Auth::check())
         <div class="text-right">
-            <a href="{{ url('reports/new') }}" class="btn btn-success">New Report</a>
+            <a href="{{ url('reports/new') }}" class="btn btn-success">새 신고</a>
         </div>
     @endif
     <br>
@@ -34,13 +34,13 @@
             <div class="logs-table-header">
                 <div class="row">
                     <div class="col-6 col-md-4">
-                        <div class="logs-table-cell">Link/Title</div>
+                        <div class="logs-table-cell">링크/제목</div>
                     </div>
                     <div class="col-6 col-md-5">
-                        <div class="logs-table-cell">Submitted</div>
+                        <div class="logs-table-cell">제출일</div>
                     </div>
                     <div class="col-12 col-md-1">
-                        <div class="logs-table-cell">Status</div>
+                        <div class="logs-table-cell">상태</div>
                     </div>
                 </div>
             </div>
@@ -55,7 +55,7 @@
         {!! $reports->render() !!}
         <div class="text-center mt-4 small text-muted">{{ $reports->total() }} result{{ $reports->total() == 1 ? '' : 's' }} found.</div>
     @else
-        <p>No reports found.</p>
+        <p>신고를 찾을 수 없습니다.</p>
     @endif
 
 @endsection

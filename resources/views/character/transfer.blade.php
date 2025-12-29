@@ -1,7 +1,7 @@
 @extends('character.layout', ['isMyo' => $character->is_myo_slot])
 
 @section('profile-title')
-    Transferring {{ $character->fullName }}
+    {{ $character->fullName }} 이전
 @endsection
 
 @section('meta-img')
@@ -22,16 +22,16 @@
     @include('character._header', ['character' => $character])
 
     @if ($character->user_id == Auth::user()->id)
-        <h3>Transfer Character</h3>
+        <h3>캐릭터 전송</h3>
         @if (!$character->is_sellable && !$character->is_tradeable && !$character->is_giftable)
-            <p>This character cannot be transferred.</p>
+            <p>이 캐릭터는 전송할 수 없습니다.</p>
         @elseif($character->transferrable_at && $character->transferrable_at->isFuture())
-            <p>This character is on transfer cooldown until <strong>{!! format_date($character->transferrable_at) !!}</strong> ({{ $character->transferrable_at->diffForHumans() }}). It cannot be transferred until then.</p>
+            <p>이 캐릭터는 <strong>{!! format_date($character->transferrable_at) !!}일 까지 쿨다운입니다.</strong> ({{ $character->transferrable_at->diffForHumans() }}). 그 전까지 이전할 수 없습니다..</p>
         @elseif($transfer)
             <div class="card bg-light mb-3">
                 <div class="card-body">
                     <p>
-                        This character is already in a transfer to {!! $transfer->recipient->displayName !!}.
+                        이 캐릭터는 이미 {!! $transfer->recipient->displayName !!}님 에게 전송중입니다.
                     </p>
                     <div class="text-right">
                         {!! Form::open(['url' => 'characters/transfer/act/' . $transfer->id]) !!}
@@ -41,27 +41,26 @@
                 </div>
             </div>
         @elseif($character->trade_id)
-            <p>This character is currently attached to a trade. (<a href="{{ $character->trade->url }}">View Trade</a>)</p>
+            <p>이 캐릭터는 현재 거래중입니다. (<a href="{{ $character->trade->url }}">거래 보기</a>)</p>
         @else
             <p>
-                Transfers require the recipient to confirm that they want to receive the character. Before the recipient makes the confirmation, you may cancel the transfer, but cannot retrieve the character after it has been transferred.
+                전송은 수신자가 캐릭터를 받고 싶은지 확인해야 합니다. 수신자가 확인하기 전에 전송을 취소할 수 있지만, 전송된 후에는 캐릭터를 검색할 수 없습니다.
                 @if ($transfersQueue)
-                    Additionally, a mod will need to approve of the transfer. There may be a wait until the recipient receives the character, even after they have confirmed the transfer.
+                    또한 스태프가 전송을 승인해야 합니다. 수신자가 전송을 확인한 후에도 캐릭터를 받을 때까지 대기 시간이 있을 수 있습니다.
                 @endif
             </p>
             @if ($cooldown)
                 <p>
-                    After a character is transferred (transfer is accepted{{ $transfersQueue ? ' and approved' : '' }}), a cooldown of <strong>{{ $cooldown }}</strong> days will be applied. During this time, the character cannot be transferred to
-                    another person.
+                    캐릭터가 전송된 후(전송이 수락되면 {{$transferQueue ? ' and approved' : '' }}), <strong>{{$cooldown}}/<strong> 일수의 쿨다운이 적용됩니다. 이 기간 동안 캐릭터는 다른 사람에게 전송할 수 없습니다.
                 </p>
             @endif
             {!! Form::open(['url' => $character->url . '/transfer']) !!}
             <div class="form-group">
-                {!! Form::label('recipient_id', 'Recipient') !!}
-                {!! Form::select('recipient_id', $userOptions, old('recipient_id'), ['class' => 'form-control selectize', 'placeholder' => 'Select User']) !!}
+                {!! Form::label('recipient_id', '받는 이') !!}
+                {!! Form::select('recipient_id', $userOptions, old('recipient_id'), ['class' => 'form-control selectize', 'placeholder' => '유저 선택']) !!}
             </div>
             <div class="form-group">
-                {!! Form::label('user_reason', 'Reason for Transfer (Required)') !!}
+                {!! Form::label('user_reason', '전송 이유 (필수)') !!}
                 {!! Form::text('user_reason', '', ['class' => 'form-control']) !!}
             </div>
             <div class="text-right">
@@ -72,28 +71,27 @@
     @endif
 
     @if (Auth::user()->hasPower('manage_characters'))
-        <h3>Admin Transfer</h3>
+        <h3>관리자 전송</h3>
         <div class="alert alert-warning">
-            You are editing this character as a staff member.
+            이 캐릭터를 스태프 권한으로 편집하고 있습니다.
         </div>
-        <p>This will transfer the character automatically, without requiring the recipient to confirm the transfer. You may also transfer a character that is marked non-transferrable, or still under cooldown. Both the old and new owners will be notified
-            of the transfer.</p>
-        <p>Fill in either of the recipient fields - if transferring to an off-site user, leave the recipient field blank and vice versa.</p>
+        <p>이렇게 하면 수신자가 전송을 확인할 필요 없이 캐릭터가 자동으로 전송됩니다. 전송 불가 또는 재사용 대기 중인 것으로 표시된 캐릭터를 전송할 수도 있습니다. 이전 소유자와 새 소유자 모두에게 양도에 대해 알림이 전송됩니다.</p>
+        <p>수신자 필드 중 하나를 입력합니다 - 사이트 밖 사용자에게 전송하는 경우 수신자 필드를 비워두거나 그 반대의 경우도 마찬가지입니다.</p>
         {!! Form::open(['url' => $character->is_myo_slot ? 'admin/myo/' . $character->id . '/transfer' : 'admin/character/' . $character->slug . '/transfer']) !!}
         <div class="form-group">
-            {!! Form::label('recipient_id', 'Recipient') !!}
-            {!! Form::select('recipient_id', $userOptions, old('recipient_id'), ['class' => 'form-control selectize', 'placeholder' => 'Select User']) !!}
+            {!! Form::label('recipient_id', '받는 이') !!}
+            {!! Form::select('recipient_id', $userOptions, old('recipient_id'), ['class' => 'form-control selectize', 'placeholder' => '유저 선택']) !!}
         </div>
         <div class="form-group">
-            {!! Form::label('recipient_url', 'Recipient Url') !!} {!! add_help('Characters can only be transferred to offsite user URLs from site(s) used for authentication.') !!}
+            {!! Form::label('recipient_url', '받는 이 Url') !!} {!! add_help('Characters can only be transferred to offsite user URLs from site(s) used for authentication.') !!}
             {!! Form::text('recipient_url', old('recipient_url'), ['class' => 'form-control']) !!}
         </div>
         <div class="form-group">
-            {!! Form::label('cooldown', 'Transfer Cooldown (days)') !!}
+            {!! Form::label('cooldown', '전송 쿨다운 (일)') !!}
             {!! Form::text('cooldown', $cooldown, ['class' => 'form-control']) !!}
         </div>
         <div class="form-group">
-            {!! Form::label('reason', 'Reason for Transfer (optional)') !!}
+            {!! Form::label('reason', '전송 이유 (선택)') !!}
             {!! Form::text('reason', '', ['class' => 'form-control']) !!}
         </div>
         <div class="text-right">

@@ -1,25 +1,25 @@
 @extends('home.layout')
 
 @section('home-title')
-    New Submission
+    새 제출
 @endsection
 
 @section('home-content')
     {!! breadcrumbs(['Reports' => 'reports', 'New Report' => 'reports/new']) !!}
 
     <h1>
-        New Report
+        새 신고
     </h1>
 
     @if ($closed)
         <div class="alert alert-danger">
-            The report queue is currently closed. You cannot make a new report at this time.
+            신고 대기열은 현제 닫혀있습니다. 신고를 이 시점에서 만들 수 없습니다.
         </div>
     @else
         {!! Form::open(['url' => 'reports/new', 'id' => 'submissionForm']) !!}
         <div class="br-form-group alert alert-warning" style="display: none">
             <div class="form-check">
-                When submitting a bug report, please use the 'URL / Title' section to briefly summarise the bug. Inlcude any links in the 'Comments' section. This is to allow an easy search.
+                버그 보고서를 제출할 때는 'URL / 제목' 섹션을 사용하여 버그를 간략하게 요약하세요. '댓글' 섹션에 링크를 포함시키세요. 쉽게 검색할 수 있도록 하기 위함입니다.
             </div>
         </div>
         <div class="form-group">
@@ -41,7 +41,7 @@
         </div>
 
         <div class="text-right">
-            <a href="#" class="btn btn-primary" id="submitButton">Submit</a>
+            <a href="#" class="btn btn-primary" id="submitButton">제출</a>
         </div>
         {!! Form::close() !!}
 
@@ -50,13 +50,13 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <span class="modal-title h5 mb-0">Confirm Report</span>
+                        <span class="modal-title h5 mb-0">신고 확인</span>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body">
-                        <p>This will submit the form and put it into the report review queue. You will not be able to edit the contents after the report has been made. Click the Confirm button to complete the report.</p>
+                        <p>이 작업은 폼을 제출하고 신고 검토 대기열에 추가합니다. 신고가 작성된 후에는 내용을 편집할 수 없습니다. 확인 버튼을 클릭하여 신고를 완료합니다.</p>
                         <div class="text-right">
-                            <a href="#" id="formSubmit" class="btn btn-primary">Confirm</a>
+                            <a href="#" id="formSubmit" class="btn btn-primary">확인</a>
                         </div>
                     </div>
                 </div>

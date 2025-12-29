@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Prompts{!! View::hasSection('prompts-title') ? ' :: ' . trim(View::getSection('prompts-title')) : '' !!}
+    프롬프트{!! View::hasSection('prompts-title') ? ' :: ' . trim(View::getSection('prompts-title')) : '' !!}
 @endsection
 
 @section('sidebar')

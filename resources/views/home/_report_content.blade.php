@@ -1,38 +1,38 @@
 <h1>
-    Report (#{{ $report->id }})
+    신고 (#{{ $report->id }})
     <span class="float-right badge badge-{{ $report->status == 'Pending' ? 'secondary' : ($report->status == 'Closed' ? 'success' : 'danger') }}">{{ $report->status }}</span>
 </h1>
 <div class="mb-1">
     <div class="row">
         <div class="col-md-2 col-4">
-            <h5>User</h5>
+            <h5>유저</h5>
         </div>
         <div class="col-md-10 col-8">{!! $report->user->displayName !!}</div>
     </div>
     <div class="row">
         <div class="col-md-2 col-4">
-            <h5>URL / Title</h5>
+            <h5>URL / 제목</h5>
         </div>
         <div class="col-md-10 col-8"><a href="{{ $report->url }}">{{ $report->url }}</a></div>
     </div>
     @if ($report->is_br == 1)
         <div class="row">
             <div class="col-md-2 col-4">
-                <h5>Bug Type</h5>
+                <h5>버그 종류</h5>
             </div>
             <div class="col-md-10 col-8">{{ ucfirst($report->error_type) . ($report->error_type != 'exploit' ? ' Error' : '') }}</div>
         </div>
     @endif
     <div class="row">
         <div class="col-md-2 col-4">
-            <h5>Submitted</h5>
+            <h5>제출일</h5>
         </div>
         <div class="col-md-10 col-8">{!! format_date($report->created_at) !!} ({{ $report->created_at->diffForHumans() }})</div>
     </div>
     @if ($report->status != 'Pending')
         <div class="row">
             <div class="col-md-2 col-4">
-                <h5>Assigned to</h5>
+                <h5>할당됨</h5>
             </div>
             <div class="col-md-10 col-8">{!! $report->staff->displayName !!} at {!! format_date($report->updated_at) !!} ({{ $report->updated_at->diffForHumans() }})</div>
         </div>

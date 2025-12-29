@@ -1,17 +1,17 @@
 @extends('home.layout')
 
 @section('home-title')
-    My Liked Comments
+    내가 좋아요한 덧글
 @endsection
 
 @section('home-content')
     {!! breadcrumbs(['Liked Comments' => 'liked-comments']) !!}
 
     <h1>
-        My Liked Comments
+        내가 좋아요한 덧글
     </h1>
 
-    <p>This is a list of comments you've liked or disliked. This list is not public, but users can see on the comment who has liked it.</p>
+    <p>이것은 당신이 좋아요하거나 싫어요한 덧글 목록입니다. 이 목록은 공개되지 않으며, 사용자는 덧글에서 누가 좋아요했는지 확인할 수 있습니다.</p>
     <div class="p-2">
         {{-- Order user CommentLikes by when the comment was created inside the foreach --}}
         @php

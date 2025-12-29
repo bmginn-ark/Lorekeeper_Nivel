@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Account{!! View::hasSection('account-title') ? ' :: ' . trim(View::getSection('account-title')) : '' !!}
+    계정{!! View::hasSection('account-title') ? ' :: ' . trim(View::getSection('account-title')) : '' !!}
 @endsection
 
 @section('sidebar')

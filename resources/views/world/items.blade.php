@@ -1,12 +1,12 @@
 @extends('world.layout')
 
 @section('world-title')
-    Items
+    아이템
 @endsection
 
 @section('content')
     {!! breadcrumbs(['World' => 'world', 'Items' => 'world/items']) !!}
-    <h1>Items</h1>
+    <h1>아이템</h1>
 
     <div>
         {!! Form::open(['method' => 'GET', 'class' => '']) !!}

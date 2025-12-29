@@ -1,12 +1,12 @@
 @extends('sales.layout')
 
 @section('title')
-    Site Sales
+    사이트 분양
 @endsection
 
 @section('sales-content')
     {!! breadcrumbs(['Site Sales' => 'sales']) !!}
-    <h1>Site Sales</h1>
+    <h1>사이트 분양</h1>
 
     <div>
         {!! Form::open(['method' => 'GET', 'class' => '']) !!}
@@ -48,6 +48,6 @@
         @endforeach
         {!! $saleses->render() !!}
     @else
-        <div>No sales posts yet.</div>
+        <div>아직 분양 게시물이 없습니다.</div>
     @endif
 @endsection

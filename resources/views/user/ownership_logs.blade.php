@@ -1,14 +1,14 @@
 @extends('user.layout')
 
 @section('profile-title')
-    {{ $user->name }}'s Character History
+    {{ $user->name }}의 캐릭터 기록
 @endsection
 
 @section('profile-content')
     {!! breadcrumbs(['Users' => 'users', $user->name => $user->url, 'Logs' => $user->url . '/ownership']) !!}
 
     <h1>
-        {!! $user->displayName !!}'s Character History
+        {!! $user->displayName !!}의 캐릭터 기록
     </h1>
 
     {!! $logs->render() !!}
@@ -16,19 +16,19 @@
         <div class="logs-table-header">
             <div class="row">
                 <div class="col-6 col-md-2">
-                    <div class="logs-table-cell">Sender</div>
+                    <div class="logs-table-cell">보내는 이</div>
                 </div>
                 <div class="col-6 col-md-2">
-                    <div class="logs-table-cell">Recipient</div>
+                    <div class="logs-table-cell">받는 이</div>
                 </div>
                 <div class="col-6 col-md-2">
-                    <div class="logs-table-cell">Character</div>
+                    <div class="logs-table-cell">캐릭터</div>
                 </div>
                 <div class="col-6 col-md-4">
-                    <div class="logs-table-cell">Log</div>
+                    <div class="logs-table-cell">로그</div>
                 </div>
                 <div class="col-6 col-md-2">
-                    <div class="logs-table-cell">Date</div>
+                    <div class="logs-table-cell">날짜</div>
                 </div>
             </div>
         </div>

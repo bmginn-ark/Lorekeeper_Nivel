@@ -1,7 +1,7 @@
 @extends('galleries.layout')
 
 @section('gallery-title')
-    Home
+    홈
 @endsection
 
 @section('gallery-content')
@@ -10,11 +10,11 @@
         @if (config('lorekeeper.extensions.show_all_recent_submissions.enable') && config('lorekeeper.extensions.show_all_recent_submissions.links.indexbutton'))
             <div class="float-right">
                 <a class="btn btn-primary" href="gallery/all">
-                    All Recent Submissions
+                    모든 최근 제출물
                 </a>
             </div>
         @endif
-        Gallery
+        갤러리
     </h1>
 
     @if ($galleries->count())
@@ -33,16 +33,16 @@
                         <p>
                             @if (isset($gallery->start_at) || isset($gallery->end_at))
                                 @if ($gallery->start_at)
-                                    <strong>Open{{ $gallery->start_at->isFuture() ? 's' : 'ed' }}: </strong>{!! pretty_date($gallery->start_at) !!}
+                                    <strong>열림: </strong>{!! pretty_date($gallery->start_at) !!}
                                 @endif
                                 {{ $gallery->start_at && $gallery->end_at ? ' ・ ' : '' }}
                                 @if ($gallery->end_at)
-                                    <strong>Close{{ $gallery->end_at->isFuture() ? 's' : 'ed' }}: </strong>{!! pretty_date($gallery->end_at) !!}
+                                    <strong>닫힘: </strong>{!! pretty_date($gallery->end_at) !!}
                                 @endif
                             @endif
                             {{ $gallery->children_count && (isset($gallery->start_at) || isset($gallery->end_at)) ? ' ・ ' : '' }}
                             @if ($gallery->children_count)
-                                Sub-galleries:
+                                하위 갤러리:
                                 @foreach ($gallery->children()->visible()->get() as $child)
                                     {!! $child->displayName !!}{{ !$loop->last ? ', ' : '' }}
                                 @endforeach
@@ -60,7 +60,7 @@
                             @endforeach
                         </div>
                         @if ($gallery->submissions_count > 4)
-                            <div class="text-right"><a href="{{ url('gallery/' . $gallery->id) }}">See More...</a></div>
+                            <div class="text-right"><a href="{{ url('gallery/' . $gallery->id) }}">더 보기...</a></div>
                         @endif
                     @elseif(
                         $gallery->children_count &&
@@ -73,7 +73,7 @@
                             @endforeach
                         </div>
                     @else
-                        <p>This gallery has no submissions!</p>
+                        <p>이 갤러리는 제출물이 없습니다!</p>
                     @endif
                 </div>
             </div>
@@ -81,7 +81,7 @@
 
         {!! $galleries->render() !!}
     @else
-        <p>There aren't any galleries!</p>
+        <p>갤러리가 없습니다!</p>
     @endif
 
 @endsection

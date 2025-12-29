@@ -11,39 +11,39 @@
                 <h2 class="mb-0"><a href="{{ $prompt->idUrl }}">{!! $prompt->name !!}</a></h2>
             @endif
             @if ($prompt->prompt_category_id)
-                <div><strong>Category: </strong>{!! $prompt->category->displayName !!}</div>
+                <div><strong>카테고리: </strong>{!! $prompt->category->displayName !!}</div>
             @endif
             @if ($prompt->start_at && $prompt->start_at->isFuture())
-                <div><strong>Starts: </strong>{!! format_date($prompt->start_at) !!} ({{ $prompt->start_at->diffForHumans() }})</div>
+                <div><strong>시작: </strong>{!! format_date($prompt->start_at) !!} ({{ $prompt->start_at->diffForHumans() }})</div>
             @endif
             @if ($prompt->end_at)
-                <div><strong>Ends: </strong>{!! format_date($prompt->end_at) !!} ({{ $prompt->end_at->diffForHumans() }})</div>
+                <div><strong>종료: </strong>{!! format_date($prompt->end_at) !!} ({{ $prompt->end_at->diffForHumans() }})</div>
             @endif
         </div>
         <div class="world-entry-text">
             <p>{{ $prompt->summary }}</p>
-            <h3 class="mb-3"><a data-toggle="collapse" href="#prompt-{{ $prompt->id }}" @if (isset($isPage)) aria-expanded="true" @endif)>Details <i class="fas fa-angle-down"></i></a></h3>
+            <h3 class="mb-3"><a data-toggle="collapse" href="#prompt-{{ $prompt->id }}" @if (isset($isPage)) aria-expanded="true" @endif)>상세 <i class="fas fa-angle-down"></i></a></h3>
             <div class="collapse @if (isset($isPage)) show @endif mb-5" id="prompt-{{ $prompt->id }}">
                 @if ($prompt->parsed_description)
                     {!! $prompt->parsed_description !!}
                 @else
-                    <p>No further details.</p>
+                    <p>내용이 없습니다.</p>
                 @endif
                 @if ($prompt->hide_submissions == 1 && isset($prompt->end_at) && $prompt->end_at > Carbon\Carbon::now())
-                    <p class="text-info">Submissions to this prompt are hidden until this prompt ends.</p>
+                    <p class="text-info">이 프롬프트에 대한 제출은 이 프롬프트가 끝날 때까지 숨겨집니다.</p>
                 @elseif($prompt->hide_submissions == 2)
-                    <p class="text-info">Submissions to this prompt are hidden.</p>
+                    <p class="text-info">이 프롬프트에 대한 제출은 숨겨집니다.</p>
                 @endif
             </div>
-            <h3>Rewards</h3>
+            <h3>보상</h3>
             @if (!count($prompt->rewards))
-                No rewards.
+                보상이 없습니다.
             @else
                 <table class="table table-sm">
                     <thead>
                         <tr>
-                            <th width="70%">Reward</th>
-                            <th width="30%">Amount</th>
+                            <th width="70%">보상</th>
+                            <th width="30%">수량</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -59,11 +59,11 @@
         </div>
         <div class="text-right">
             @if ($prompt->end_at && $prompt->end_at->isPast())
-                <span class="text-secondary">This prompt has ended.</span>
+                <span class="text-secondary">이 프롬프트는 종료되었습니다.</span>
             @elseif($prompt->start_at && $prompt->start_at->isFuture())
-                <span class="text-secondary">This prompt is not open for submissions yet.</span>
+                <span class="text-secondary">이 프롬프트는 제출이 열리지 않았습니다.</span>
             @else
-                <a href="{{ url('submissions/new?prompt_id=' . $prompt->id) }}" class="btn btn-primary">Submit Prompt</a>
+                <a href="{{ url('submissions/new?prompt_id=' . $prompt->id) }}" class="btn btn-primary">프롬프트 제출</a>
             @endunless
     </div>
 </div>

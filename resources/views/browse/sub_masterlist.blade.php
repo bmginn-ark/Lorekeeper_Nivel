@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    {{ $sublist->name }} Masterlist
+    {{ $sublist->name }} 마스터리스트
 @endsection
 
 @section('sidebar')
@@ -10,7 +10,7 @@
 
 @section('content')
     {!! breadcrumbs([$sublist->name . ' Masterlist' => $sublist->key]) !!}
-    <h1>{{ $sublist->name }} Masterlist</h1>
+    <h1>{{ $sublist->name }} 마스터리스트</h1>
 
     @include('browse._masterlist_content', ['characters' => $characters])
 @endsection

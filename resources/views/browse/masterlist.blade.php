@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Character Masterlist
+    캐릭터 마스터리스트
 @endsection
 
 @section('sidebar')
@@ -10,7 +10,7 @@
 
 @section('content')
     {!! breadcrumbs(['Character Masterlist' => 'masterlist']) !!}
-    <h1>Character Masterlist</h1>
+    <h1>캐릭터 마스터리스트</h1>
 
     @include('browse._masterlist_content', ['characters' => $characters])
 @endsection

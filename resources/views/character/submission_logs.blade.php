@@ -1,7 +1,7 @@
 @extends('character.layout', ['isMyo' => $character->is_myo_slot])
 
 @section('profile-title')
-    {{ $character->fullName }}'s Submissions
+    {{ $character->fullName }}의 제출
 @endsection
 
 @section('meta-img')
@@ -26,16 +26,16 @@
             <div class="logs-table-header">
                 <div class="row">
                     <div class="col-12 col-md-2">
-                        <div class="logs-table-cell">Submitted By</div>
+                        <div class="logs-table-cell">제출자</div>
                     </div>
                     <div class="col-6 col-md-2">
-                        <div class="logs-table-cell">Prompt</div>
+                        <div class="logs-table-cell">프롬프트</div>
                     </div>
                     <div class="col-6 col-md-4">
-                        <div class="logs-table-cell">Link</div>
+                        <div class="logs-table-cell">링크</div>
                     </div>
                     <div class="col-6 col-md-3">
-                        <div class="logs-table-cell">Date</div>
+                        <div class="logs-table-cell">날짜</div>
                     </div>
                 </div>
             </div>
@@ -76,7 +76,7 @@
 
         {!! $logs->render() !!}
     @else
-        <p>No submissions found.</p>
+        <p>제출 내역이 없습니다.</p>
     @endif
 
 @endsection

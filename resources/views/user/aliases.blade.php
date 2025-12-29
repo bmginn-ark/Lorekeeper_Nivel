@@ -1,24 +1,24 @@
 @extends('user.layout')
 
 @section('profile-title')
-    {{ $user->name }}'s Aliases
+    {{ $user->name }}의 SNS
 @endsection
 
 @section('profile-content')
     {!! breadcrumbs(['Users' => 'users', $user->name => $user->url, 'Aliases' => $user->url . '/aliases']) !!}
 
     <h1>
-        {!! $user->displayName !!}'s Aliases
+        {!! $user->displayName !!}의 SNS
     </h1>
 
     <div class="mb-4 logs-table">
         <div class="logs-table-header">
             <div class="row">
                 <div class="col-4">
-                    <div class="logs-table-cell">Alias</div>
+                    <div class="logs-table-cell">계정</div>
                 </div>
                 <div class="col-3">
-                    <div class="logs-table-cell">Site</div>
+                    <div class="logs-table-cell">사이트</div>
                 </div>
                 <div class="col-5">
                     <div class="logs-table-cell"></div>
@@ -38,7 +38,7 @@
                         <div class="col-5">
                             <div class="logs-table-cell">
                                 @if ($alias->is_primary_alias)
-                                    <span class="badge badge-success">Primary</span>
+                                    <span class="badge badge-success">대표</span>
                                 @endif
                                 @if (!$alias->is_visible)
                                     <i class="fas fa-eye-slash" data-toggle="tooltip" title="This alias is hidden from public view."></i>

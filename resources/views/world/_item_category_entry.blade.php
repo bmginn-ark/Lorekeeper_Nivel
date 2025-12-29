@@ -21,7 +21,7 @@
         </h3>
         @if ($category->is_character_owned == 1)
             <div>
-                <strong>Characters can own {{ $category->character_limit != 0 ? $category->character_limit : '' }} items in this category{{ $category->can_name != 0 ? ', as well as name them' : '' }}!</strong>
+                <strong>캐릭터는 {{ $category->character_limit != 0 ? $category->character_limit : '' }}개의 아이템을 소유할 수 있습니다. {{ $category->can_name != 0 ? ' 이름도 붙일 수 있습니다.' : '' }}!</strong>
             </div>
         @endif
         <div class="world-entry-text">

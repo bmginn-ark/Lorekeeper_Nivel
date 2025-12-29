@@ -5,7 +5,7 @@
 @endif
 
 @if (Auth::check() && $submission->staff_comments && ($submission->user_id == Auth::user()->id || Auth::user()->hasPower('manage_submissions')))
-    <h2>Staff Comments ({!! $submission->staff->displayName !!})</h2>
+    <h2>스태프 코멘트 ({!! $submission->staff->displayName !!})</h2>
     <div class="card mb-3">
         <div class="card-body">
             @if (isset($submission->parsed_staff_comments))
@@ -19,23 +19,23 @@
 
 @if (!$isClaim)
     <div class="form-group">
-        {!! Form::label('prompt_id', 'Prompt') !!}
+        {!! Form::label('prompt_id', '프롬프트') !!}
         {!! Form::select('prompt_id', $prompts, isset($submission->prompt_id) ? $submission->prompt_id : old('prompt_id') ?? Request::get('prompt_id'), ['class' => 'form-control selectize', 'id' => 'prompt', 'placeholder' => '']) !!}
     </div>
 @endif
 
 <div class="form-group">
-    {!! Form::label('url', $isClaim ? 'URL (Optional)' : 'Submission URL (Optional)') !!}
+    {!! Form::label('url', $isClaim ? 'URL (옵션)' : '제출 URL (옵션)') !!}
     @if ($isClaim)
-        {!! add_help('Enter a URL relevant to your claim (for example, a comment proving you may make this claim).') !!}
+        {!! add_help('귀하의 주장과 관련된 URL을 입력하세요(예: 이 주장을 할 수 있음을 증명하는 댓글).') !!}
     @else
-        {!! add_help('Enter the URL of your submission (whether uploaded to dA or some other hosting service).') !!}
+        {!! add_help('제출한 URL(트위터 또는 기타 호스팅 서비스에 업로드되었는지 여부)을 입력합니다.') !!}
     @endif
     {!! Form::text('url', isset($submission->url) ? $submission->url : old('url') ?? Request::get('url'), ['class' => 'form-control', 'required']) !!}
 </div>
 
 <div class="form-group">
-    {!! Form::label('comments', 'Comments (Optional)') !!} {!! add_help('Enter a comment for your ' . ($isClaim ? 'claim' : 'submission') . ' (no HTML). This will be viewed by the mods when reviewing your ' . ($isClaim ? 'claim' : 'submission') . '.') !!}
+    {!! Form::label('comments', '코멘트 (옵션)') !!} {!! add_help(($isClaim ? '수령' : '제출') . '에 대한 코멘트를 입력하세요 (HTML 미적용). 스태프가 당신의 ' . ($isClaim ? '수령' : '제출') . '을 확인할 때 참고할 것입니다.') !!}
     {!! Form::textarea('comments', isset($submission->comments) ? $submission->comments : old('comments') ?? Request::get('comments'), ['class' => 'form-control']) !!}
 </div>
 
@@ -47,13 +47,13 @@
 
 <div class="card mb-3">
     <div class="card-header h2">
-        Rewards
+        보상
     </div>
     <div class="card-body">
         @if ($isClaim)
-            <p>Select the rewards you would like to claim.</p>
+            <p>받고 싶은 보상을 선택하세요.</p>
         @else
-            <p>Note that any rewards added here are <u>in addition</u> to the default prompt rewards. If you do not require any additional rewards, you can leave this blank.</p>
+            <p>이곳에 추가한 보상은 기본 프롬프트 보상과 <u>추가</u>됩니다. 추가 보상을 원하지 않으면 이 항목을 비워둘 수 있습니다.</p>
         @endif
 
         {{-- previous input --}}
@@ -86,12 +86,12 @@
 
 <div class="card mb-3">
     <div class="card-header h2">
-        <a href="#" class="btn btn-outline-info float-right" id="addCharacter">Add Character</a>
-        Characters
+        <a href="#" class="btn btn-outline-info float-right" id="addCharacter">캐릭터 추가</a>
+        캐릭터
     </div>
     <div class="card-body" style="clear:both;">
         @if ($isClaim)
-            <p>If there are character-specific rewards you would like to claim, attach them here. Otherwise, this section can be left blank.</p>
+            <p>캐릭터별 보상을 받고 싶으시면 여기에 첨부해주세요. 그렇지 않으면 이 섹션은 비워둘 수 있습니다.</p>
         @endif
         <div id="characters" class="mb-3">
             @foreach ($submission->characters as $character)
@@ -120,11 +120,10 @@
 
 <div class="card mb-3">
     <div class="card-header h2">
-        Add-Ons
+        추가
     </div>
     <div class="card-body">
-        <p>If your {{ $isClaim ? 'claim' : 'submission' }} consumes items, attach them here. Otherwise, this section can be left blank. These items will be removed from your inventory but refunded if your {{ $isClaim ? 'claim' : 'submission' }} is
-            rejected.</p>
+        <p>{{ $isClaim ? '수령' : '제출' }} 이 아이템을 소비하는 경우 여기에 첨부합니다. 그렇지 않으면 이 섹션을 비워둘 수 있습니다. 이러한 아이템은 인벤토리에서 제거되지만 {{ $isClaim ? '수령' : '제출' }} 이 거부되는 경우 반환됩니다.</p>
         <div id="addons" class="mb-3">
             @include('widgets._inventory_select', [
                 'user' => Auth::user(),
@@ -143,14 +142,14 @@
 
 @if ($submission->status == 'Draft')
     <div class="text-right">
-        <a href="#" class="btn btn-danger mr-2" id="cancelButton">Delete Draft</a>
-        <a href="#" class="btn btn-secondary mr-2" id="draftButton">Save Draft</a>
-        <a href="#" class="btn btn-primary" id="confirmButton">Submit</a>
+        <a href="#" class="btn btn-danger mr-2" id="cancelButton">초안 삭제</a>
+        <a href="#" class="btn btn-secondary mr-2" id="draftButton">초안 저장</a>
+        <a href="#" class="btn btn-primary" id="confirmButton">제출</a>
     </div>
 @else
     <div class="text-right">
-        <a href="#" class="btn btn-secondary mr-2" id="draftButton">Save Draft</a>
-        <a href="#" class="btn btn-primary" id="confirmButton">Submit</a>
+        <a href="#" class="btn btn-secondary mr-2" id="draftButton">초안 저장</a>
+        <a href="#" class="btn btn-primary" id="confirmButton">제출</a>
     </div>
 @endif
 

@@ -1,22 +1,22 @@
 @extends('home.layout')
 
 @section('home-title')
-    Inventory
+    인벤토리
 @endsection
 
 @section('home-content')
     {!! breadcrumbs(['Inventory' => 'inventory']) !!}
 
     <h1>
-        Inventory
+        인벤토리
         <div class="float-right mb-3">
-            <a class="btn btn-secondary consolidate-inventory" href="#">Consolidate</a>
-            <a class="btn btn-primary" href="{{ url('inventory/account-search') }}"><i class="fas fa-search"></i> Account Search</a>
-            <a class="btn btn-primary" href="{{ url('inventory/full-inventory') }}"><i class="fas fa-warehouse"></i> Full Inventory</a>
+            <a class="btn btn-secondary consolidate-inventory" href="#">통합</a>
+            <a class="btn btn-primary" href="{{ url('inventory/account-search') }}"><i class="fas fa-search"></i> 계정 검색</a>
+            <a class="btn btn-primary" href="{{ url('inventory/full-inventory') }}"><i class="fas fa-warehouse"></i> 전체 인벤토리</a>
         </div>
     </h1>
 
-    <p>This is your inventory. Click on an item to view more details and actions you can perform on it.</p>
+    <p>이것은 당신의 인벤토리입니다. 항목을 클릭하여 해당 항목에 대한 자세한 정보와 수행할 수 있는 작업을 확인할 수 있습니다.</p>
 
     <div class="text-right mb-3">
         <div class="btn-group">
@@ -30,7 +30,7 @@
             <div class="card mb-3 inventory-category">
                 <h5 class="card-header inventory-header">
                     {!! isset($categories[$categoryId]) ? '<a href="' . $categories[$categoryId]->searchUrl . '">' . $categories[$categoryId]->name . '</a>' : 'Miscellaneous' !!}
-                    <a class="small inventory-collapse-toggle collapse-toggle" href="#categoryId_{!! isset($categories[$categoryId]) ? $categories[$categoryId]->id : 'miscellaneous' !!}" data-toggle="collapse">Show</a>
+                    <a class="small inventory-collapse-toggle collapse-toggle" href="#categoryId_{!! isset($categories[$categoryId]) ? $categories[$categoryId]->id : 'miscellaneous' !!}" data-toggle="collapse">보기</a>
                 </h5>
                 <div class="card-body inventory-body collapse show" id="categoryId_{!! isset($categories[$categoryId]) ? $categories[$categoryId]->id : 'miscellaneous' !!}">
                     @foreach ($categoryItems->chunk(4) as $chunk)
@@ -60,10 +60,10 @@
         @foreach ($items as $categoryId => $categoryItems)
             <div class="card mb-2">
                 <h5 class="card-header">
-                    {!! isset($categories[$categoryId]) ? '<a href="' . $categories[$categoryId]->searchUrl . '">' . $categories[$categoryId]->name . '</a>' : 'Miscellaneous' !!}
-                    <a class="small inventory-collapse-toggle collapse-toggle" href="#categoryId_{!! isset($categories[$categoryId]) ? $categories[$categoryId]->id : 'miscellaneous' !!}" data-toggle="collapse">Show</a>
+                    {!! isset($categories[$categoryId]) ? '<a href="' . $categories[$categoryId]->searchUrl . '">' . $categories[$categoryId]->name . '</a>' : '기타' !!}
+                    <a class="small inventory-collapse-toggle collapse-toggle" href="#categoryId_{!! isset($categories[$categoryId]) ? $categories[$categoryId]->id : '기타' !!}" data-toggle="collapse">보기</a>
                 </h5>
-                <div class="card-body p-2 collapse show row" id="categoryId_{!! isset($categories[$categoryId]) ? $categories[$categoryId]->id : 'miscellaneous' !!}">
+                <div class="card-body p-2 collapse show row" id="categoryId_{!! isset($categories[$categoryId]) ? $categories[$categoryId]->id : '기타' !!}">
                     @foreach ($categoryItems as $itemtype)
                         <div class="col-lg-3 col-sm-4 col-12">
                             @if ($itemtype->first()->has_image)
@@ -73,7 +73,7 @@
                             <ul class="mb-0" data-id="{{ $itemtype->first()->pivot->id }}" data-name="{{ $user->name }}'s {{ $itemtype->first()->name }}">
                                 @foreach ($itemtype as $item)
                                     <li>
-                                        <a class="inventory-stack" href="#">Stack of x{{ $item->pivot->count }}</a>.
+                                        <a class="inventory-stack" href="#">x{{ $item->pivot->count }}개</a>.
                                     </li>
                                 @endforeach
                             </ul>
@@ -85,7 +85,7 @@
     </div>
 
     <div class="text-right mb-4">
-        <a href="{{ url(Auth::user()->url . '/item-logs') }}">View logs...</a>
+        <a href="{{ url(Auth::user()->url . '/item-logs') }}">기록 보기...</a>
     </div>
 @endsection
 @section('scripts')

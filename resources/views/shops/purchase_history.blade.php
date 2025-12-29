@@ -1,14 +1,14 @@
 @extends('shops.layout')
 
 @section('shops-title')
-    My Purchase History
+    내 구매 기록
 @endsection
 
 @section('shops-content')
     {!! breadcrumbs(['Shops' => 'shops', 'My Purchase History' => 'history']) !!}
 
     <h1>
-        My Purchase History
+        내 구매 기록
     </h1>
 
     {!! $logs->render() !!}
@@ -17,22 +17,22 @@
         <div class="logs-table-header">
             <div class="row">
                 <div class="col-12 col-md-2">
-                    <div class="logs-table-cell">Item</div>
+                    <div class="logs-table-cell">아이템</div>
                 </div>
                 <div class="col-6 col-md-2">
-                    <div class="logs-table-cell">Quantity</div>
+                    <div class="logs-table-cell">수량</div>
                 </div>
                 <div class="col-6 col-md-2">
-                    <div class="logs-table-cell">Shop</div>
+                    <div class="logs-table-cell">상점</div>
                 </div>
                 <div class="col-6 col-md-2">
-                    <div class="logs-table-cell">Character</div>
+                    <div class="logs-table-cell">캐릭터</div>
                 </div>
                 <div class="col-6 col-md-2">
-                    <div class="logs-table-cell">Cost</div>
+                    <div class="logs-table-cell">가격</div>
                 </div>
                 <div class="col-6 col-md-2">
-                    <div class="logs-table-cell">Date</div>
+                    <div class="logs-table-cell">날짜</div>
                 </div>
             </div>
         </div>

@@ -1,12 +1,12 @@
 @extends('prompts.layout')
 
 @section('prompts-title')
-    All Prompts
+    모든 프롬프트
 @endsection
 
 @section('content')
     {!! breadcrumbs(['Prompts' => 'prompts', 'All Prompts' => 'prompts/prompts']) !!}
-    <h1>All Prompts</h1>
+    <h1>모든 프롬프트</h1>
 
     <div>
         {!! Form::open(['method' => 'GET', 'class' => '']) !!}

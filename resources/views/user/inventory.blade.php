@@ -1,14 +1,14 @@
 @extends('user.layout')
 
 @section('profile-title')
-    {{ $user->name }}'s Inventory
+    {{ $user->name }}의 인벤토리
 @endsection
 
 @section('profile-content')
     {!! breadcrumbs(['Users' => 'users', $user->name => $user->url, 'Inventory' => $user->url . '/inventory']) !!}
 
     <h1>
-        Inventory
+        인벤토리
     </h1>
 
     <div class="text-right mb-3">
@@ -24,7 +24,7 @@
                 <h5 class="card-header inventory-header">
                     {!! isset($categories[$categoryId]) ? '<a href="' . $categories[$categoryId]->searchUrl . '">' . $categories[$categoryId]->name . '</a>' : 'Miscellaneous' !!}
                     <a class="small inventory-collapse-toggle collapse-toggle" href="#categoryId_{!! isset($categories[$categoryId]) ? $categories[$categoryId]->id : 'miscellaneous' !!}" data-toggle="collapse">
-                        Show
+                        보기
                     </a>
                 </h5>
                 <div class="card-body inventory-body collapse show" id="categoryId_{!! isset($categories[$categoryId]) ? $categories[$categoryId]->id : 'miscellaneous' !!}">
@@ -59,7 +59,7 @@
                 <h5 class="card-header">
                     {!! isset($categories[$categoryId]) ? '<a href="' . $categories[$categoryId]->searchUrl . '">' . $categories[$categoryId]->name . '</a>' : 'Miscellaneous' !!}
                     <a class="small inventory-collapse-toggle collapse-toggle" href="#categoryId_{!! isset($categories[$categoryId]) ? $categories[$categoryId]->id : 'miscellaneous' !!}" data-toggle="collapse">
-                        Show
+                        보기
                     </a>
                 </h5>
                 <div class="card-body p-2 collapse show row" id="categoryId_{!! isset($categories[$categoryId]) ? $categories[$categoryId]->id : 'miscellaneous' !!}">
@@ -75,7 +75,7 @@
                                 @foreach ($itemtype as $item)
                                     <li>
                                         <a class="inventory-stack" href="#">
-                                            Stack of x{{ $item->pivot->count }}
+                                            x{{ $item->pivot->count }}개
                                         </a>.
                                     </li>
                                 @endforeach
@@ -92,19 +92,19 @@
         <div class="logs-table-header">
             <div class="row">
                 <div class="col-6 col-md-2">
-                    <div class="logs-table-cell">Sender</div>
+                    <div class="logs-table-cell">보내는 이</div>
                 </div>
                 <div class="col-6 col-md-2">
-                    <div class="logs-table-cell">Recipient</div>
+                    <div class="logs-table-cell">받는 이</div>
                 </div>
                 <div class="col-6 col-md-2">
-                    <div class="logs-table-cell">Item</div>
+                    <div class="logs-table-cell">아이템</div>
                 </div>
                 <div class="col-6 col-md-4">
-                    <div class="logs-table-cell">Log</div>
+                    <div class="logs-table-cell">로그</div>
                 </div>
                 <div class="col-6 col-md-2">
-                    <div class="logs-table-cell">Date</div>
+                    <div class="logs-table-cell">날짜</div>
                 </div>
             </div>
         </div>
@@ -118,7 +118,7 @@
     </div>
 
     <div class="text-right">
-        <a href="{{ url($user->url . '/item-logs') }}">View all...</a>
+        <a href="{{ url($user->url . '/item-logs') }}">전체 보기...</a>
     </div>
 @endsection
 

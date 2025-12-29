@@ -44,13 +44,13 @@ class Item extends Model {
      */
     public static $createRules = [
         'item_category_id'  => 'nullable',
-        'name'              => 'required|unique:items|between:3,100',
+        'name'              => 'required|unique:items|between:1,100',
         'description'       => 'nullable',
         'image'             => 'mimes:png',
         'rarity'            => 'nullable',
-        'reference_url'     => 'nullable|between:3,200',
-        'uses'              => 'nullable|between:3,250',
-        'release'           => 'nullable|between:3,100',
+        'reference_url'     => 'nullable|between:1,200',
+        'uses'              => 'nullable|between:1,250',
+        'release'           => 'nullable|between:1,100',
         'currency_quantity' => 'nullable|integer|min:1',
     ];
 
@@ -61,12 +61,12 @@ class Item extends Model {
      */
     public static $updateRules = [
         'item_category_id'  => 'nullable',
-        'name'              => 'required|between:3,100',
+        'name'              => 'required|between:1,100',
         'description'       => 'nullable',
         'image'             => 'mimes:png',
-        'reference_url'     => 'nullable|between:3,200',
-        'uses'              => 'nullable|between:3,250',
-        'release'           => 'nullable|between:3,100',
+        'reference_url'     => 'nullable|between:1,200',
+        'uses'              => 'nullable|between:1,250',
+        'release'           => 'nullable|between:1,100',
         'currency_quantity' => 'nullable|integer|min:1',
     ];
 

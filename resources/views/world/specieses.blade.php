@@ -1,12 +1,12 @@
 @extends('world.layout')
 
 @section('world-title')
-    Species
+    종
 @endsection
 
 @section('content')
     {!! breadcrumbs(['World' => 'world', 'Species' => 'world/species']) !!}
-    <h1>Species</h1>
+    <h1>종</h1>
 
     <div>
         {!! Form::open(['method' => 'GET', 'class' => 'form-inline justify-content-end']) !!}
