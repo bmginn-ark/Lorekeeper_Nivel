@@ -36,7 +36,7 @@ return [
     | site wherever the name needs to be displayed.
     |
     */
-    'site_name'                                         => 'Palistal',
+    'site_name'                                         => 'Lorekeeper',
 
     /*
     |--------------------------------------------------------------------------
@@ -48,7 +48,7 @@ return [
     | It is not, however, displayed on the site itself. This should be kept short and snappy!
     |
     */
-    'site_desc'                                         => 'Palistal ARPG',
+    'site_desc'                                         => 'Lorekeeper ARPG',
 
     /*
     |--------------------------------------------------------------------------
