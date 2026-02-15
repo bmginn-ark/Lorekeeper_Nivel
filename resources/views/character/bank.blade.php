@@ -19,7 +19,7 @@
 
     <h3>
         @if (Auth::check() && Auth::user()->hasPower('edit_inventories'))
-            <a href="#" class="float-right btn btn-outline-info btn-sm" id="grantButton" data-toggle="modal" data-target="#grantModal"><i class="fas fa-cog"></i> 관리자</a>
+            <a href="#" class="float-right btn btn-outline-info btn-sm" id="grantButton" data-toggle="modal" data-target="#grantModal"><i class="fas fa-cog"></i> {{ __('Admin') }}</a>
         @endif
         재화
     </h3>

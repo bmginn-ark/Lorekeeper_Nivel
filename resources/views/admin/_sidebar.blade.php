@@ -1,10 +1,10 @@
 <ul>
-    <li class="sidebar-header"><a href="{{ url('admin') }}" class="card-link">Admin Home</a></li>
+    <li class="sidebar-header"><a href="{{ url('admin') }}" class="card-link">{{ __('Admin Home') }}</a></li>
 
     @foreach (config('lorekeeper.admin_sidebar') as $key => $section)
         @if (Auth::user()->isAdmin || Auth::user()->hasPower($section['power']))
             <li class="sidebar-section">
-                <div class="sidebar-section-header" data-toggle="collapse" href="#collapse-{!! $key !!}" role="button" aria-expanded="false" aria-controls="collapse-{!! $key !!}">{{ str_replace(' ', '', $key) }} </div>
+                <div class="sidebar-section-header" data-toggle="collapse" href="#collapse-{!! $key !!}" role="button" aria-expanded="false" aria-controls="collapse-{!! $key !!}">{{ __($key) }} </div>
 
                 <div class="{{ config('lorekeeper.extensions.collapsible_admin_sidebar') ? 'collapse' : '' }} collapse-{!! $key !!}" id="collapse-{!! $key !!}">
                     {{-- order by name --}}
@@ -15,7 +15,7 @@
                     @endphp
                     @foreach ($section['links'] as $item)
                         <div class="sidebar-item">
-                            <a href="{{ url($item['url']) }}" class="collapse-link {{ set_active($item['url'] . '*') }}">{{ $item['name'] }}</a>
+                            <a href="{{ url($item['url']) }}" class="collapse-link {{ set_active($item['url'] . '*') }}">{{ __($item['name']) }}</a>
                         </div>
                     @endforeach
                 </div>

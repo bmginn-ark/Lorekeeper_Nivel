@@ -2,7 +2,7 @@
     <li class="sidebar-header"><a href="{{ url('world') }}" class="card-link">백과사전</a></li>
     <li class="sidebar-section">
         <div class="sidebar-section-header">캐릭터</div>
-        <div class="sidebar-item"><a href="{{ url('world/species') }}" class="{{ set_active('world/species*') }}">종</a></div>
+        <div class="sidebar-item"><a href="{{ url('world/species') }}" class="{{ set_active('world/species*') }}">종족</a></div>
         <div class="sidebar-item"><a href="{{ url('world/subtypes') }}" class="{{ set_active('world/subtypes*') }}">분류</a></div>
         <div class="sidebar-item"><a href="{{ url('world/rarities') }}" class="{{ set_active('world/rarities*') }}">희귀도</a></div>
         <div class="sidebar-item"><a href="{{ url('world/trait-categories') }}" class="{{ set_active('world/trait-categories*') }}">특성 카테고리</a></div>

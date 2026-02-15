@@ -1,19 +1,19 @@
 @extends('admin.layout')
 
 @section('admin-title')
-    Subtypes
+    {{ __('Subtypes') }}
 @endsection
 
 @section('admin-content')
-    {!! breadcrumbs(['Admin Panel' => 'admin', 'Subtypes' => 'admin/data/subtypes']) !!}
+    {!! breadcrumbs([__('Admin Panel') => 'admin', __('Subtypes') => 'admin/data/subtypes']) !!}
 
-    <h1>Subtypes</h1>
+    <h1>{{ __('Subtypes') }}</h1>
 
-    <p>Subtypes are optional categories that can be added to species. Characters require a species, but do not require a subtype. Note that the sort order here reflects the sort order under the species name as well.</p>
+    <p>{{ __('Subtypes are optional categories that can be added to species. Characters require a species, but do not require a subtype. Note that the sort order here reflects the sort order under the species name as well.') }}</p>
 
-    <div class="text-right mb-3"><a class="btn btn-primary" href="{{ url('admin/data/subtypes/create') }}"><i class="fas fa-plus"></i> Create New Subtype</a></div>
+    <div class="text-right mb-3"><a class="btn btn-primary" href="{{ url('admin/data/subtypes/create') }}"><i class="fas fa-plus"></i> {{ __('Create New Subtype') }}</a></div>
     @if (!count($subtypes))
-        <p>No subtypes found.</p>
+        <p>{{ __('No subtypes found.') }}</p>
     @else
         <table class="table table-sm subtypes-table">
             <tbody id="sortable" class="sortable">
@@ -30,7 +30,7 @@
                             {!! $subtype->species->displayName !!}
                         </td>
                         <td class="text-right">
-                            <a href="{{ url('admin/data/subtypes/edit/' . $subtype->id) }}" class="btn btn-primary">Edit</a>
+                            <a href="{{ url('admin/data/subtypes/edit/' . $subtype->id) }}" class="btn btn-primary">{{ __('Edit') }}</a>
                         </td>
                     </tr>
                 @endforeach
@@ -40,7 +40,7 @@
         <div class="mb-4">
             {!! Form::open(['url' => 'admin/data/subtypes/sort']) !!}
             {!! Form::hidden('sort', '', ['id' => 'sortableOrder']) !!}
-            {!! Form::submit('Save Order', ['class' => 'btn btn-primary']) !!}
+            {!! Form::submit(__('Save Order'), ['class' => 'btn btn-primary']) !!}
             {!! Form::close() !!}
         </div>
     @endif

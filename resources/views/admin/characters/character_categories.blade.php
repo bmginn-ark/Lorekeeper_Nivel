@@ -1,27 +1,27 @@
 @extends('admin.layout')
 
 @section('admin-title')
-    Character Categories
+    {{ __('Character Categories') }}
 @endsection
 
 @section('admin-content')
-    {!! breadcrumbs(['Admin Panel' => 'admin', 'Character Categories' => 'admin/data/character-categories']) !!}
+    {!! breadcrumbs([__('Admin Panel') => 'admin', __('Character Categories') => 'admin/data/character-categories']) !!}
 
-    <h1>Character Categories</h1>
+    <h1>{{ __('Character Categories') }}</h1>
 
-    <p>This is a list of character categories that will be used to classify characters. Creating character categories is entirely optional, but recommended for organisational purposes.</p>
-    <p>The sorting order reflects the order in which the character categories will be displayed on the world pages.</p>
+    <p>{{ __('This is a list of character categories that will be used to classify characters. Creating character categories is entirely optional, but recommended for organisational purposes.') }}</p>
+    <p>{{ __('The sorting order reflects the order in which the character categories will be displayed on the world pages.') }}</p>
 
-    <div class="text-right mb-3"><a class="btn btn-primary" href="{{ url('admin/data/character-categories/create') }}"><i class="fas fa-plus"></i> Create New Character Category</a></div>
+    <div class="text-right mb-3"><a class="btn btn-primary" href="{{ url('admin/data/character-categories/create') }}"><i class="fas fa-plus"></i> {{ __('Create New Character Category') }}</a></div>
     @if (!count($categories))
-        <p>No character categories found.</p>
+        <p>{{ __('No character categories found.') }}</p>
     @else
         <table class="table table-sm category-table">
             <thead>
                 <tr>
-                    <th>Category</th>
-                    <th>Code</th>
-                    <th>Sub Masterlist</th>
+                    <th>{{ __('Category') }}</th>
+                    <th>{{ __('Code') }}</th>
+                    <th>{{ __('Sub Masterlist') }}</th>
                     <th></th>
                 </tr>
             </thead>
@@ -46,7 +46,7 @@
                             @endif
                         </td>
                         <td class="text-right">
-                            <a href="{{ url('admin/data/character-categories/edit/' . $category->id) }}" class="btn btn-primary">Edit</a>
+                            <a href="{{ url('admin/data/character-categories/edit/' . $category->id) }}" class="btn btn-primary">{{ __('Edit') }}</a>
                         </td>
                     </tr>
                 @endforeach
@@ -56,7 +56,7 @@
         <div class="mb-4">
             {!! Form::open(['url' => 'admin/data/character-categories/sort']) !!}
             {!! Form::hidden('sort', '', ['id' => 'sortableOrder']) !!}
-            {!! Form::submit('Save Order', ['class' => 'btn btn-primary']) !!}
+            {!! Form::submit(__('Save Order'), ['class' => 'btn btn-primary']) !!}
             {!! Form::close() !!}
         </div>
     @endif

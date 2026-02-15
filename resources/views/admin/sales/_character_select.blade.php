@@ -14,72 +14,72 @@
             <div class="row">
                 <div class="col-md-2 align-items-stretch d-flex">
                     <div class="d-flex text-center align-items-center">
-                        <div class="character-image-blank">Enter character code.</div>
+                        <div class="character-image-blank">{{ __('Enter character code.') }}</div>
                         <div class="character-image-loaded hide"></div>
                     </div>
                 </div>
                 <div class="col-md-10">
                     <div class="form-group">
-                        {!! Form::label('slug', 'Character Code') !!}
-                        {!! Form::select('slug[]', $characters, null, ['class' => 'form-control character-code', 'placeholder' => 'Select Character', 'placeholder' => 'Select Character']) !!}
+                        {!! Form::label('slug', __('Character Code')) !!}
+                        {!! Form::select('slug[]', $characters, null, ['class' => 'form-control character-code', 'placeholder' => __('Select Character')]) !!}
                     </div>
                     <div class="character-details hide">
-                        <h4>Sale Details</h4>
+                        <h4>{{ __('Sale Details') }}</h4>
 
                         <div class="form-group mb-2">
-                            {!! Form::label('Type') !!}
-                            {!! Form::select('sale_type[]', ['flatsale' => 'Flatsale', 'auction' => 'Auction', 'ota' => 'OTA', 'xta' => 'XTA', 'raffle' => 'Raffle', 'flaffle' => 'Flatsale Raffle', 'pwyw' => 'Pay What You Want'], null, [
+                            {!! Form::label(__('Type')) !!}
+                            {!! Form::select('sale_type[]', ['flatsale' => __('Flatsale'), 'auction' => __('Auction'), 'ota' => __('OTA'), 'xta' => __('XTA'), 'raffle' => __('Raffle'), 'flaffle' => __('Flatsale Raffle'), 'pwyw' => __('Pay What You Want')], null, [
                                 'class' => 'form-control character-sale-type',
-                                'placeholder' => 'Select Sale Type',
+                                'placeholder' => __('Select Sale Type'),
                             ]) !!}
                         </div>
 
                         <div class="saleType">
                             <div class="mb-3 hide flatOptions">
                                 <div class="form-group">
-                                    {!! Form::label('Price') !!}
-                                    {!! Form::number('price[]', null, ['class' => 'form-control', 'placeholder' => 'Enter a Cost']) !!}
+                                    {!! Form::label(__('Price')) !!}
+                                    {!! Form::number('price[]', null, ['class' => 'form-control', 'placeholder' => __('Enter a Cost')]) !!}
                                 </div>
                             </div>
 
                             <div class="mb-3 hide auctionOptions">
                                 <div class="form-group">
-                                    {!! Form::label('Starting Bid') !!}
-                                    {!! Form::number('starting_bid[]', null, ['class' => 'form-control', 'placeholder' => 'Enter a Starting Bid']) !!}
+                                    {!! Form::label(__('Starting Bid')) !!}
+                                    {!! Form::number('starting_bid[]', null, ['class' => 'form-control', 'placeholder' => __('Enter a Starting Bid')]) !!}
                                 </div>
                                 <div class="form-group">
-                                    {!! Form::label('Minimum Increment') !!}
-                                    {!! Form::number('min_increment[]', null, ['class' => 'form-control', 'placeholder' => 'Enter a Minimum Increment']) !!}
+                                    {!! Form::label(__('Minimum Increment')) !!}
+                                    {!! Form::number('min_increment[]', null, ['class' => 'form-control', 'placeholder' => __('Enter a Minimum Increment')]) !!}
                                 </div>
                             </div>
 
                             <div class="mb-3 hide xtaOptions">
                                 <div class="form-group">
-                                    {!! Form::label('Autobuy (Optional)') !!}
-                                    {!! Form::number('autobuy[]', null, ['class' => 'form-control', 'placeholder' => 'Enter an Autobuy']) !!}
+                                    {!! Form::label(__('Autobuy (Optional)')) !!}
+                                    {!! Form::number('autobuy[]', null, ['class' => 'form-control', 'placeholder' => __('Enter an Autobuy')]) !!}
                                 </div>
                                 <div class="form-group">
-                                    {!! Form::label('End Point (Optional)') !!}
-                                    {!! Form::text('end_point[]', null, ['class' => 'form-control', 'placeholder' => 'Provide information about when bids/offers close']) !!}
+                                    {!! Form::label(__('End Point (Optional)')) !!}
+                                    {!! Form::text('end_point[]', null, ['class' => 'form-control', 'placeholder' => __('Provide information about when bids/offers close')]) !!}
                                 </div>
                             </div>
 
                             <div class="mb-3 hide pwywOptions">
                                 <div class="form-group">
-                                    {!! Form::label('Minimum Offer (Optional)') !!}
-                                    {!! Form::number('minimum[]', null, ['class' => 'form-control', 'placeholder' => 'Enter a Minimum']) !!}
+                                    {!! Form::label(__('Minimum Offer (Optional)')) !!}
+                                    {!! Form::number('minimum[]', null, ['class' => 'form-control', 'placeholder' => __('Enter a Minimum')]) !!}
                                 </div>
                             </div>
                         </div>
 
                         <div class="form-group my-2">
-                            {!! Form::label('Notes (Optional)') !!}
-                            {!! Form::text('description[]', null, ['class' => 'form-control', 'placeholder' => 'Provide any additional notes necessary']) !!}
+                            {!! Form::label(__('Notes (Optional)')) !!}
+                            {!! Form::text('description[]', null, ['class' => 'form-control', 'placeholder' => __('Provide any additional notes necessary')]) !!}
                         </div>
 
                         <div class="form-group mb-4">
-                            {!! Form::label('Link (Optional)') !!} {!! add_help('The URL for where to buy, bid, etc. on the character.') !!}
-                            {!! Form::text('link[]', null, ['class' => 'form-control', 'placeholder' => 'URL']) !!}
+                            {!! Form::label(__('Link (Optional)')) !!} {!! add_help(__('The URL for where to buy, bid, etc. on the character.')) !!}
+                            {!! Form::text('link[]', null, ['class' => 'form-control', 'placeholder' => __('URL')]) !!}
                         </div>
 
                         {!! Form::hidden('new_entry[]', 1) !!}

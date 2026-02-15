@@ -1,28 +1,28 @@
 @extends('admin.layout')
 
 @section('admin-title')
-    Sub Masterlists
+    {{ __('Sub Masterlists') }}
 @endsection
 
 @section('admin-content')
-    {!! breadcrumbs(['Admin Panel' => 'admin', 'Sub Masterlists' => 'admin/data/sublists']) !!}
+    {!! breadcrumbs([__('Admin Panel') => 'admin', __('Sub Masterlists') => 'admin/data/sublists']) !!}
 
-    <h1>Sub Masterlists</h1>
+    <h1>{{ __('Sub Masterlists') }}</h1>
 
-    <p>Sub masterlists are additional masterlists which can be separate or alternative to the main masterlist. This can be used to divide a masterlist up between species, player versus non-player-character, characters vs pets/mounts, etc.</p>
-    <p>Both categories and species can be assigned to sublists, but each can only be assigned to ONE sublist.</p>
+    <p>{{ __('Sub masterlists are additional masterlists which can be separate or alternative to the main masterlist. This can be used to divide a masterlist up between species, player versus non-player-character, characters vs pets/mounts, etc.') }}</p>
+    <p>{{ __('Both categories and species can be assigned to sublists, but each can only be assigned to ONE sublist.') }}</p>
 
-    <div class="text-right mb-3"><a class="btn btn-primary" href="{{ url('admin/data/sublists/create') }}"><i class="fas fa-plus"></i> Create New Sub Masterlist</a></div>
+    <div class="text-right mb-3"><a class="btn btn-primary" href="{{ url('admin/data/sublists/create') }}"><i class="fas fa-plus"></i> {{ __('Create New Sub Masterlist') }}</a></div>
 
     @if (!count($sublists))
-        <p>No sub masterlists found.</p>
+        <p>{{ __('No sub masterlists found.') }}</p>
     @else
         <table class="table table-sm category-table">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Show on Main</th>
-                    <th>Key</th>
+                    <th>{{ __('Name') }}</th>
+                    <th>{{ __('Show on Main') }}</th>
+                    <th>{{ __('Key') }}</th>
                     <th></th>
                 </tr>
             </thead>
@@ -36,7 +36,7 @@
                         <td>{!! $sublist->show_main ? '<i class="text-success fas fa-check"></i>' : '' !!}</td>
                         <td>{!! $sublist->key !!}</td>
                         <td class="text-right">
-                            <a href="{{ url('admin/data/sublists/edit/' . $sublist->id) }}" class="btn btn-primary">Edit</a>
+                            <a href="{{ url('admin/data/sublists/edit/' . $sublist->id) }}" class="btn btn-primary">{{ __('Edit') }}</a>
                         </td>
                     </tr>
                 @endforeach
@@ -45,7 +45,7 @@
         <div class="mb-4">
             {!! Form::open(['url' => 'admin/data/sublists/sort']) !!}
             {!! Form::hidden('sort', '', ['id' => 'sortableOrder']) !!}
-            {!! Form::submit('Save Order', ['class' => 'btn btn-primary']) !!}
+            {!! Form::submit(__('Save Order'), ['class' => 'btn btn-primary']) !!}
             {!! Form::close() !!}
         </div>
     @endif

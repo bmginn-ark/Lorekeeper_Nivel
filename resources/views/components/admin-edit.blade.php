@@ -1,7 +1,7 @@
 <div class="float-right">
-    <a href="{{ $object->adminUrl }}" data-toggle="tooltip" data-title="Edit {{ $title }}">
+    <a href="{{ $object->adminUrl }}" data-toggle="tooltip" data-title="{{ __('Edit :title', ['title' => $title]) }}">
         <!-- Uses default "crown" if the "pen" fontawesome icon isn't available. -->
         <i class="fas fa-pen fa-crown"></i>
-        <span class="sr-only">Edit {{ $title }}</span>
+        <span class="sr-only">{{ __('Edit :title', ['title' => $title]) }}</span>
     </a>
 </div>

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Admin{!! View::hasSection('admin-title') ? ' :: ' . trim(View::getSection('admin-title')) : '' !!}
+    {{ __('Admin') }}{!! View::hasSection('admin-title') ? ' :: ' . trim(View::getSection('admin-title')) : '' !!}
 @endsection
 
 @section('sidebar')

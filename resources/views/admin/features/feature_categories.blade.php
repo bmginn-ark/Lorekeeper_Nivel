@@ -1,20 +1,20 @@
 @extends('admin.layout')
 
 @section('admin-title')
-    Trait Categories
+    {{ __('Trait Categories') }}
 @endsection
 
 @section('admin-content')
-    {!! breadcrumbs(['Admin Panel' => 'admin', 'Trait Categories' => 'admin/data/trait-categories']) !!}
+    {!! breadcrumbs([__('Admin Panel') => 'admin', __('Trait Categories') => 'admin/data/trait-categories']) !!}
 
-    <h1>Trait Categories</h1>
+    <h1>{{ __('Trait Categories') }}</h1>
 
-    <p>This is a list of trait categories that will be used to sort traits in the inventory. Creating trait categories is entirely optional, but recommended if you have a lot of traits in the game.</p>
-    <p>The sorting order reflects the order in which the trait categories will be displayed in the inventory, as well as on the world pages.</p>
+    <p>{{ __('This is a list of trait categories that will be used to sort traits in the inventory. Creating trait categories is entirely optional, but recommended if you have a lot of traits in the game.') }}</p>
+    <p>{{ __('The sorting order reflects the order in which the trait categories will be displayed in the inventory, as well as on the world pages.') }}</p>
 
-    <div class="text-right mb-3"><a class="btn btn-primary" href="{{ url('admin/data/trait-categories/create') }}"><i class="fas fa-plus"></i> Create New Trait Category</a></div>
+    <div class="text-right mb-3"><a class="btn btn-primary" href="{{ url('admin/data/trait-categories/create') }}"><i class="fas fa-plus"></i> {{ __('Create New Trait Category') }}</a></div>
     @if (!count($categories))
-        <p>No trait categories found.</p>
+        <p>{{ __('No trait categories found.') }}</p>
     @else
         <table class="table table-sm category-table">
             <tbody id="sortable" class="sortable">
@@ -28,7 +28,7 @@
                             {!! $category->displayName !!}
                         </td>
                         <td class="text-right">
-                            <a href="{{ url('admin/data/trait-categories/edit/' . $category->id) }}" class="btn btn-primary">Edit</a>
+                            <a href="{{ url('admin/data/trait-categories/edit/' . $category->id) }}" class="btn btn-primary">{{ __('Edit') }}</a>
                         </td>
                     </tr>
                 @endforeach
@@ -38,7 +38,7 @@
         <div class="mb-4">
             {!! Form::open(['url' => 'admin/data/trait-categories/sort']) !!}
             {!! Form::hidden('sort', '', ['id' => 'sortableOrder']) !!}
-            {!! Form::submit('Save Order', ['class' => 'btn btn-primary']) !!}
+            {!! Form::submit(__('Save Order'), ['class' => 'btn btn-primary']) !!}
             {!! Form::close() !!}
         </div>
     @endif

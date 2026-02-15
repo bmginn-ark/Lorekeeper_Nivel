@@ -1,20 +1,20 @@
 @extends('admin.layout')
 
 @section('admin-title')
-    Galleries
+    {{ __('Galleries') }}
 @endsection
 
 @section('admin-content')
-    {!! breadcrumbs(['Admin Panel' => 'admin', 'Galleries' => 'admin/data/galleries']) !!}
+    {!! breadcrumbs([__('Admin Panel') => 'admin', __('Galleries') => 'admin/data/galleries']) !!}
 
-    <h1>Galleries</h1>
+    <h1>{{ __('Galleries') }}</h1>
 
-    <p>This is a list of galleries that art and literature can be submitted to.</p>
+    <p>{{ __('This is a list of galleries that art and literature can be submitted to.') }}</p>
 
-    <div class="text-right mb-3"><a class="btn btn-primary" href="{{ url('admin/data/galleries/create') }}"><i class="fas fa-plus"></i> Create New Gallery</a></div>
+    <div class="text-right mb-3"><a class="btn btn-primary" href="{{ url('admin/data/galleries/create') }}"><i class="fas fa-plus"></i> {{ __('Create New Gallery') }}</a></div>
 
     @if (!count($galleries))
-        <p>No galleries found.</p>
+        <p>{{ __('No galleries found.') }}</p>
     @else
         {!! $galleries->render() !!}
 
@@ -22,22 +22,22 @@
             <div class="logs-table-header">
                 <div class="row">
                     <div class="col-6 col-md-1">
-                        <div class="logs-table-cell">Open</div>
+                        <div class="logs-table-cell">{{ __('Open') }}</div>
                     </div>
                     <div class="col-6 col-md-2">
-                        <div class="logs-table-cell">Name</div>
+                        <div class="logs-table-cell">{{ __('Name') }}</div>
                     </div>
                     <div class="col-6 col-md-1">
-                        <div class="logs-table-cell">{{ Settings::get('gallery_submissions_reward_currency') ? 'Rewards' : '' }}</div>
+                        <div class="logs-table-cell">{{ Settings::get('gallery_submissions_reward_currency') ? __('Rewards') : '' }}</div>
                     </div>
                     <div class="col-6 col-md-2">
-                        <div class="logs-table-cell">{{ Settings::get('gallery_submissions_require_approval') ? 'Votes Needed' : '' }}</div>
+                        <div class="logs-table-cell">{{ Settings::get('gallery_submissions_require_approval') ? __('Votes Needed') : '' }}</div>
                     </div>
                     <div class="col-4 col-md-2">
-                        <div class="logs-table-cell">Start</div>
+                        <div class="logs-table-cell">{{ __('Start') }}</div>
                     </div>
                     <div class="col-4 col-md-2">
-                        <div class="logs-table-cell">End</div>
+                        <div class="logs-table-cell">{{ __('End') }}</div>
                     </div>
                 </div>
             </div>

@@ -1,15 +1,13 @@
 @extends('admin.layout')
 
 @section('admin-title')
-    Character Transfers
+    {{ __('Character Transfers') }}
 @endsection
 
 @section('admin-content')
-    {!! breadcrumbs(['Admin Panel' => 'admin', 'Character Transfer Queue' => 'admin/masterlist/transfers/incoming']) !!}
+    {!! breadcrumbs([__('Admin Panel') => 'admin', __('Character Transfer Queue') => 'admin/masterlist/transfers/incoming']) !!}
 
-    <h1>
-        Character Transfers
-    </h1>
+    <h1>{{ __('Character Transfers') }}</h1>
 
     @include('admin.masterlist._header', ['tradeCount' => $tradeCount, 'transferCount' => $transferCount])
 
@@ -20,15 +18,15 @@
                 {!! Form::select(
                     'sort',
                     [
-                        'newest' => 'Newest First',
-                        'oldest' => 'Oldest First',
+                        'newest' => __('Newest First'),
+                        'oldest' => __('Oldest First'),
                     ],
                     Request::get('sort') ?: 'oldest',
                     ['class' => 'form-control'],
                 ) !!}
             </div>
             <div class="form-group ml-3 mb-3">
-                {!! Form::submit('Search', ['class' => 'btn btn-primary']) !!}
+                {!! Form::submit(__('Search'), ['class' => 'btn btn-primary']) !!}
             </div>
         </div>
         {!! Form::close() !!}
@@ -49,7 +47,7 @@
             $('.transfer-action-button').on('click', function(e) {
                 e.preventDefault();
                 console.log("{{ url('admin/masterlist/transfer/act') }}/" + $(this).data('id') + "/" + $(this).data('action'));
-                loadModal("{{ url('admin/masterlist/transfer/act') }}/" + $(this).data('id') + "/" + $(this).data('action'), 'Process Transfer');
+                loadModal("{{ url('admin/masterlist/transfer/act') }}/" + $(this).data('id') + "/" + $(this).data('action'), '{{ __("Process Transfer") }}');
             });
         });
     </script>

@@ -1,14 +1,14 @@
 @if ($sublist)
     {!! Form::open(['url' => 'admin/data/sublists/delete/' . $sublist->id]) !!}
 
-    <p>You are about to delete the sublist <strong>{{ $sublist->name }}</strong>. This is not reversible.</p>
-    <p>Are you sure you want to delete <strong>{{ $sublist->name }}</strong>?</p>
+    <p>{{ __('You are about to delete the sublist :name. This is not reversible.', ['name' => $sublist->name]) }}</p>
+    <p>{{ __('Are you sure you want to delete :name?', ['name' => $sublist->name]) }}</p>
 
     <div class="text-right">
-        {!! Form::submit('Delete Sublist', ['class' => 'btn btn-danger']) !!}
+        {!! Form::submit(__('Delete Sublist'), ['class' => 'btn btn-danger']) !!}
     </div>
 
     {!! Form::close() !!}
 @else
-    Invalid sublist selected.
+    {{ __('Invalid sublist selected.') }}
 @endif

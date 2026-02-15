@@ -28,28 +28,28 @@
             @endif
             <div class="masterlist-search-field">
                 {!! Form::label('owner', '오너 닉네임: ') !!}
-                {!! Form::select('owner', $userOptions, Request::get('owner'), ['class' => 'form-control mr-2 userselectize', 'style' => 'width: 250px', 'placeholder' => 'Select a User']) !!}
+                {!! Form::select('owner', $userOptions, Request::get('owner'), ['class' => 'form-control mr-2 userselectize', 'style' => 'width: 250px', 'placeholder' => __('Select a User')]) !!}
             </div>
             <div class="masterlist-search-field">
                 {!! Form::label('artist', '아티스트: ') !!}
-                {!! Form::select('artist', $userOptions, Request::get('artist'), ['class' => 'form-control mr-2 userselectize', 'style' => 'width: 250px', 'placeholder' => 'Select a User']) !!}
+                {!! Form::select('artist', $userOptions, Request::get('artist'), ['class' => 'form-control mr-2 userselectize', 'style' => 'width: 250px', 'placeholder' => __('Select a User')]) !!}
             </div>
             <div class="masterlist-search-field">
                 {!! Form::label('designer', '디자이너: ') !!}
-                {!! Form::select('designer', $userOptions, Request::get('designer'), ['class' => 'form-control mr-2 userselectize', 'style' => 'width: 250px', 'placeholder' => 'Select a User']) !!}
+                {!! Form::select('designer', $userOptions, Request::get('designer'), ['class' => 'form-control mr-2 userselectize', 'style' => 'width: 250px', 'placeholder' => __('Select a User')]) !!}
             </div>
             <hr />
             <div class="masterlist-search-field">
                 {!! Form::label('owner_url', '오너 URL / 닉네임: ') !!} {!! add_help('Example: https://deviantart.com/username OR username') !!}
-                {!! Form::text('owner_url', Request::get('owner_url'), ['class' => 'form-control mr-2', 'style' => 'width: 250px', 'placeholder' => 'Type a Username']) !!}
+                {!! Form::text('owner_url', Request::get('owner_url'), ['class' => 'form-control mr-2', 'style' => 'width: 250px', 'placeholder' => __('Type a Username')]) !!}
             </div>
             <div class="masterlist-search-field">
                 {!! Form::label('artist_url', '아티스트 URL / 닉네임: ') !!} {!! add_help('Example: https://deviantart.com/username OR username') !!}
-                {!! Form::text('artist_url', Request::get('artist_url'), ['class' => 'form-control mr-2', 'style' => 'width: 250px', 'placeholder' => 'Type a Username']) !!}
+                {!! Form::text('artist_url', Request::get('artist_url'), ['class' => 'form-control mr-2', 'style' => 'width: 250px', 'placeholder' => __('Type a Username')]) !!}
             </div>
             <div class="masterlist-search-field">
                 {!! Form::label('designer_url', '디자이너 URL / 닉네임: ') !!} {!! add_help('Example: https://deviantart.com/username OR username') !!}
-                {!! Form::text('designer_url', Request::get('designer_url'), ['class' => 'form-control mr-2', 'style' => 'width: 250px', 'placeholder' => 'Type a Username']) !!}
+                {!! Form::text('designer_url', Request::get('designer_url'), ['class' => 'form-control mr-2', 'style' => 'width: 250px', 'placeholder' => __('Type a Username')]) !!}
             </div>
             <hr />
             <div class="masterlist-search-field">
@@ -93,7 +93,7 @@
                         <div class="feature-block col-md-4 col-sm-6 mt-3 p-1">
                             <div class="card">
                                 <div class="card-body d-flex">
-                                    {!! Form::select('feature_id[]', $features, $featureId, ['class' => 'form-control feature-select selectize', 'placeholder' => 'Select Trait']) !!}
+                                    {!! Form::select('feature_id[]', $features, $featureId, ['class' => 'form-control feature-select selectize', 'placeholder' => __('Select Trait')]) !!}
                                     <a href="#" class="btn feature-remove ml-2"><i class="fas fa-times"></i></a>
                                 </div>
                             </div>
@@ -114,19 +114,31 @@
     </div>
     <div class="form-inline justify-content-end mb-3">
         <div class="form-group mr-3">
-            {!! Form::label('sort', 'Sort: ', ['class' => 'mr-2']) !!}
+            {!! Form::label('sort', __('Sort').': ', ['class' => 'mr-2']) !!}
             @if (!$isMyo)
                 {!! Form::select(
                     'sort',
-                    ['number_desc' => 'Number Descending', 'number_asc' => 'Number Ascending', 'id_desc' => 'Newest First', 'id_asc' => 'Oldest First', 'sale_value_desc' => 'Highest Sale Value', 'sale_value_asc' => 'Lowest Sale Value'],
+                    [
+                        'number_desc' => __('Number Descending'),
+                        'number_asc' => __('Number Ascending'),
+                        'id_desc' => __('Newest First'),
+                        'id_asc' => __('Oldest First'),
+                        'sale_value_desc' => __('Highest Sale Value'),
+                        'sale_value_asc' => __('Lowest Sale Value'),
+                    ],
                     Request::get('sort'),
                     ['class' => 'form-control'],
                 ) !!}
             @else
-                {!! Form::select('sort', ['id_desc' => 'Newest First', 'id_asc' => 'Oldest First', 'sale_value_desc' => 'Highest Sale Value', 'sale_value_asc' => 'Lowest Sale Value'], Request::get('sort'), ['class' => 'form-control']) !!}
+                {!! Form::select('sort', [
+                    'id_desc' => __('Newest First'),
+                    'id_asc' => __('Oldest First'),
+                    'sale_value_desc' => __('Highest Sale Value'),
+                    'sale_value_asc' => __('Lowest Sale Value'),
+                ], Request::get('sort'), ['class' => 'form-control']) !!}
             @endif
         </div>
-        {!! Form::submit('검색', ['class' => 'btn btn-primary']) !!}
+        {!! Form::submit(__('Search'), ['class' => 'btn btn-primary']) !!}
     </div>
     {!! Form::close() !!}
 </div>
@@ -134,7 +146,7 @@
     <div class="feature-block col-md-4 col-sm-6 mt-3 p-1">
         <div class="card">
             <div class="card-body d-flex">
-                {!! Form::select('feature_id[]', $features, null, ['class' => 'form-control feature-select selectize', 'placeholder' => 'Select Trait']) !!}
+                {!! Form::select('feature_id[]', $features, null, ['class' => 'form-control feature-select selectize', 'placeholder' => __('Select Trait')]) !!}
                 <a href="#" class="btn feature-remove ml-2"><i class="fas fa-times"></i></a>
             </div>
         </div>
@@ -142,8 +154,8 @@
 </div>
 <div class="text-right mb-3">
     <div class="btn-group">
-        <button type="button" class="btn btn-secondary active grid-view-button" data-toggle="tooltip" title="Grid View" alt="Grid View"><i class="fas fa-th"></i></button>
-        <button type="button" class="btn btn-secondary list-view-button" data-toggle="tooltip" title="List View" alt="List View"><i class="fas fa-bars"></i></button>
+        <button type="button" class="btn btn-secondary active grid-view-button" data-toggle="tooltip" title="{{ __('Grid View') }}" alt="{{ __('Grid View') }}"><i class="fas fa-th"></i></button>
+        <button type="button" class="btn btn-secondary list-view-button" data-toggle="tooltip" title="{{ __('List View') }}" alt="{{ __('List View') }}"><i class="fas fa-bars"></i></button>
     </div>
 </div>
 

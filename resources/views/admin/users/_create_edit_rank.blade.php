@@ -2,17 +2,17 @@
     {!! Form::open(['url' => $rank->id ? 'admin/users/ranks/edit/' . $rank->id : 'admin/users/ranks/create']) !!}
 
     <div class="form-group">
-        {!! Form::label('Rank Name') !!}
+        {!! Form::label(__('Rank Name')) !!}
         {!! Form::text('name', $rank->name, ['class' => 'form-control']) !!}
     </div>
 
     <div class="form-group">
-        {!! Form::label('Description (optional)') !!}
+        {!! Form::label(__('Description (optional)')) !!}
         {!! Form::textarea('description', $rank->description, ['class' => 'form-control']) !!}
     </div>
 
     <div class="form-group">
-        {!! Form::label('Colour (Hex code; optional)') !!}
+        {!! Form::label(__('Colour (Hex code; optional)')) !!}
         <div class="input-group cp">
             {!! Form::text('color', $rank->color, ['class' => 'form-control']) !!}
             <span class="input-group-append">
@@ -23,7 +23,7 @@
 
     <div class="form-group row px-0 mx-0">
         <div class="col-5 align-self-center">
-            {!! Form::label('Icon (Font-awesome code; optional)') !!}
+            {!! Form::label(__('Icon (Font-awesome code; optional)')) !!}
         </div>
         <div class="col-1 align-self-center text-right p-0">
             <i id="rankitem" class="{{ $rank->icon }}"></i>
@@ -41,8 +41,8 @@
                     <div class="col-md-6">
                         <div class="form-check">
                             {!! Form::checkbox('powers[' . $key . ']', $key, $rankPowers ? isset($rankPowers[$key]) : false, ['class' => 'form-check-input', 'id' => 'powers[' . $key . ']']) !!}
-                            {!! Form::label('powers[' . $key . ']', $power['name'], ['class' => 'form-check-label']) !!}
-                            {!! add_help($power['description']) !!}
+                            {!! Form::label('powers[' . $key . ']', __($power['name']), ['class' => 'form-check-label']) !!}
+                            {!! add_help(__($power['description'])) !!}
                         </div>
                     </div>
                 @endforeach
@@ -50,12 +50,12 @@
         </div>
     @else
         <div class="card bg-light mb-3">
-            <div class="card-body">Powers for the admin rank cannot be edited. {!! add_help('The admin rank has the ability to edit any editable information on the site, and is always highest-ranked (cannot be edited by any other user).') !!}</div>
+            <div class="card-body">{{ __('Powers for the admin rank cannot be edited.') }} {!! add_help(__('The admin rank has the ability to edit any editable information on the site, and is always highest-ranked (cannot be edited by any other user).')) !!}</div>
         </div>
     @endif
 
     <div class="text-right">
-        {!! Form::submit($rank->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+        {!! Form::submit($rank->id ? __('Edit') : __('Create'), ['class' => 'btn btn-primary']) !!}
     </div>
 
     {!! Form::close() !!}
@@ -70,5 +70,5 @@
         });
     </script>
 @else
-    Invalid rank selected.
+    {{ __('Invalid rank selected.') }}
 @endif

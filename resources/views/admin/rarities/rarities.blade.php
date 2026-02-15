@@ -1,21 +1,20 @@
 @extends('admin.layout')
 
 @section('admin-title')
-    Rarities
+    {{ __('Rarities') }}
 @endsection
 
 @section('admin-content')
-    {!! breadcrumbs(['Admin Panel' => 'admin', 'Rarities' => 'admin/data/rarities']) !!}
+    {!! breadcrumbs([__('Admin Panel') => 'admin', __('Rarities') => 'admin/data/rarities']) !!}
 
-    <h1>Rarities</h1>
+    <h1>{{ __('Rarities') }}</h1>
 
-    <p>This is a list of rarities that will be used across the site, primarily assigned to characters and traits. At least one rarity is required to create characters and traits.</p>
-    <p>The sorting order reflects the order in which rarities will be displayed on the world pages (e.g. rarity-sorted traits will appear in this order), as well as in select dropdown fields. <strong>Please note that the highest rarity should be at the
-            <u>top</u> of the list.</strong></p>
+    <p>{{ __('This is a list of rarities that will be used across the site, primarily assigned to characters and traits. At least one rarity is required to create characters and traits.') }}</p>
+    <p>{!! __('The sorting order reflects the order in which rarities will be displayed on the world pages (e.g. rarity-sorted traits will appear in this order), as well as in select dropdown fields. Please note that the highest rarity should be at the :top of the list.', ['top' => '<strong><u>'.__('top').'</u></strong>']) !!}</p>
 
-    <div class="text-right mb-3"><a class="btn btn-primary" href="{{ url('admin/data/rarities/create') }}"><i class="fas fa-plus"></i> Create New Rarity</a></div>
+    <div class="text-right mb-3"><a class="btn btn-primary" href="{{ url('admin/data/rarities/create') }}"><i class="fas fa-plus"></i> {{ __('Create New Rarity') }}</a></div>
     @if (!count($rarities))
-        <p>No rarities found.</p>
+        <p>{{ __('No rarities found.') }}</p>
     @else
         <table class="table table-sm rarity-table">
             <tbody id="sortable" class="sortable">
@@ -26,7 +25,7 @@
                             {!! $rarity->displayName !!}
                         </td>
                         <td class="text-right">
-                            <a href="{{ url('admin/data/rarities/edit/' . $rarity->id) }}" class="btn btn-primary">Edit</a>
+                            <a href="{{ url('admin/data/rarities/edit/' . $rarity->id) }}" class="btn btn-primary">{{ __('Edit') }}</a>
                         </td>
                     </tr>
                 @endforeach
@@ -36,7 +35,7 @@
         <div class="mb-4">
             {!! Form::open(['url' => 'admin/data/rarities/sort']) !!}
             {!! Form::hidden('sort', '', ['id' => 'sortableOrder']) !!}
-            {!! Form::submit('Save Order', ['class' => 'btn btn-primary']) !!}
+            {!! Form::submit(__('Save Order'), ['class' => 'btn btn-primary']) !!}
             {!! Form::close() !!}
         </div>
     @endif

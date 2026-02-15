@@ -35,7 +35,7 @@
                     </p>
                     <div class="text-right">
                         {!! Form::open(['url' => 'characters/transfer/act/' . $transfer->id]) !!}
-                        {!! Form::submit('Cancel', ['class' => 'btn btn-danger', 'name' => 'action']) !!}
+                        {!! Form::submit(__('Cancel'), ['class' => 'btn btn-danger', 'name' => 'action']) !!}
                         {!! Form::close() !!}
                     </div>
                 </div>
@@ -51,7 +51,7 @@
             </p>
             @if ($cooldown)
                 <p>
-                    캐릭터가 전송된 후(전송이 수락되면 {{$transferQueue ? ' and approved' : '' }}), <strong>{{$cooldown}}/<strong> 일수의 쿨다운이 적용됩니다. 이 기간 동안 캐릭터는 다른 사람에게 전송할 수 없습니다.
+                    캐릭터가 전송된 후(전송이 수락되면 {{ $transferQueue ? ' ' . __(' and approved') : '' }}), <strong>{{$cooldown}}</strong> 일수의 쿨다운이 적용됩니다. 이 기간 동안 캐릭터는 다른 사람에게 전송할 수 없습니다.
                 </p>
             @endif
             {!! Form::open(['url' => $character->url . '/transfer']) !!}
@@ -64,14 +64,14 @@
                 {!! Form::text('user_reason', '', ['class' => 'form-control']) !!}
             </div>
             <div class="text-right">
-                {!! Form::submit('Send Transfer', ['class' => 'btn btn-primary']) !!}
+                {!! Form::submit(__('Send Transfer'), ['class' => 'btn btn-primary']) !!}
             </div>
             {!! Form::close() !!}
         @endif
     @endif
 
     @if (Auth::user()->hasPower('manage_characters'))
-        <h3>관리자 전송</h3>
+        <h3>{{ __('Admin Transfer') }}</h3>
         <div class="alert alert-warning">
             이 캐릭터를 스태프 권한으로 편집하고 있습니다.
         </div>
@@ -83,7 +83,7 @@
             {!! Form::select('recipient_id', $userOptions, old('recipient_id'), ['class' => 'form-control selectize', 'placeholder' => '유저 선택']) !!}
         </div>
         <div class="form-group">
-            {!! Form::label('recipient_url', '받는 이 Url') !!} {!! add_help('Characters can only be transferred to offsite user URLs from site(s) used for authentication.') !!}
+            {!! Form::label('recipient_url', '받는 이 Url') !!} {!! add_help(__('Characters can only be transferred to offsite user URLs from site(s) used for authentication.')) !!}
             {!! Form::text('recipient_url', old('recipient_url'), ['class' => 'form-control']) !!}
         </div>
         <div class="form-group">
@@ -95,7 +95,7 @@
             {!! Form::text('reason', '', ['class' => 'form-control']) !!}
         </div>
         <div class="text-right">
-            {!! Form::submit('Send Transfer', ['class' => 'btn btn-primary']) !!}
+            {!! Form::submit(__('Send Transfer'), ['class' => 'btn btn-primary']) !!}
         </div>
         {!! Form::close() !!}
     @endif

@@ -1,4 +1,4 @@
-<p>You rolled {{ $quantity }} time{{ $quantity != 1 ? 's' : '' }} for the following:</p>
+<p>{{ __('You rolled :count time(s) for the following:', ['count' => $quantity]) }}</p>
 <div class="mb-4 logs-table table-striped">
     <div class="logs-table-header">
         <div class="row">
@@ -6,10 +6,10 @@
                 <div class="logs-table-cell text-center">#</div>
             </div>
             <div class="col-6 col-md-3">
-                <div class="logs-table-cell">Reward</div>
+                <div class="logs-table-cell">{{ __('Reward') }}</div>
             </div>
             <div class="col-5 col-md-3">
-                <div class="logs-table-cell">Quantity</div>
+                <div class="logs-table-cell">{{ __('Quantity') }}</div>
             </div>
         </div>
     </div>
@@ -38,4 +38,4 @@
         @endforeach
     </div>
 </div>
-<p>Note: "None" results are not shown in this table.</p>
+<p>{{ __('Note: "None" results are not shown in this table.') }}</p>

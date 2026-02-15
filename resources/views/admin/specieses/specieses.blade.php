@@ -1,23 +1,23 @@
 @extends('admin.layout')
 
 @section('admin-title')
-    Species
+    {{ __('Species') }}
 @endsection
 
 @section('admin-content')
-    {!! breadcrumbs(['Admin Panel' => 'admin', 'Species' => 'admin/data/species']) !!}
+    {!! breadcrumbs([__('Admin Panel') => 'admin', __('Species') => 'admin/data/species']) !!}
 
-    <h1>Species</h1>
+    <h1>{{ __('Species') }}</h1>
 
-    <div class="text-right mb-3"><a class="btn btn-primary" href="{{ url('admin/data/species/create') }}"><i class="fas fa-plus"></i> Create New Species</a></div>
+    <div class="text-right mb-3"><a class="btn btn-primary" href="{{ url('admin/data/species/create') }}"><i class="fas fa-plus"></i> {{ __('Create New Species') }}</a></div>
     @if (!count($specieses))
-        <p>No species found.</p>
+        <p>{{ __('No species found.') }}</p>
     @else
         <table class="table table-sm species-table">
             <thead>
                 <tr>
-                    <th>Species</th>
-                    <th>Sub Masterlist</th>
+                    <th>{{ __('Species') }}</th>
+                    <th>{{ __('Sub Masterlist') }}</th>
                     <th></th>
                 </tr>
             </thead>
@@ -39,7 +39,7 @@
                             @endif
                         </td>
                         <td class="text-right">
-                            <a href="{{ url('admin/data/species/edit/' . $species->id) }}" class="btn btn-primary">Edit</a>
+                            <a href="{{ url('admin/data/species/edit/' . $species->id) }}" class="btn btn-primary">{{ __('Edit') }}</a>
                         </td>
                     </tr>
                 @endforeach
@@ -49,7 +49,7 @@
         <div class="mb-4">
             {!! Form::open(['url' => 'admin/data/species/sort']) !!}
             {!! Form::hidden('sort', '', ['id' => 'sortableOrder']) !!}
-            {!! Form::submit('Save Order', ['class' => 'btn btn-primary']) !!}
+            {!! Form::submit(__('Save Order'), ['class' => 'btn btn-primary']) !!}
             {!! Form::close() !!}
         </div>
     @endif

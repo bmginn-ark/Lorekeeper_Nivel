@@ -30,7 +30,7 @@
     @if (Auth::check() && Auth::user()->hasPower('edit_user_info'))
         <li class="sidebar-section">
             <div class="sidebar-section-header">관리자</div>
-            <div class="sidebar-item"><a href="{{ $user->adminUrl }}">유저 수정</a></div>
+            <div class="sidebar-item"><a href="{{ $user->adminUrl }}">{{ __('Edit User') }}</a></div>
         </li>
     @endif
 </ul>

@@ -1,22 +1,22 @@
 @extends('admin.layout')
 
 @section('admin-title')
-    Gallery Currency Queue
+    {{ __('Gallery Currency Queue') }}
 @endsection
 
 @section('admin-content')
-    {!! breadcrumbs(['Admin Panel' => 'admin', ($currency ? $currency->name : 'Gallery Currency') . ' Queue' => 'admin/gallery/currency/pending']) !!}
+    {!! breadcrumbs([__('Admin Panel') => 'admin', ($currency ? $currency->name : __('Gallery Currency')) . ' ' . __('Queue') => 'admin/gallery/currency/pending']) !!}
 
     <h1>
-        {!! $currency ? $currency->name : 'Gallery Currency' !!} Queue
+        {!! $currency ? $currency->name : __('Gallery Currency') !!} {{ __('Queue') }}
     </h1>
 
     <ul class="nav nav-tabs mb-3">
         <li class="nav-item">
-            <a class="nav-link {{ set_active('admin/gallery/currency/pending*') }} {{ set_active('admin/gallery/currency') }}" href="{{ url('admin/gallery/currency/pending') }}">Pending</a>
+            <a class="nav-link {{ set_active('admin/gallery/currency/pending*') }} {{ set_active('admin/gallery/currency') }}" href="{{ url('admin/gallery/currency/pending') }}">{{ __('Pending') }}</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link {{ set_active('admin/gallery/currency/valued*') }}" href="{{ url('admin/gallery/currency/valued') }}">Processed</a>
+            <a class="nav-link {{ set_active('admin/gallery/currency/valued*') }}" href="{{ url('admin/gallery/currency/valued') }}">{{ __('Processed') }}</a>
         </li>
     </ul>
 
@@ -30,15 +30,15 @@
                 {!! Form::select(
                     'sort',
                     [
-                        'newest' => 'Newest First',
-                        'oldest' => 'Oldest First',
+                        'newest' => __('Newest First'),
+                        'oldest' => __('Oldest First'),
                     ],
                     Request::get('sort') ?: 'oldest',
                     ['class' => 'form-control'],
                 ) !!}
             </div>
             <div class="form-group ml-3 mb-3">
-                {!! Form::submit('Search', ['class' => 'btn btn-primary']) !!}
+                {!! Form::submit(__('Search'), ['class' => 'btn btn-primary']) !!}
             </div>
         </div>
         {!! Form::close() !!}
@@ -51,5 +51,5 @@
     @endforeach
 
     {!! $submissions->render() !!}
-    <div class="text-center mt-4 small text-muted">{{ $submissions->total() }} result{{ $submissions->total() == 1 ? '' : 's' }} found.</div>
+    <div class="text-center mt-4 small text-muted">{{ $submissions->total() }} {{ $submissions->total() == 1 ? __('result') : __('results') }} {{ __('found.') }}</div>
 @endsection

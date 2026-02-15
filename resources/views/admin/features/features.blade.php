@@ -1,25 +1,25 @@
 @extends('admin.layout')
 
 @section('admin-title')
-    Traits
+    {{ __('Traits') }}
 @endsection
 
 @section('admin-content')
-    {!! breadcrumbs(['Admin Panel' => 'admin', 'Traits' => 'admin/data/traits']) !!}
+    {!! breadcrumbs([__('Admin Panel') => 'admin', __('Traits') => 'admin/data/traits']) !!}
 
-    <h1>Traits</h1>
+    <h1>{{ __('Traits') }}</h1>
 
-    <p>This is a list of traits that can be attached to characters. </p>
+    <p>{{ __('This is a list of traits that can be attached to characters.') }}</p>
 
     <div class="text-right mb-3">
-        <a class="btn btn-primary" href="{{ url('admin/data/trait-categories') }}"><i class="fas fa-folder"></i> Trait Categories</a>
-        <a class="btn btn-primary" href="{{ url('admin/data/traits/create') }}"><i class="fas fa-plus"></i> Create New Trait</a>
+        <a class="btn btn-primary" href="{{ url('admin/data/trait-categories') }}"><i class="fas fa-folder"></i> {{ __('Trait Categories') }}</a>
+        <a class="btn btn-primary" href="{{ url('admin/data/traits/create') }}"><i class="fas fa-plus"></i> {{ __('Create New Trait') }}</a>
     </div>
 
     <div>
         {!! Form::open(['method' => 'GET', 'class' => 'form-inline justify-content-end']) !!}
         <div class="form-group mr-3 mb-3">
-            {!! Form::text('name', Request::get('name'), ['class' => 'form-control', 'placeholder' => 'Name']) !!}
+            {!! Form::text('name', Request::get('name'), ['class' => 'form-control', 'placeholder' => __('Name')]) !!}
         </div>
         <div class="form-group mr-3 mb-3">
             {!! Form::select('species_id', $specieses, Request::get('species_id'), ['class' => 'form-control']) !!}
@@ -34,32 +34,32 @@
             {!! Form::select('feature_category_id', $categories, Request::get('feature_category_id'), ['class' => 'form-control']) !!}
         </div>
         <div class="form-group mb-3">
-            {!! Form::submit('Search', ['class' => 'btn btn-primary']) !!}
+            {!! Form::submit(__('Search'), ['class' => 'btn btn-primary']) !!}
         </div>
         {!! Form::close() !!}
     </div>
 
     @if (!count($features))
-        <p>No traits found.</p>
+        <p>{{ __('No traits found.') }}</p>
     @else
         {!! $features->render() !!}
         <div class="mb-4 logs-table">
             <div class="logs-table-header">
                 <div class="row">
                     <div class="col-12 col-md-3">
-                        <div class="logs-table-cell">Name</div>
+                        <div class="logs-table-cell">{{ __('Name') }}</div>
                     </div>
                     <div class="col-6 col-md-2">
-                        <div class="logs-table-cell">Rarity</div>
+                        <div class="logs-table-cell">{{ __('Rarity') }}</div>
                     </div>
                     <div class="col-6 col-md-2">
-                        <div class="logs-table-cell">Category</div>
+                        <div class="logs-table-cell">{{ __('Category') }}</div>
                     </div>
                     <div class="col-6 col-md-2">
-                        <div class="logs-table-cell">Species</div>
+                        <div class="logs-table-cell">{{ __('Species') }}</div>
                     </div>
                     <div class="col-6 col-md-2">
-                        <div class="logs-table-cell">Subtype</div>
+                        <div class="logs-table-cell">{{ __('Subtype') }}</div>
                     </div>
                 </div>
             </div>
@@ -88,7 +88,7 @@
                                 <div class="logs-table-cell">{{ $feature->subtype ? $feature->subtype->name : '---' }}</div>
                             </div>
                             <div class="col-12 col-md-1">
-                                <div class="logs-table-cell"><a href="{{ url('admin/data/traits/edit/' . $feature->id) }}" class="btn btn-primary py-0 px-1 w-100">Edit</a></div>
+                                <div class="logs-table-cell"><a href="{{ url('admin/data/traits/edit/' . $feature->id) }}" class="btn btn-primary py-0 px-1 w-100">{{ __('Edit') }}</a></div>
                             </div>
                         </div>
                     </div>
@@ -96,7 +96,7 @@
             </div>
         </div>
         {!! $features->render() !!}
-        <div class="text-center mt-4 small text-muted">{{ $features->total() }} result{{ $features->total() == 1 ? '' : 's' }} found.</div>
+        <div class="text-center mt-4 small text-muted">{{ $features->total() }} {{ $features->total() == 1 ? __('result') : __('results') }} {{ __('found.') }}</div>
     @endif
 
 @endsection

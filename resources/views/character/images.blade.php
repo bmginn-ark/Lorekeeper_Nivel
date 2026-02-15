@@ -42,7 +42,7 @@
     <h3>
         이미지
         @if ($canManage)
-            <a href="{{ url('admin/character/' . $character->slug . '/image') }}" class="float-right btn btn-outline-info btn-sm"><i class="fas fa-plus"></i> 이미지 추가</a>
+            <a href="{{ url('admin/character/' . $character->slug . '/image') }}" class="float-right btn btn-outline-info btn-sm"><i class="fas fa-plus"></i> {{ __('Add Image') }}</a>
         @endif
     </h3>
 
@@ -57,7 +57,7 @@
     @if ($canManage)
         {!! Form::open(['url' => 'admin/character/' . $character->slug . '/images/sort', 'class' => 'text-right']) !!}
         {!! Form::hidden('sort', '', ['id' => 'sortableOrder']) !!}
-        {!! Form::submit('Save Order', ['class' => 'btn btn-primary']) !!}
+        {!! Form::submit(__('Save Order'), ['class' => 'btn btn-primary']) !!}
         {!! Form::close() !!}
     @endif
 @endsection

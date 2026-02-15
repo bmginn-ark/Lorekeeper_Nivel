@@ -5,49 +5,49 @@
 @endsection
 
 @section('admin-content')
-    {!! breadcrumbs(['Admin Panel' => 'admin', 'Report Queue' => 'admin/reports/pending', 'Report (#' . $report->id . ')' => $report->viewUrl]) !!}
+    {!! breadcrumbs([__('Admin Panel') => 'admin', __('Report Queue') => 'admin/reports/pending', __('Report') . ' (#' . $report->id . ')' => $report->viewUrl]) !!}
 
     @if ($report->status !== 'Closed')
         @if ($report->status == 'Assigned' && Auth::user()->id !== $report->staff_id)
-            <div class="alert alert-danger">This report is not assigned to you.</div>
+            <div class="alert alert-danger">{{ __('This report is not assigned to you.') }}</div>
         @elseif($report->status == 'Pending')
-            <div class="alert alert-warning">This report needs assigning.</div>
+            <div class="alert alert-warning">{{ __('This report needs assigning.') }}</div>
         @endif
 
         <h1>
-            Report (#{{ $report->id }})
-            <span class="float-right badge badge-{{ $report->status == 'Pending' ? 'secondary' : ($report->status == 'Closed' ? 'success' : 'danger') }}">{{ $report->status }}</span>
+            {{ __('Report') }} (#{{ $report->id }})
+            <span class="float-right badge badge-{{ $report->status == 'Pending' ? 'secondary' : ($report->status == 'Closed' ? 'success' : 'danger') }}">{{ __($report->status) }}</span>
         </h1>
         <div class="mb-1">
             <div class="row">
                 <div class="col-md-2 col-4">
-                    <h5>User</h5>
+                    <h5>{{ __('User') }}</h5>
                 </div>
                 <div class="col-md-10 col-8">{!! $report->user->displayName !!}</div>
             </div>
             <div class="row">
                 <div class="col-md-2 col-4">
-                    <h5>URL / Title</h5>
+                    <h5>{{ __('URL / Title') }}</h5>
                 </div>
                 <div class="col-md-10 col-8"><a href="{{ $report->url }}">{{ $report->url }}</a></div>
             </div>
             @if ($report->is_br == 1)
                 <div class="row">
                     <div class="col-md-2 col-4">
-                        <h5>Bug Type</h5>
+                        <h5>{{ __('Bug Type') }}</h5>
                     </div>
                     <div class="col-md-10 col-8">{{ ucfirst($report->error_type) . ($report->error_type != 'exploit' ? ' Error' : '') }}</div>
                 </div>
             @endif
             <div class="row">
                 <div class="col-md-2 col-4">
-                    <h5>Submitted</h5>
+                    <h5>{{ __('Submitted') }}</h5>
                 </div>
                 <div class="col-md-10 col-8">{!! format_date($report->created_at) !!} ({{ $report->created_at->diffForHumans() }})</div>
             </div>
             <div class="row">
                 <div class="col-md-2 col-4">
-                    <h5>Assigned to</h5>
+                    <h5>{{ __('Assigned to') }}</h5>
                 </div>
                 <div class="col-md-10 col-8">
                     @if ($report->staff != null)
@@ -57,12 +57,12 @@
             </div>
         </div>
 
-        <h2>Report Details</h2>
+        <h2>{{ __('Report Details') }}</h2>
         <div class="card mb-3">
             <div class="card-body">{!! nl2br(htmlentities($report->comments)) !!}</div>
         </div>
         @if (Auth::check() && $report->staff_comments && ($report->user_id == Auth::user()->id || Auth::user()->hasPower('manage_reports')))
-            <h2>Staff Comments ({!! $report->staff->displayName !!})</h2>
+            <h2>{{ __('Staff Comments') }} ({!! $report->staff->displayName !!})</h2>
             <div class="card mb-3">
                 <div class="card-body">
                     @if (isset($report->parsed_staff_comments))
@@ -81,19 +81,19 @@
         {!! Form::open(['url' => url()->current(), 'id' => 'reportForm']) !!}
         @if ($report->status == 'Assigned' && Auth::user()->id == $report->staff_id)
             @if (Auth::user()->hasPower('manage_reports'))
-                <div class="alert alert-warning">Please include a small paragraph on the solution and as many important details as you deem necessary, as the user will no longer be able to view the comments after the report is closed.</div>
+                <div class="alert alert-warning">{{ __('Please include a small paragraph on the solution and as many important details as you deem necessary, as the user will no longer be able to view the comments after the report is closed.') }}</div>
             @endif
             <div class="form-group">
-                {!! Form::label('staff_comments', 'Staff Comments (Optional)') !!}
+                {!! Form::label('staff_comments', __('Staff Comments (Optional)')) !!}
                 {!! Form::textarea('staff_comments', $report->staffComments, ['class' => 'form-control wysiwyg']) !!}
             </div>
         @endif
         <div class="text-right">
             @if ($report->staff_id == null)
-                <a href="#" class="btn btn-danger mr-2" id="assignButton">Assign</a>
+                <a href="#" class="btn btn-danger mr-2" id="assignButton">{{ __('Assign') }}</a>
             @endif
             @if ($report->status == 'Assigned' && Auth::user()->id == $report->staff_id)
-                <a href="#" class="btn btn-success" id="closalButton">Close</a>
+                <a href="#" class="btn btn-success" id="closalButton">{{ __('Close') }}</a>
             @endif
         </div>
         {!! Form::close() !!}
@@ -102,32 +102,32 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content hide" id="closalContent">
                     <div class="modal-header">
-                        <span class="modal-title h5 mb-0">Confirm Closal</span>
+                        <span class="modal-title h5 mb-0">{{ __('Confirm Closure') }}</span>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body">
-                        <p>This will close the report.</p>
+                        <p>{{ __('This will close the report.') }}</p>
                         <div class="text-right">
-                            <a href="#" id="closalSubmit" class="btn btn-success">Close</a>
+                            <a href="#" id="closalSubmit" class="btn btn-success">{{ __('Close') }}</a>
                         </div>
                     </div>
                 </div>
                 <div class="modal-content hide" id="assignContent">
                     <div class="modal-header">
-                        <span class="modal-title h5 mb-0">Confirm Assignment</span>
+                        <span class="modal-title h5 mb-0">{{ __('Confirm Assignment') }}</span>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body">
-                        <p class="text-left">This will assign yourself to the report.</p>
+                        <p class="text-left">{{ __('This will assign yourself to the report.') }}</p>
                         <div class="text-right">
-                            <a href="#" id="assignSubmit" class="btn btn-danger">Assign</a>
+                            <a href="#" id="assignSubmit" class="btn btn-danger">{{ __('Assign') }}</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     @else
-        <div class="alert alert-danger">This report has already been closed.</div>
+        <div class="alert alert-danger">{{ __('This report has already been closed.') }}</div>
         @include('home._report_content', ['report' => $report])
     @endif
 

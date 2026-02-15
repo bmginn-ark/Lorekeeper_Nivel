@@ -1,20 +1,20 @@
 @extends('admin.layout')
 
 @section('admin-title')
-    Sort Currencies
+    {{ __('Sort Currencies') }}
 @endsection
 
 @section('admin-content')
-    {!! breadcrumbs(['Admin Panel' => 'admin', 'Currencies' => 'admin/data/currencies', 'Sort Currencies' => 'admin/data/currencies/sort']) !!}
+    {!! breadcrumbs([__('Admin Panel') => 'admin', __('Currencies') => 'admin/data/currencies', __('Sort Currencies') => 'admin/data/currencies/sort']) !!}
 
-    <h1>Sort Currencies</h1>
+    <h1>{{ __('Sort Currencies') }}</h1>
 
-    <p>This is the order in which currencies will appear on a user or character's page. Both types are saved separately, so remember to hit save before editing the other one.</p>
+    <p>{{ __('This is the order in which currencies will appear on a user or character\'s page. Both types are saved separately, so remember to hit save before editing the other one.') }}</p>
 
-    <h3>User Currencies</h3>
+    <h3>{{ __('User Currencies') }}</h3>
 
     @if (!count($userCurrencies))
-        <p>No user-attached currencies found.</p>
+        <p>{{ __('No user-attached currencies found.') }}</p>
     @else
         <table class="table table-sm currency-table">
             <tbody id="userSortable" class="sortable">
@@ -34,15 +34,15 @@
         <div class="mb-4">
             {!! Form::open(['url' => 'admin/data/currencies/sort/user']) !!}
             {!! Form::hidden('sort', '', ['id' => 'userSortableOrder']) !!}
-            {!! Form::submit('Save Order', ['class' => 'btn btn-primary']) !!}
+            {!! Form::submit(__('Save Order'), ['class' => 'btn btn-primary']) !!}
             {!! Form::close() !!}
         </div>
     @endif
 
-    <h3>Character Currencies</h3>
+    <h3>{{ __('Character Currencies') }}</h3>
 
     @if (!count($characterCurrencies))
-        <p>No character-attached currencies found.</p>
+        <p>{{ __('No character-attached currencies found.') }}</p>
     @else
         <table class="table table-sm currency-table">
             <tbody id="characterSortable" class="sortable">
@@ -62,7 +62,7 @@
         <div>
             {!! Form::open(['url' => 'admin/data/currencies/sort/character']) !!}
             {!! Form::hidden('sort', '', ['id' => 'characterSortableOrder']) !!}
-            {!! Form::submit('Save Order', ['class' => 'btn btn-primary']) !!}
+            {!! Form::submit(__('Save Order'), ['class' => 'btn btn-primary']) !!}
             {!! Form::close() !!}
         </div>
     @endif

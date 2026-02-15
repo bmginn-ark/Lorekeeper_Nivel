@@ -1,65 +1,65 @@
 @extends('admin.layout')
 
 @section('admin-title')
-    {{ $submission->prompt_id ? 'Submission' : 'Claim' }} (#{{ $submission->id }})
+    {{ $submission->prompt_id ? __('Submission') : __('Claim') }} (#{{ $submission->id }})
 @endsection
 
 @section('admin-content')
     @if ($submission->prompt_id)
-        {!! breadcrumbs(['Admin Panel' => 'admin', 'Prompt Queue' => 'admin/submissions/pending', 'Submission (#' . $submission->id . ')' => $submission->viewUrl]) !!}
+        {!! breadcrumbs([__('Admin Panel') => 'admin', __('Prompt Queue') => 'admin/submissions/pending', __('Submission') . ' (#' . $submission->id . ')' => $submission->viewUrl]) !!}
     @else
-        {!! breadcrumbs(['Admin Panel' => 'admin', 'Claim Queue' => 'admin/claims/pending', 'Claim (#' . $submission->id . ')' => $submission->viewUrl]) !!}
+        {!! breadcrumbs([__('Admin Panel') => 'admin', __('Claim Queue') => 'admin/claims/pending', __('Claim') . ' (#' . $submission->id . ')' => $submission->viewUrl]) !!}
     @endif
 
     @if ($submission->status == 'Pending')
 
         <h1>
-            {{ $submission->prompt_id ? 'Submission' : 'Claim' }} (#{{ $submission->id }})
+            {{ $submission->prompt_id ? __('Submission') : __('Claim') }} (#{{ $submission->id }})
             <span class="float-right badge badge-{{ $submission->status == 'Pending' || $submission->status == 'Draft' ? 'secondary' : ($submission->status == 'Approved' ? 'success' : 'danger') }}">
-                {{ $submission->status }}
+                {{ __($submission->status) }}
             </span>
         </h1>
 
         <div class="mb-1">
             <div class="row">
                 <div class="col-md-2 col-4">
-                    <h5>User</h5>
+                    <h5>{{ __('User') }}</h5>
                 </div>
                 <div class="col-md-10 col-8">{!! $submission->user->displayName !!}</div>
             </div>
             @if ($submission->prompt_id)
                 <div class="row">
                     <div class="col-md-2 col-4">
-                        <h5>Prompt</h5>
+                        <h5>{{ __('Prompt') }}</h5>
                     </div>
                     <div class="col-md-10 col-8">{!! $submission->prompt->displayName !!}</div>
                 </div>
                 <div class="row">
                     <div class="col-md-2 col-4">
-                        <h5>Previous Submissions</h5>
+                        <h5>{{ __('Previous Submissions') }}</h5>
                     </div>
-                    <div class="col-md-10 col-8">{{ $count }} {!! add_help('This is the number of times the user has submitted this prompt before and had their submission approved.') !!}</div>
+                    <div class="col-md-10 col-8">{{ $count }} {!! add_help(__('This is the number of times the user has submitted this prompt before and had their submission approved.')) !!}</div>
                 </div>
             @endif
             <div class="row">
                 <div class="col-md-2 col-4">
-                    <h5>URL</h5>
+                    <h5>{{ __('URL') }}</h5>
                 </div>
                 <div class="col-md-10 col-8"><a href="{{ $submission->url }}">{{ $submission->url }}</a></div>
             </div>
             <div class="row">
                 <div class="col-md-2 col-4">
-                    <h5>Submitted</h5>
+                    <h5>{{ __('Submitted') }}</h5>
                 </div>
                 <div class="col-md-10 col-8">{!! format_date($submission->created_at) !!} ({{ $submission->created_at->diffForHumans() }})</div>
             </div>
         </div>
-        <h2>Comments</h2>
+        <h2>{{ __('Comments') }}</h2>
         <div class="card mb-3">
             <div class="card-body">{!! nl2br(htmlentities($submission->comments)) !!}</div>
         </div>
         @if (Auth::check() && $submission->staff_comments && ($submission->user_id == Auth::user()->id || Auth::user()->hasPower('manage_submissions')))
-            <h2>Staff Comments ({!! $submission->staff->displayName !!})</h2>
+            <h2>{{ __('Staff Comments') }} ({!! $submission->staff->displayName !!})</h2>
             <div class="card mb-3">
                 <div class="card-body">
                     @if (isset($submission->parsed_staff_comments))
@@ -73,7 +73,7 @@
 
         {!! Form::open(['url' => url()->current(), 'id' => 'submissionForm']) !!}
 
-        <h2>Rewards</h2>
+        <h2>{{ __('Rewards') }}</h2>
         @include('widgets._loot_select', ['loots' => $submission->rewards, 'showLootTables' => true, 'showRaffles' => true])
         @if ($submission->prompt_id)
             <div class="mb-3">
@@ -81,12 +81,12 @@
             </div>
         @endif
 
-        <h2>Characters</h2>
+        <h2>{{ __('Characters') }}</h2>
         <div id="characters" class="mb-3">
             @if (count(
                     $submission->characters()->whereRelation('character', 'deleted_at', null)->get()) != count($submission->characters()->get()))
                 <div class="alert alert-warning">
-                    Some characters have been deleted since this submission was created.
+                    {{ __('Some characters have been deleted since this submission was created.') }}
                 </div>
             @endif
             @foreach ($submission->characters()->whereRelation('character', 'deleted_at', null)->get() as $character)
@@ -94,19 +94,19 @@
             @endforeach
         </div>
         <div class="text-right mb-3">
-            <a href="#" class="btn btn-outline-info" id="addCharacter">Add Character</a>
+            <a href="#" class="btn btn-outline-info" id="addCharacter">{{ __('Add Character') }}</a>
         </div>
 
         @if (isset($inventory['user_items']))
-            <h2>Add-Ons</h2>
-            <p>These items have been removed from the {{ $submission->prompt_id ? 'submitter' : 'claimant' }}'s inventory and will be refunded if the request is rejected or consumed if it is approved.</p>
+            <h2>{{ __('Add-Ons') }}</h2>
+            <p>{{ __('These items have been removed from the :role\'s inventory and will be refunded if the request is rejected or consumed if it is approved.', ['role' => $submission->prompt_id ? __('submitter') : __('claimant')]) }}</p>
             <table class="table table-sm">
                 <thead class="thead-light">
                     <tr class="d-flex">
-                        <th class="col-2">Item</th>
-                        <th class="col-4">Source</th>
-                        <th class="col-4">Notes</th>
-                        <th class="col-2">Quantity</th>
+                        <th class="col-2">{{ __('Item') }}</th>
+                        <th class="col-4">{{ __('Source') }}</th>
+                        <th class="col-4">{{ __('Notes') }}</th>
+                        <th class="col-2">{{ __('Quantity') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -126,12 +126,12 @@
         @endif
 
         @if (isset($inventory['currencies']))
-            <h3>{!! $submission->user->displayName !!}'s Bank</h3>
+            <h3>{{ __(":name's Bank", ['name' => $submission->user->name]) }}</h3>
             <table class="table table-sm mb-3">
                 <thead>
                     <tr>
-                        <th width="70%">Currency</th>
-                        <th width="30%">Quantity</th>
+                        <th width="70%">{{ __('Currency') }}</th>
+                        <th width="30%">{{ __('Quantity') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -146,14 +146,14 @@
         @endif
 
         <div class="form-group">
-            {!! Form::label('staff_comments', 'Staff Comments (Optional)') !!}
+            {!! Form::label('staff_comments', __('Staff Comments (Optional)')) !!}
             {!! Form::textarea('staff_comments', $submission->staffComments, ['class' => 'form-control wysiwyg']) !!}
         </div>
 
         <div class="text-right">
-            <a href="#" class="btn btn-danger mr-2" id="rejectionButton">Reject</a>
-            <a href="#" class="btn btn-secondary mr-2" id="cancelButton">Cancel</a>
-            <a href="#" class="btn btn-success" id="approvalButton">Approve</a>
+            <a href="#" class="btn btn-danger mr-2" id="rejectionButton">{{ __('Reject') }}</a>
+            <a href="#" class="btn btn-secondary mr-2" id="cancelButton">{{ __('Cancel') }}</a>
+            <a href="#" class="btn btn-success" id="approvalButton">{{ __('Approve') }}</a>
         </div>
 
         {!! Form::close() !!}
@@ -165,34 +165,34 @@
                     <div class="row">
                         <div class="col-md-2 align-items-stretch d-flex">
                             <div class="d-flex text-center align-items-center">
-                                <div class="character-image-blank">Enter character code.</div>
+                                <div class="character-image-blank">{{ __('Enter character code.') }}</div>
                                 <div class="character-image-loaded hide"></div>
                             </div>
                         </div>
                         <div class="col-md-10">
                             <div class="form-group">
-                                {!! Form::label('slug', 'Character Code') !!}
-                                {!! Form::select('slug[]', $characters, null, ['class' => 'form-control character-code', 'placeholder' => 'Select Character']) !!}
+                                {!! Form::label('slug', __('Character Code')) !!}
+                                {!! Form::select('slug[]', $characters, null, ['class' => 'form-control character-code', 'placeholder' => __('Select Character')]) !!}
                             </div>
                             <div class="character-rewards hide">
-                                <h4>Character Rewards</h4>
+                                <h4>{{ __('Character Rewards') }}</h4>
                                 <table class="table table-sm">
                                     <thead>
                                         <tr>
                                             @if ($expanded_rewards)
-                                                <th width="35%">Reward Type</th>
-                                                <th width="35%">Reward</th>
+                                                <th width="35%">{{ __('Reward Type') }}</th>
+                                                <th width="35%">{{ __('Reward') }}</th>
                                             @else
-                                                <th width="70%">Reward</th>
+                                                <th width="70%">{{ __('Reward') }}</th>
                                             @endif
-                                            <th width="30%">Amount</th>
+                                            <th width="30%">{{ __('Amount') }}</th>
                                         </tr>
                                     </thead>
                                     <tbody class="character-rewards">
                                     </tbody>
                                 </table>
                                 <div class="text-right">
-                                    <a href="#" class="btn btn-outline-primary btn-sm add-reward">Add Reward</a>
+                                    <a href="#" class="btn btn-outline-primary btn-sm add-reward">{{ __('Add Reward') }}</a>
                                 </div>
                             </div>
                         </div>
@@ -204,17 +204,17 @@
 
                     @if ($expanded_rewards)
                         <td>
-                            {!! Form::select('character_rewardable_type[]', ['Item' => 'Item', 'Currency' => 'Currency', 'LootTable' => 'Loot Table'], null, ['class' => 'form-control character-rewardable-type', 'placeholder' => 'Select Reward Type']) !!}
+                            {!! Form::select('character_rewardable_type[]', ['Item' => __('Item'), 'Currency' => __('Currency'), 'LootTable' => __('Loot Table')], null, ['class' => 'form-control character-rewardable-type', 'placeholder' => __('Select Reward Type')]) !!}
                         </td>
                         <td class="lootDivs">
-                            <div class="character-currencies hide">{!! Form::select('character_rewardable_id[]', $characterCurrencies, 0, ['class' => 'form-control character-currency-id', 'placeholder' => 'Select Currency']) !!}</div>
-                            <div class="character-items hide">{!! Form::select('character_rewardable_id[]', $items, 0, ['class' => 'form-control character-item-id', 'placeholder' => 'Select Item']) !!}</div>
-                            <div class="character-tables hide">{!! Form::select('character_rewardable_id[]', $tables, 0, ['class' => 'form-control character-table-id', 'placeholder' => 'Select Loot Table']) !!}</div>
+                            <div class="character-currencies hide">{!! Form::select('character_rewardable_id[]', $characterCurrencies, 0, ['class' => 'form-control character-currency-id', 'placeholder' => __('Select Currency')]) !!}</div>
+                            <div class="character-items hide">{!! Form::select('character_rewardable_id[]', $items, 0, ['class' => 'form-control character-item-id', 'placeholder' => __('Select Item')]) !!}</div>
+                            <div class="character-tables hide">{!! Form::select('character_rewardable_id[]', $tables, 0, ['class' => 'form-control character-table-id', 'placeholder' => __('Select Loot Table')]) !!}</div>
                         </td>
                     @else
                         <td class="lootDivs">
                             {!! Form::hidden('character_rewardable_type[]', 'Currency', ['class' => 'character-rewardable-type']) !!}
-                            {!! Form::select('character_rewardable_id[]', $characterCurrencies, 0, ['class' => 'form-control character-currency-id', 'placeholder' => 'Select Currency']) !!}
+                            {!! Form::select('character_rewardable_id[]', $characterCurrencies, 0, ['class' => 'form-control character-currency-id', 'placeholder' => __('Select Currency')]) !!}
                         </td>
                     @endif
 
@@ -231,44 +231,44 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content hide" id="approvalContent">
                     <div class="modal-header">
-                        <span class="modal-title h5 mb-0">Confirm Approval</span>
+                        <span class="modal-title h5 mb-0">{{ __('Confirm Approval') }}</span>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body">
-                        <p>This will approve the {{ $submission->prompt_id ? 'submission' : 'claim' }} and distribute the above rewards to the user.</p>
+                        <p>{{ __('This will approve the :type and distribute the above rewards to the user.', ['type' => $submission->prompt_id ? __('submission') : __('claim')]) }}</p>
                         <div class="text-right">
-                            <a href="#" id="approvalSubmit" class="btn btn-success">Approve</a>
+                            <a href="#" id="approvalSubmit" class="btn btn-success">{{ __('Approve') }}</a>
                         </div>
                     </div>
                 </div>
                 <div class="modal-content hide" id="cancelContent">
                     <div class="modal-header">
-                        <span class="modal-title h5 mb-0">Confirm Cancellation</span>
+                        <span class="modal-title h5 mb-0">{{ __('Confirm Cancellation') }}</span>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body">
-                        <p>This will cancel the {{ $submission->prompt_id ? 'submission' : 'claim' }} and send it back to drafts. Make sure to include a staff comment if you do this!</p>
+                        <p>{{ __('This will cancel the :type and send it back to drafts. Make sure to include a staff comment if you do this!', ['type' => $submission->prompt_id ? __('submission') : __('claim')]) }}</p>
                         <div class="text-right">
-                            <a href="#" id="cancelSubmit" class="btn btn-secondary">Cancel</a>
+                            <a href="#" id="cancelSubmit" class="btn btn-secondary">{{ __('Cancel') }}</a>
                         </div>
                     </div>
                 </div>
                 <div class="modal-content hide" id="rejectionContent">
                     <div class="modal-header">
-                        <span class="modal-title h5 mb-0">Confirm Rejection</span>
+                        <span class="modal-title h5 mb-0">{{ __('Confirm Rejection') }}</span>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body">
-                        <p>This will reject the {{ $submission->prompt_id ? 'submission' : 'claim' }}.</p>
+                        <p>{{ __('This will reject the :type.', ['type' => $submission->prompt_id ? __('submission') : __('claim')]) }}</p>
                         <div class="text-right">
-                            <a href="#" id="rejectionSubmit" class="btn btn-danger">Reject</a>
+                            <a href="#" id="rejectionSubmit" class="btn btn-danger">{{ __('Reject') }}</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     @else
-        <div class="alert alert-danger">This {{ $submission->prompt_id ? 'submission' : 'claim' }} has already been processed.</div>
+        <div class="alert alert-danger">{{ __('This :type has already been processed.', ['type' => $submission->prompt_id ? __('submission') : __('claim')]) }}</div>
         @include('home._submission_content', ['submission' => $submission])
     @endif
 

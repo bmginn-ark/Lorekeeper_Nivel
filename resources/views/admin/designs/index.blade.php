@@ -1,25 +1,23 @@
 @extends('admin.layout')
 
 @section('admin-title')
-    {{ $isMyo ? 'MYO Approval' : 'Design Update' }} Queue
+    {{ ($isMyo ? __('MYO Approval') : __('Design Update')) . ' ' . __('Queue') }}
 @endsection
 
 @section('admin-content')
-    {!! breadcrumbs(['Admin Panel' => 'admin', ($isMyo ? 'MYO Approval' : 'Design Update') . ' Queue' => 'admin/designs/pending']) !!}
+    {!! breadcrumbs([__('Admin Panel') => 'admin', ($isMyo ? __('MYO Approval') : __('Design Update')) . ' ' . __('Queue') => 'admin/designs/pending']) !!}
 
-    <h1>
-        {{ $isMyo ? 'MYO Approval' : 'Design Update' }} Queue
-    </h1>
+    <h1>{{ ($isMyo ? __('MYO Approval') : __('Design Update')) . ' ' . __('Queue') }}</h1>
 
     <ul class="nav nav-tabs mb-3">
         <li class="nav-item">
-            <a class="nav-link {{ set_active('admin/' . ($isMyo ? 'myo-approvals' : 'design-approvals') . '/pending*') }}" href="{{ url('admin/' . ($isMyo ? 'myo-approvals' : 'design-approvals') . '/pending') }}">Pending</a>
+            <a class="nav-link {{ set_active('admin/' . ($isMyo ? 'myo-approvals' : 'design-approvals') . '/pending*') }}" href="{{ url('admin/' . ($isMyo ? 'myo-approvals' : 'design-approvals') . '/pending') }}">{{ __('Pending') }}</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link {{ set_active('admin/' . ($isMyo ? 'myo-approvals' : 'design-approvals') . '/approved*') }}" href="{{ url('admin/' . ($isMyo ? 'myo-approvals' : 'design-approvals') . '/approved') }}">Approved</a>
+            <a class="nav-link {{ set_active('admin/' . ($isMyo ? 'myo-approvals' : 'design-approvals') . '/approved*') }}" href="{{ url('admin/' . ($isMyo ? 'myo-approvals' : 'design-approvals') . '/approved') }}">{{ __('Approved') }}</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link {{ set_active('admin/' . ($isMyo ? 'myo-approvals' : 'design-approvals') . '/rejected*') }}" href="{{ url('admin/' . ($isMyo ? 'myo-approvals' : 'design-approvals') . '/rejected') }}">Rejected</a>
+            <a class="nav-link {{ set_active('admin/' . ($isMyo ? 'myo-approvals' : 'design-approvals') . '/rejected*') }}" href="{{ url('admin/' . ($isMyo ? 'myo-approvals' : 'design-approvals') . '/rejected') }}">{{ __('Rejected') }}</a>
         </li>
     </ul>
 
@@ -30,15 +28,15 @@
                 {!! Form::select(
                     'sort',
                     [
-                        'newest' => 'Newest First',
-                        'oldest' => 'Oldest First',
+                        'newest' => __('Newest First'),
+                        'oldest' => __('Oldest First'),
                     ],
                     Request::get('sort') ?: 'oldest',
                     ['class' => 'form-control'],
                 ) !!}
             </div>
             <div class="form-group ml-3 mb-3">
-                {!! Form::submit('Search', ['class' => 'btn btn-primary']) !!}
+                {!! Form::submit(__('Search'), ['class' => 'btn btn-primary']) !!}
             </div>
         </div>
         {!! Form::close() !!}
@@ -49,21 +47,21 @@
         <div class="logs-table-header">
             <div class="row">
                 <div class="col-md-3">
-                    <div class="logs-table-cell">{{ $isMyo ? 'MYO Slot' : 'Character' }}</div>
+                    <div class="logs-table-cell">{{ $isMyo ? __('MYO slot') : __('Character') }}</div>
                 </div>
                 <div class="col-3 col-md-3">
-                    <div class="logs-table-cell">User</div>
+                    <div class="logs-table-cell">{{ __('User') }}</div>
                 </div>
                 <div class="col-2 col-md-2">
-                    <div class="logs-table-cell">Submitted</div>
+                    <div class="logs-table-cell">{{ __('Submitted') }}</div>
                 </div>
                 @if (config('lorekeeper.extensions.design_update_voting'))
                     <div class="col-2 col-md-2">
-                        <div class="logs-table-cell">Votes</div>
+                        <div class="logs-table-cell">{{ __('Votes') }}</div>
                     </div>
                 @endif
                 <div class="col-4 col-md-2">
-                    <div class="logs-table-cell">Status</div>
+                    <div class="logs-table-cell">{{ __('Status') }}</div>
                 </div>
             </div>
         </div>
@@ -86,7 +84,7 @@
                     @endif
                     <div class="row flex-wrap">
                         <div class="col-md-3">
-                            <div class="logs-table-cell">{!! $r->character ? $r->character->displayName : 'Deleted Character [#' . $r->character_id . ']' !!}</div>
+                            <div class="logs-table-cell">{!! $r->character ? $r->character->displayName : __('Deleted Character') . ' [#' . $r->character_id . ']' !!}</div>
                         </div>
                         <div class="col-3 col-md-3">
                             <div class="logs-table-cell">{!! $r->user->displayName !!}</div>
@@ -108,7 +106,7 @@
                             <div class="logs-table-cell"><span class="btn btn-{{ $r->status == 'Pending' ? 'secondary' : ($r->status == 'Approved' ? 'success' : 'danger') }} btn-sm py-0 px-1">{{ $r->status }}</span></div>
                         </div>
                         <div class="col-4 col-md-1">
-                            <div class="logs-table-cell"><a href="{{ $r->url }}" class="btn btn-primary btn-sm">Details</a></div>
+                            <div class="logs-table-cell"><a href="{{ $r->url }}" class="btn btn-primary btn-sm">{{ __('Details') }}</a></div>
                         </div>
                     </div>
                 </div>
@@ -117,5 +115,5 @@
     </div>
     {!! $requests->render() !!}
 
-    <div class="text-center mt-4 small text-muted">{{ $requests->total() }} result{{ $requests->total() == 1 ? '' : 's' }} found.</div>
+    <div class="text-center mt-4 small text-muted">{{ $requests->total() }} {{ $requests->total() == 1 ? __('result') : __('results') }} {{ __('found.') }}</div>
 @endsection

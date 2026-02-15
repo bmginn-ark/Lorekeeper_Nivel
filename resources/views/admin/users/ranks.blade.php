@@ -1,26 +1,24 @@
 @extends('admin.layout')
 
 @section('admin-title')
-    User Ranks
+    {{ __('User Ranks') }}
 @endsection
 
 @section('admin-content')
-    {!! breadcrumbs(['Admin Panel' => 'admin', 'User Ranks' => 'admin/users/ranks']) !!}
+    {!! breadcrumbs([__('Admin Panel') => 'admin', __('User Ranks') => 'admin/users/ranks']) !!}
 
-    <h1>
-        User Ranks</h1>
+    <h1>{{ __('User Ranks') }}</h1>
 
-    <p>You can create and edit ranks to assign to users here. Ranks can have powers attached, which allows users with the rank to view and edit data on certain parts of the site. To assign a rank to a user, find their admin page from the <a
-            href="{{ url('admin/users') }}">User Index</a> and change their rank there.</p>
+    <p>{{ __('You can create and edit ranks to assign to users here. Ranks can have powers attached, which allows users with the rank to view and edit data on certain parts of the site. To assign a rank to a user, find their admin page from the') }} <a href="{{ url('admin/users') }}">{{ __('User Index') }}</a> {{ __('and change their rank there.') }}</p>
 
-    <div class="text-right mb-3"><a class="btn btn-primary create-rank-button" href="#"><i class="fas fa-plus"></i> Add New Rank</a></div>
+    <div class="text-right mb-3"><a class="btn btn-primary create-rank-button" href="#"><i class="fas fa-plus"></i> {{ __('Add New Rank') }}</a></div>
     <table class="table table-sm ranks-table">
         <thead>
             <tr>
                 <th></th>
-                <th>Rank</th>
-                <th>Description</th>
-                <th>Powers</th>
+                <th>{{ __('Rank') }}</th>
+                <th>{{ __('Description') }}</th>
+                <th>{{ __('Powers') }}</th>
                 <th></th>
             </tr>
         </thead>
@@ -40,9 +38,9 @@
                         @endforeach
                     </td>
                     <td>
-                        <a href="#" class="btn btn-primary edit-rank-button" data-id="{{ $rank->id }}">Edit</a>
+                        <a href="#" class="btn btn-primary edit-rank-button" data-id="{{ $rank->id }}">{{ __('Edit') }}</a>
                         @if (!$rank->isAdmin)
-                            <a href="#" class="btn btn-danger delete-rank-button" data-id="{{ $rank->id }}">Delete</a>
+                            <a href="#" class="btn btn-danger delete-rank-button" data-id="{{ $rank->id }}">{{ __('Delete') }}</a>
                         @endif
                     </td>
                 </tr>
@@ -53,8 +51,8 @@
     <div>
         {!! Form::open(['url' => 'admin/users/ranks/sort']) !!}
         {!! Form::hidden('sort', '', ['id' => 'sortableOrder']) !!}
-        {!! Form::submit('Save Order', ['class' => 'btn btn-primary']) !!}
-        {!! add_help('This order is reflected in the sort order on the users list. Additionally, users with the Edit User Info power cannot edit users with a rank higher than their own.') !!}
+        {!! Form::submit(__('Save Order'), ['class' => 'btn btn-primary']) !!}
+        {!! add_help(__('This order is reflected in the sort order on the users list. Additionally, users with the Edit User Info power cannot edit users with a rank higher than their own.')) !!}
         {!! Form::close() !!}
     </div>
 @endsection
@@ -65,15 +63,15 @@
         $(document).ready(function() {
             $('.create-rank-button').on('click', function(e) {
                 e.preventDefault();
-                loadModal("{{ url('admin/users/ranks/create') }}", 'Create Rank');
+                loadModal("{{ url('admin/users/ranks/create') }}", '{{ __('Create Rank') }}');
             });
             $('.edit-rank-button').on('click', function(e) {
                 e.preventDefault();
-                loadModal("{{ url('admin/users/ranks/edit') }}" + '/' + $(this).data('id'), 'Edit Rank');
+                loadModal("{{ url('admin/users/ranks/edit') }}" + '/' + $(this).data('id'), '{{ __('Edit Rank') }}');
             });
             $('.delete-rank-button').on('click', function(e) {
                 e.preventDefault();
-                loadModal("{{ url('admin/users/ranks/delete') }}" + '/' + $(this).data('id'), 'Delete Rank');
+                loadModal("{{ url('admin/users/ranks/delete') }}" + '/' + $(this).data('id'), '{{ __('Delete Rank') }}');
             });
             $('.handle').on('click', function(e) {
                 e.preventDefault();

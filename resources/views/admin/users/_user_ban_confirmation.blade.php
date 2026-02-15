@@ -1,6 +1,6 @@
 @if (!$user->is_banned)
-    <p>Are you sure you want to ban {!! $user->displayName !!}?</p>
-    <div class="text-right"><a href="#" class="btn btn-danger ban-confirm-button">Ban</a></div>
+    <p>{{ __('Are you sure you want to ban :name?', ['name' => $user->name]) }}</p>
+    <div class="text-right"><a href="#" class="btn btn-danger ban-confirm-button">{{ __('Ban') }}</a></div>
 
     <script>
         $('.ban-confirm-button').on('click', function(e) {
@@ -9,5 +9,5 @@
         });
     </script>
 @else
-    <p>This user is already banned.</p>
+    <p>{{ __('This user is already banned.') }}</p>
 @endif

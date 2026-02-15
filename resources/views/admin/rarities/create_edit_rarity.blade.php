@@ -1,29 +1,29 @@
 @extends('admin.layout')
 
 @section('admin-title')
-    {{ $rarity->id ? 'Edit' : 'Create' }} Rarity
+    {{ $rarity->id ? __('Edit') : __('Create') }} {{ __('Rarity') }}
 @endsection
 
 @section('admin-content')
-    {!! breadcrumbs(['Admin Panel' => 'admin', 'Rarities' => 'admin/data/rarities', ($rarity->id ? 'Edit' : 'Create') . ' Rarity' => $rarity->id ? 'admin/data/rarities/edit/' . $rarity->id : 'admin/data/rarities/create']) !!}
+    {!! breadcrumbs([__('Admin Panel') => 'admin', __('Rarities') => 'admin/data/rarities', ($rarity->id ? __('Edit') : __('Create')) . ' ' . __('Rarity') => $rarity->id ? 'admin/data/rarities/edit/' . $rarity->id : 'admin/data/rarities/create']) !!}
 
-    <h1>{{ $rarity->id ? 'Edit' : 'Create' }} Rarity
+    <h1>{{ $rarity->id ? __('Edit') : __('Create') }} {{ __('Rarity') }}
         @if ($rarity->id)
-            <a href="#" class="btn btn-danger float-right delete-rarity-button">Delete Rarity</a>
+            <a href="#" class="btn btn-danger float-right delete-rarity-button">{{ __('Delete Rarity') }}</a>
         @endif
     </h1>
 
     {!! Form::open(['url' => $rarity->id ? 'admin/data/rarities/edit/' . $rarity->id : 'admin/data/rarities/create', 'files' => true]) !!}
 
-    <h3>Basic Information</h3>
+    <h3>{{ __('Basic Information') }}</h3>
 
     <div class="form-group">
-        {!! Form::label('Name') !!}
+        {!! Form::label(__('Name')) !!}
         {!! Form::text('name', $rarity->name, ['class' => 'form-control']) !!}
     </div>
 
     <div class="form-group">
-        {!! Form::label('Colour (Hex code; optional)') !!}
+        {!! Form::label(__('Colour (Hex code; optional)')) !!}
         <div class="input-group cp">
             {!! Form::text('color', $rarity->color, ['class' => 'form-control']) !!}
             <span class="input-group-append">
@@ -33,33 +33,33 @@
     </div>
 
     <div class="form-group">
-        {!! Form::label('World Page Image (Optional)') !!} {!! add_help('This image is used only on the world information pages.') !!}
+        {!! Form::label(__('World Page Image (Optional)')) !!} {!! add_help(__('This image is used only on the world information pages.')) !!}
         <div class="custom-file">
-            {!! Form::label('image', 'Choose file...', ['class' => 'custom-file-label']) !!}
+            {!! Form::label('image', __('Choose file...'), ['class' => 'custom-file-label']) !!}
             {!! Form::file('image', ['class' => 'custom-file-input']) !!}
         </div>
-        <div class="text-muted">Recommended size: 200px x 200px</div>
+        <div class="text-muted">{{ __('Recommended size: 200px x 200px') }}</div>
         @if ($rarity->has_image)
             <div class="form-check">
                 {!! Form::checkbox('remove_image', 1, false, ['class' => 'form-check-input']) !!}
-                {!! Form::label('remove_image', 'Remove current image', ['class' => 'form-check-label']) !!}
+                {!! Form::label('remove_image', __('Remove current image'), ['class' => 'form-check-label']) !!}
             </div>
         @endif
     </div>
 
     <div class="form-group">
-        {!! Form::label('Description (Optional)') !!}
+        {!! Form::label(__('Description (Optional)')) !!}
         {!! Form::textarea('description', $rarity->description, ['class' => 'form-control wysiwyg']) !!}
     </div>
 
     <div class="text-right">
-        {!! Form::submit($rarity->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+        {!! Form::submit($rarity->id ? __('Edit') : __('Create'), ['class' => 'btn btn-primary']) !!}
     </div>
 
     {!! Form::close() !!}
 
     @if ($rarity->id)
-        <h3>Preview</h3>
+        <h3>{{ __('Preview') }}</h3>
         <div class="card mb-3">
             <div class="card-body">
                 @include('world._rarity_entry', [
@@ -69,7 +69,7 @@
                     'searchFeaturesUrl' => $rarity->searchFeaturesUrl,
                     'searchCharactersUrl' => $rarity->searchCharactersUrl,
                     'edit' => [
-                        'title' => 'Edit Rarity',
+                        'title' => __('Edit Rarity'),
                         'object' => $rarity,
                     ],
                 ])
@@ -84,7 +84,7 @@
         $(document).ready(function() {
             $('.delete-rarity-button').on('click', function(e) {
                 e.preventDefault();
-                loadModal("{{ url('admin/data/rarities/delete') }}/{{ $rarity->id }}", 'Delete Rarity');
+                loadModal("{{ url('admin/data/rarities/delete') }}/{{ $rarity->id }}", '{{ __("Delete Rarity") }}');
             });
         });
     </script>

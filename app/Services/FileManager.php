@@ -102,8 +102,18 @@ class FileManager extends Service {
         if (!file_exists($directory)) {
             $this->setError('error', 'Folder does not exist.');
         }
-        File::move($file, $directory.'/'.$name);
-        chmod($directory.'/'.$name, 0755);
+        $destination = $directory.'/'.$name;
+        $source = is_string($file) ? $file : $file->getRealPath();
+        // Prefer move; if rename() fails (e.g. Operation not permitted on some servers), fall back to copy+unlink
+        if (!@rename($source, $destination)) {
+            if (!@copy($source, $destination)) {
+                $this->setError('error', 'Could not save file. Check that the web server can write to '.$directory);
+
+                return false;
+            }
+            @unlink($source);
+        }
+        @chmod($destination, 0644);
 
         return true;
     }

@@ -1,15 +1,13 @@
 @extends('admin.layout')
 
 @section('admin-title')
-    Character Trades
+    {{ __('Character Trades') }}
 @endsection
 
 @section('admin-content')
-    {!! breadcrumbs(['Admin Panel' => 'admin', 'Character Trade Queue' => 'admin/masterlist/trades/incoming']) !!}
+    {!! breadcrumbs([__('Admin Panel') => 'admin', __('Character Trade Queue') => 'admin/masterlist/trades/incoming']) !!}
 
-    <h1>
-        Character Trades
-    </h1>
+    <h1>{{ __('Character Trades') }}</h1>
 
     @include('admin.masterlist._header', ['tradeCount' => $tradeCount, 'transferCount' => $transferCount])
 
@@ -28,7 +26,7 @@
             $('.trade-action-button').on('click', function(e) {
                 e.preventDefault();
                 console.log("{{ url('admin/masterlist/trade/act') }}/" + $(this).data('id') + "/" + $(this).data('action'));
-                loadModal("{{ url('admin/masterlist/trade/act') }}/" + $(this).data('id') + "/" + $(this).data('action'), 'Process Trade');
+                loadModal("{{ url('admin/masterlist/trade/act') }}/" + $(this).data('id') + "/" + $(this).data('action'), '{{ __("Process Trade") }}');
             });
         });
     </script>

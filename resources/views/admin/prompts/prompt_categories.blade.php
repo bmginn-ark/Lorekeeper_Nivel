@@ -1,21 +1,20 @@
 @extends('admin.layout')
 
 @section('admin-title')
-    Prompt Categories
+    {{ __('Prompt Categories') }}
 @endsection
 
 @section('admin-content')
-    {!! breadcrumbs(['Admin Panel' => 'admin', 'Prompt Categories' => 'admin/data/prompt-categories']) !!}
+    {!! breadcrumbs([__('Admin Panel') => 'admin', __('Prompt Categories') => 'admin/data/prompt-categories']) !!}
 
-    <h1>Prompt Categories</h1>
+    <h1>{{ __('Prompt Categories') }}</h1>
 
-    <p>This is a list of prompt categories that will be used to classify prompts on the prompts page. Creating prompt categories is entirely optional, but recommended if you need to sort prompts for mod work division, for example. The submission approval
-        queue page can be sorted by prompt category.</p>
-    <p>The sorting order reflects the order in which the prompt categories will be displayed on the prompts page.</p>
+    <p>{{ __('This is a list of prompt categories that will be used to classify prompts on the prompts page. Creating prompt categories is entirely optional, but recommended if you need to sort prompts for mod work division, for example. The submission approval queue page can be sorted by prompt category.') }}</p>
+    <p>{{ __('The sorting order reflects the order in which the prompt categories will be displayed on the prompts page.') }}</p>
 
-    <div class="text-right mb-3"><a class="btn btn-primary" href="{{ url('admin/data/prompt-categories/create') }}"><i class="fas fa-plus"></i> Create New Prompt Category</a></div>
+    <div class="text-right mb-3"><a class="btn btn-primary" href="{{ url('admin/data/prompt-categories/create') }}"><i class="fas fa-plus"></i> {{ __('Create New Prompt Category') }}</a></div>
     @if (!count($categories))
-        <p>No prompt categories found.</p>
+        <p>{{ __('No prompt categories found.') }}</p>
     @else
         <table class="table table-sm category-table">
             <tbody id="sortable" class="sortable">
@@ -26,7 +25,7 @@
                             {!! $category->displayName !!}
                         </td>
                         <td class="text-right">
-                            <a href="{{ url('admin/data/prompt-categories/edit/' . $category->id) }}" class="btn btn-primary">Edit</a>
+                            <a href="{{ url('admin/data/prompt-categories/edit/' . $category->id) }}" class="btn btn-primary">{{ __('Edit') }}</a>
                         </td>
                     </tr>
                 @endforeach
@@ -36,7 +35,7 @@
         <div class="mb-4">
             {!! Form::open(['url' => 'admin/data/prompt-categories/sort']) !!}
             {!! Form::hidden('sort', '', ['id' => 'sortableOrder']) !!}
-            {!! Form::submit('Save Order', ['class' => 'btn btn-primary']) !!}
+            {!! Form::submit(__('Save Order'), ['class' => 'btn btn-primary']) !!}
             {!! Form::close() !!}
         </div>
     @endif

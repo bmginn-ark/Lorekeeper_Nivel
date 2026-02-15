@@ -1,15 +1,15 @@
 @extends('admin.layout')
 
 @section('admin-title')
-    User Index
+    {{ __('User Index') }}
 @endsection
 
 @section('admin-content')
-    {!! breadcrumbs(['Admin Panel' => 'admin', 'User Index' => 'admin/users']) !!}
+    {!! breadcrumbs([__('Admin Panel') => 'admin', __('User Index') => 'admin/users']) !!}
 
-    <h1>User Index</h1>
+    <h1>{{ __('User Index') }}</h1>
 
-    <p>Click on a user's name to view/edit their information.</p>
+    <p>{{ __("Click on a user's name to view/edit their information.") }}</p>
 
     <div>
         {!! Form::open(['method' => 'GET', 'class' => 'form-inline justify-content-end']) !!}
@@ -23,20 +23,20 @@
             {!! Form::select(
                 'sort',
                 [
-                    'alpha' => 'Sort Alphabetically (A-Z)',
-                    'alpha-reverse' => 'Sort Alphabetically (Z-A)',
-                    'alias' => 'Sort by Alias (A-Z)',
-                    'alias-reverse' => 'Sort by Alias (Z-A)',
-                    'rank' => 'Sort by Rank (Default)',
-                    'newest' => 'Newest First',
-                    'oldest' => 'Oldest First',
+                    'alpha' => __('Sort Alphabetically (A-Z)'),
+                    'alpha-reverse' => __('Sort Alphabetically (Z-A)'),
+                    'alias' => __('Sort by Alias (A-Z)'),
+                    'alias-reverse' => __('Sort by Alias (Z-A)'),
+                    'rank' => __('Sort by Rank (Default)'),
+                    'newest' => __('Newest First'),
+                    'oldest' => __('Oldest First'),
                 ],
                 Request::get('sort') ?: 'category',
                 ['class' => 'form-control'],
             ) !!}
         </div>
         <div class="form-group mb-3">
-            {!! Form::submit('Search', ['class' => 'btn btn-primary']) !!}
+            {!! Form::submit(__('Search'), ['class' => 'btn btn-primary']) !!}
         </div>
         {!! Form::close() !!}
     </div>
@@ -46,16 +46,16 @@
         <div class="logs-table-header">
             <div class="row">
                 <div class="col-12 col-md-4">
-                    <div class="logs-table-cell">Username</div>
+                    <div class="logs-table-cell">{{ __('Username') }}</div>
                 </div>
                 <div class="col-4 col-md-3">
-                    <div class="logs-table-cell">Alias</div>
+                    <div class="logs-table-cell">{{ __('Alias') }}</div>
                 </div>
                 <div class="col-4 col-md-2">
-                    <div class="logs-table-cell">Rank</div>
+                    <div class="logs-table-cell">{{ __('Rank') }}</div>
                 </div>
                 <div class="col-4 col-md-3">
-                    <div class="logs-table-cell">Joined</div>
+                    <div class="logs-table-cell">{{ __('Joined') }}</div>
                 </div>
             </div>
         </div>
@@ -82,5 +82,5 @@
     </div>
     {!! $users->render() !!}
 
-    <div class="text-center mt-4 small text-muted">{{ $count }} user{{ $count == 1 ? '' : 's' }} found.</div>
+    <div class="text-center mt-4 small text-muted">{{ $count }} {{ $count == 1 ? __('user') : __('users') }} {{ __('found.') }}</div>
 @endsection

@@ -1,25 +1,25 @@
 @extends('admin.layout')
 
 @section('admin-title')
-    Gallery Queue
+    {{ __('Gallery Queue') }}
 @endsection
 
 @section('admin-content')
-    {!! breadcrumbs(['Admin Panel' => 'admin', 'Gallery Submissions Queue' => 'admin/gallery/submissions/pending']) !!}
+    {!! breadcrumbs([__('Admin Panel') => 'admin', __('Gallery Submissions Queue') => 'admin/gallery/submissions/pending']) !!}
 
     <h1>
-        Gallery Submission Queue
+        {{ __('Gallery Submission Queue') }}
     </h1>
 
     <ul class="nav nav-tabs mb-3">
         <li class="nav-item">
-            <a class="nav-link {{ set_active('admin/gallery/submissions/pending*') }} {{ set_active('admin/gallery/submissions') }}" href="{{ url('admin/gallery/submissions/pending') }}">Pending</a>
+            <a class="nav-link {{ set_active('admin/gallery/submissions/pending*') }} {{ set_active('admin/gallery/submissions') }}" href="{{ url('admin/gallery/submissions/pending') }}">{{ __('Pending') }}</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link {{ set_active('admin/gallery/submissions/accepted*') }}" href="{{ url('admin/gallery/submissions/accepted') }}">Accepted</a>
+            <a class="nav-link {{ set_active('admin/gallery/submissions/accepted*') }}" href="{{ url('admin/gallery/submissions/accepted') }}">{{ __('Accepted') }}</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link {{ set_active('admin/gallery/submissions/rejected*') }}" href="{{ url('admin/gallery/submissions/rejected') }}">Rejected</a>
+            <a class="nav-link {{ set_active('admin/gallery/submissions/rejected*') }}" href="{{ url('admin/gallery/submissions/rejected') }}">{{ __('Rejected') }}</a>
         </li>
     </ul>
 
@@ -33,15 +33,15 @@
                 {!! Form::select(
                     'sort',
                     [
-                        'newest' => 'Newest First',
-                        'oldest' => 'Oldest First',
+                        'newest' => __('Newest First'),
+                        'oldest' => __('Oldest First'),
                     ],
                     Request::get('sort') ?: 'oldest',
                     ['class' => 'form-control'],
                 ) !!}
             </div>
             <div class="form-group ml-3 mb-3">
-                {!! Form::submit('Search', ['class' => 'btn btn-primary']) !!}
+                {!! Form::submit(__('Search'), ['class' => 'btn btn-primary']) !!}
             </div>
         </div>
         {!! Form::close() !!}
@@ -54,5 +54,5 @@
     @endforeach
 
     {!! $submissions->render() !!}
-    <div class="text-center mt-4 small text-muted">{{ $submissions->total() }} result{{ $submissions->total() == 1 ? '' : 's' }} found.</div>
+    <div class="text-center mt-4 small text-muted">{{ $submissions->total() }} {{ $submissions->total() == 1 ? __('result') : __('results') }} {{ __('found.') }}</div>
 @endsection
